@@ -4,6 +4,7 @@
   --r: 16px; --font: "Space Grotesk", system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0; color: var(--ink); font: 400 17px/1.6 var(--font);

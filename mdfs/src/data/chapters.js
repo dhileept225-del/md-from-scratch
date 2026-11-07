@@ -16,7 +16,7 @@ export const chapters = [
     n: 2, title: 'Building a system', blurb: 'Units, starting structures and the periodic box.',
     lessons: [
       { id: 'units', title: 'Units in MD', level: 'core', ready: true },
-      { id: 'lattice-start', title: 'Starting positions: lattices', level: 'core' },
+      { id: 'lattice-start', title: 'Starting positions: lattices', level: 'core', ready: true },
       { id: 'maxwell-boltzmann', title: 'Starting velocities: Maxwell–Boltzmann', level: 'core' },
       { id: 'pbc', title: 'Periodic boundary conditions', level: 'core' },
       { id: 'cutoffs', title: 'Cutoffs and the minimum image', level: 'core' },
