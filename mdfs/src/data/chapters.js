@@ -29,7 +29,7 @@ export const chapters = [
       { id: 'temperature', title: 'What temperature means in MD', level: 'core', ready: true },
       { id: 'ensembles', title: 'NVE, NVT and NPT', level: 'core', ready: true },
       { id: 'berendsen', title: 'The Berendsen thermostat', level: 'core', ready: true },
-      { id: 'nose-hoover', title: 'Nosé–Hoover thermostats', level: 'adv' },
+      { id: 'nose-hoover', title: 'Nosé–Hoover thermostats', level: 'adv', ready: true },
       { id: 'langevin', title: 'Langevin dynamics', level: 'adv' },
       { id: 'barostats', title: 'Pressure and barostats', level: 'adv' },
     ],
