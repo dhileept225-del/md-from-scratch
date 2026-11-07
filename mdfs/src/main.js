@@ -13,6 +13,7 @@ import { mountUnits } from './sims/units.js';
 import { mountLattice } from './sims/lattice.js';
 import { mountVelocities } from './sims/velocities.js';
 import { mountPBC } from './sims/pbc.js';
+import { mountLangevin } from './sims/langevin.js';
 import { mountNoseHoover } from './sims/nosehoover.js';
 import { mountBerendsen } from './sims/berendsen.js';
 import { mountEnsembles } from './sims/ensembles.js';
@@ -29,6 +30,7 @@ import unitsLesson from './lessons/units.js';
 import latticeStart from './lessons/lattices.js';
 import maxwellBoltzmann from './lessons/maxwell-boltzmann.js';
 import pbcLesson from './lessons/pbc.js';
+import langevinLesson from './lessons/langevin.js';
 import noseHooverLesson from './lessons/nose-hoover.js';
 import berendsenLesson from './lessons/berendsen.js';
 import ensemblesLesson from './lessons/ensembles.js';
@@ -36,8 +38,8 @@ import temperatureLesson from './lessons/temperature.js';
 import neighbourLists from './lessons/neighbour-lists.js';
 import cutoffsLesson from './lessons/cutoffs.js';
 
-const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson, cutoffs: cutoffsLesson, 'neighbour-lists': neighbourLists, temperature: temperatureLesson, ensembles: ensemblesLesson, berendsen: berendsenLesson, 'nose-hoover': noseHooverLesson };   // add new lesson files here
-const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC, cutoff: mountCutoff, neighbours: mountNeighbours, temperature: mountTemperature, ensembles: mountEnsembles, berendsen: mountBerendsen, nosehoover: mountNoseHoover };
+const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson, cutoffs: cutoffsLesson, 'neighbour-lists': neighbourLists, temperature: temperatureLesson, ensembles: ensemblesLesson, berendsen: berendsenLesson, 'nose-hoover': noseHooverLesson, langevin: langevinLesson };   // add new lesson files here
+const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC, cutoff: mountCutoff, neighbours: mountNeighbours, temperature: mountTemperature, ensembles: mountEnsembles, berendsen: mountBerendsen, nosehoover: mountNoseHoover, langevin: mountLangevin };
 const app = document.getElementById('app');
 let cleanup = [];
 

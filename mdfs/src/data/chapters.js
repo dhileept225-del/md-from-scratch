@@ -30,7 +30,7 @@ export const chapters = [
       { id: 'ensembles', title: 'NVE, NVT and NPT', level: 'core', ready: true },
       { id: 'berendsen', title: 'The Berendsen thermostat', level: 'core', ready: true },
       { id: 'nose-hoover', title: 'Nosé–Hoover thermostats', level: 'adv', ready: true },
-      { id: 'langevin', title: 'Langevin dynamics', level: 'adv' },
+      { id: 'langevin', title: 'Langevin dynamics', level: 'adv', ready: true },
       { id: 'barostats', title: 'Pressure and barostats', level: 'adv' },
     ],
   },
