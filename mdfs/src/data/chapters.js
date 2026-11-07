@@ -7,7 +7,7 @@ export const chapters = [
       { id: 'what-is-md', title: 'What is molecular dynamics?', level: 'core', ready: true },
       { id: 'lennard-jones', title: 'Atoms and forces: the Lennard-Jones potential', level: 'core', ready: true },
       { id: 'newton-in-code', title: "Newton's law in code", level: 'core', ready: true },
-      { id: 'time-step', title: 'The time step', level: 'core' },
+      { id: 'time-step', title: 'The time step', level: 'core', ready: true },
       { id: 'verlet', title: 'Euler vs velocity Verlet', level: 'core' },
       { id: 'energy-check', title: 'Energy conservation: checking your simulation', level: 'core' },
     ],
