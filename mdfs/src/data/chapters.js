@@ -8,7 +8,7 @@ export const chapters = [
       { id: 'lennard-jones', title: 'Atoms and forces: the Lennard-Jones potential', level: 'core', ready: true },
       { id: 'newton-in-code', title: "Newton's law in code", level: 'core', ready: true },
       { id: 'time-step', title: 'The time step', level: 'core', ready: true },
-      { id: 'verlet', title: 'Euler vs velocity Verlet', level: 'core' },
+      { id: 'verlet', title: 'Euler vs velocity Verlet', level: 'core', ready: true },
       { id: 'energy-check', title: 'Energy conservation: checking your simulation', level: 'core' },
     ],
   },
