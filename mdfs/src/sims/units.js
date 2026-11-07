@@ -21,7 +21,7 @@ export function mountUnits(root) {
       <div><span>Time unit τ</span><b data-o="tau"></b></div>
       <div><span>Time step</span><b data-o="dt"></b></div>
       <div><span>Pressure unit</span><b data-o="P"></b></div>
-      <div><span>ε</span><b data-o="eps"></b></div>
+      <div><span><i class="nc">ε</i></span><b data-o="eps"></b></div>
       <div class="wide"><span>Rough state (LJ phase diagram)</span><b data-o="phase"></b></div>
     </div>
     <div class="conv"><span class="muted small">Energy converter</span>

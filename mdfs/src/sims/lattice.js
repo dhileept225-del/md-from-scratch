@@ -22,7 +22,7 @@ export function mountLattice(root) {
       <div><span>Box length L</span><b data-o="L"></b></div>
       <div><span>Closest pair</span><b data-o="dmin"></b></div>
       <div><span>Overlapping atoms</span><b data-o="ov"></b></div>
-      <div class="wide"><span>LJ energy per atom (ε)</span><b data-o="E"></b></div>
+      <div class="wide"><span>LJ energy per atom (<i class="nc">ε</i>)</span><b data-o="E"></b></div>
     </div>
   </div>`;
   const view = root.querySelector('.sim-view'), $ = s => root.querySelector(s), o = {};

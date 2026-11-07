@@ -99,8 +99,9 @@ input[type=range] { width: 100%; accent-color: var(--cyan); }
 input[type=checkbox] { accent-color: var(--cyan); width: 18px; height: 18px; }
 .readouts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .readouts div { background: rgba(255, 255, 255, .03); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
-.readouts span { display: block; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.readouts > div > span { display: block; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
 .readouts b { font-variant-numeric: tabular-nums; font-size: 16px; }
+.readouts .nc { text-transform: none; font-style: normal; }
 .readouts .wide { grid-column: 1 / -1; }
 .pair-view { min-height: 460px; }
 .pair-view .sim-tip { top: 10px; bottom: auto; }
@@ -111,6 +112,7 @@ input[type=checkbox] { accent-color: var(--cyan); width: 18px; height: 18px; }
 .units-view { min-height: 460px; }
 .vel-view { min-height: 480px; }
 .pbc-view { min-height: 500px; }
+.cut-view { min-height: 480px; }
 .steps-btns { display: flex; flex-direction: column; gap: 8px; }
 .steps-btns .btn { justify-content: flex-start; }
 .conv { display: flex; flex-direction: column; gap: 8px; }
