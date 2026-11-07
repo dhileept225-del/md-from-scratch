@@ -171,6 +171,7 @@ pre .k { color: var(--cyan); } pre .s { color: var(--amber); } pre .n { color: #
   .sim-view { min-height: 0; aspect-ratio: 1; }
   .sim-ctrl { border-left: 0; border-top: 1px solid var(--line); }
   .prevnext { grid-template-columns: 1fr; }
+  .sim-view.lab-view { aspect-ratio: auto; min-height: 640px; }
   .top { padding: 12px 16px; }
   .top nav { gap: 14px; font-size: 15px; }
   .logo { font-size: 16px; gap: 8px; }

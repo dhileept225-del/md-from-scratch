@@ -83,30 +83,37 @@ export function mountEnergyLab(root) {
   const resize = () => { const d = Math.min(devicePixelRatio || 1, 2); W = view.clientWidth; H = view.clientHeight; cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0); };
   const ro = new ResizeObserver(resize); ro.observe(view); resize();
 
-  function plot(x0, y0, w, h, series, title) {
+  // legend sits ABOVE the plot box, so it never overlaps the data
+  function plot(x0, y0, w, h, series, legend) {
+    cx.font = '500 12px "Space Grotesk", sans-serif'; cx.textAlign = 'left'; cx.textBaseline = 'alphabetic';
+    let lx = x0;
+    legend.forEach(([txt, c]) => { const sw = c !== COL.muted; if (sw) { cx.fillStyle = c; cx.fillRect(lx, y0 - 11, 14, 3); } cx.fillStyle = c; cx.fillText(txt, lx + (sw ? 18 : 0), y0 - 6); lx += (sw ? 26 : 8) + cx.measureText(txt).width; });
     cx.strokeStyle = 'rgba(143,163,199,.45)'; cx.lineWidth = 1; cx.strokeRect(x0, y0, w, h);
-    cx.fillStyle = COL.muted; cx.font = '500 12px "Space Grotesk", sans-serif'; cx.textAlign = 'left'; cx.fillText(title, x0 + 6, y0 + 14);
-    let lo = Infinity, hi = -Infinity; series.forEach(s => s.data.forEach(q => { lo = Math.min(lo, q); hi = Math.max(hi, q); }));
+    let lo = Infinity, hi = -Infinity; series.forEach(sr => sr.data.forEach(q => { lo = Math.min(lo, q); hi = Math.max(hi, q); }));
     if (!isFinite(lo)) return; const pad = Math.max((hi - lo) * 0.15, series.minSpan || 1e-3); lo -= pad; hi += pad;
-    series.forEach(s => {
-      cx.strokeStyle = s.color; cx.lineWidth = s.w || 2; cx.beginPath();
-      s.data.forEach((q, i) => { const X = x0 + i / (HIST - 1) * w, Yv = y0 + h - (q - lo) / (hi - lo) * h; i ? cx.lineTo(X, Yv) : cx.moveTo(X, Yv); }); cx.stroke();
+    cx.save(); cx.beginPath(); cx.rect(x0 + 1, y0 + 1, w - 2, h - 2); cx.clip();
+    series.forEach(sr => {
+      cx.strokeStyle = sr.color; cx.lineWidth = sr.w || 2; cx.beginPath();
+      sr.data.forEach((q, i) => { const X = x0 + 4 + i / (HIST - 1) * (w - 8), Yv = y0 + 4 + (h - 8) - (q - lo) / (hi - lo) * (h - 8); i ? cx.lineTo(X, Yv) : cx.moveTo(X, Yv); }); cx.stroke();
     });
+    cx.restore();
   }
   function draw() {
     cx.clearRect(0, 0, W, H);
     const wide = W > 520, bs = wide ? Math.min(H - 20, W * 0.48) : Math.min(W - 20, H * 0.5), bx = 10, by = 10, s = bs / L;
     cx.strokeStyle = 'rgba(56,225,255,.4)'; cx.lineWidth = 1.5; cx.strokeRect(bx, by, bs, bs);
+    cx.save(); cx.beginPath(); cx.rect(bx, by, bs, bs); cx.clip();
     for (let i = 0; i < N; i++) {
       const sp = Math.hypot(v[2 * i], v[2 * i + 1]) / 2.2;
       cx.fillStyle = sp < 0.5 ? COL.cyan : sp < 1 ? COL.amber : COL.coral;
       cx.beginPath(); cx.arc(bx + x[2 * i] * s, by + x[2 * i + 1] * s, Math.max(3, 0.48 * s), 0, Math.PI * 2); cx.fill();
     }
-    const px = wide ? bx + bs + 16 : 10, py = wide ? 10 : by + bs + 14, pw = wide ? W - px - 10 : W - 20, ph = wide ? (H - 34) / 2 : (H - py - 24) / 2;
+    cx.restore();
+    const px = wide ? bx + bs + 16 : 10, py = wide ? 26 : by + bs + 30, pw = wide ? W - px - 10 : W - 20, ph = wide ? (H - 26 - 36 - 10) / 2 : (H - py - 36 - 10) / 2;
     const hK = st.hist.map(q => q[0]), hU = st.hist.map(q => q[1]), hE = st.hist.map(q => q[0] + q[1]);
-    plot(px, py, pw, ph, [{ data: hK, color: COL.cyan }, { data: hU, color: COL.coral }, { data: hE, color: COL.amber, w: 3 }], 'kinetic · potential · total (per atom)');
+    plot(px, py, pw, ph, [{ data: hK, color: COL.cyan }, { data: hU, color: COL.coral }, { data: hE, color: COL.amber, w: 3 }], [['kinetic', COL.cyan], ['potential', COL.coral], ['total', COL.amber], ['(per atom)', COL.muted]]);
     const dev = Object.assign([{ data: hE.map(e => e - (st.E0 ?? e)), color: COL.amber, w: 2.5 }], { minSpan: 2e-3 });
-    plot(px, py + ph + 14, pw, ph, dev, 'total energy change, zoomed in');
+    plot(px, py + ph + 36, pw, ph, dev, [['total energy change, zoomed in', COL.amber]]);
   }
   function stats() {
     o.dt.textContent = st.dt.toFixed(3); o.rc.textContent = st.rc.toFixed(2) + ' σ';
