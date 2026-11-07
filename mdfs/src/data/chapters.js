@@ -20,7 +20,7 @@ export const chapters = [
       { id: 'maxwell-boltzmann', title: 'Starting velocities: Maxwell–Boltzmann', level: 'core', ready: true },
       { id: 'pbc', title: 'Periodic boundary conditions', level: 'core', ready: true },
       { id: 'cutoffs', title: 'Cutoffs and the minimum image', level: 'core', ready: true },
-      { id: 'neighbour-lists', title: 'Neighbour lists', level: 'adv' },
+      { id: 'neighbour-lists', title: 'Neighbour lists', level: 'adv', ready: true },
     ],
   },
   {
