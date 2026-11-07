@@ -103,6 +103,15 @@ input[type=checkbox] { accent-color: var(--cyan); width: 18px; height: 18px; }
 .readouts .wide { grid-column: 1 / -1; }
 .pair-view { min-height: 460px; }
 .pair-view .sim-tip { top: 10px; bottom: auto; }
+.newton-view { min-height: 480px; }
+.seg { display: flex; background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 99px; padding: 3px; }
+.seg button { flex: 1; font: 700 14px var(--font); color: var(--muted); background: none; border: 0; border-radius: 99px; padding: 8px 10px; cursor: pointer; }
+.seg button.on { background: var(--cyan); color: #04101F; }
+.mem { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.mem caption { text-align: left; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding-bottom: 6px; }
+.mem th { color: var(--muted); font-weight: 500; text-align: right; padding: 4px 8px; }
+.mem td { padding: 6px 8px; border-top: 1px solid var(--line); text-align: right; }
+.mem td:first-child { text-align: left; color: var(--muted); }
 .echart { width: 100%; height: 100px; background: rgba(0, 0, 0, .2); border-radius: 10px; }
 .legend { font-size: 13px; color: var(--muted); display: flex; gap: 14px; align-items: center; margin-top: -8px; }
 .legend i { width: 14px; height: 4px; border-radius: 2px; background: var(--c); display: inline-block; margin-right: -8px; }

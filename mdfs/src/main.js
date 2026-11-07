@@ -5,11 +5,13 @@ import './style.css';
 import { chapters, allLessons } from './data/chapters.js';
 import { mountLJ } from './sims/lj.js';
 import { mountPair } from './sims/pair.js';
+import { mountNewton } from './sims/newton.js';
 import whatIsMd from './lessons/what-is-md.js';
 import lennardJones from './lessons/lennard-jones.js';
+import newtonInCode from './lessons/newton-in-code.js';
 
-const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones };   // add new lesson files here
-const sims = { lj: mountLJ, pair: mountPair };
+const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode };   // add new lesson files here
+const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton };
 const app = document.getElementById('app');
 let cleanup = [];
 
