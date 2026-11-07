@@ -109,6 +109,9 @@ input[type=checkbox] { accent-color: var(--cyan); width: 18px; height: 18px; }
 .int-view { min-height: 520px; }
 .lab-view { min-height: 480px; }
 .units-view { min-height: 460px; }
+.vel-view { min-height: 480px; }
+.steps-btns { display: flex; flex-direction: column; gap: 8px; }
+.steps-btns .btn { justify-content: flex-start; }
 .conv { display: flex; flex-direction: column; gap: 8px; }
 .conv input, .conv select { font: 500 15px var(--font); color: var(--ink); background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
 .conv input { width: 120px; }
