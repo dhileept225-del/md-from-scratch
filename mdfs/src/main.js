@@ -8,14 +8,16 @@ import { mountPair } from './sims/pair.js';
 import { mountNewton } from './sims/newton.js';
 import { mountTimestep } from './sims/timestep.js';
 import { mountIntegrators } from './sims/integrators.js';
+import { mountEnergyLab } from './sims/energylab.js';
 import whatIsMd from './lessons/what-is-md.js';
 import lennardJones from './lessons/lennard-jones.js';
 import newtonInCode from './lessons/newton-in-code.js';
 import timeStep from './lessons/time-step.js';
 import verlet from './lessons/verlet.js';
+import energyCheck from './lessons/energy-check.js';
 
-const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet };   // add new lesson files here
-const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators };
+const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck };   // add new lesson files here
+const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab };
 const app = document.getElementById('app');
 let cleanup = [];
 

@@ -9,7 +9,7 @@ export const chapters = [
       { id: 'newton-in-code', title: "Newton's law in code", level: 'core', ready: true },
       { id: 'time-step', title: 'The time step', level: 'core', ready: true },
       { id: 'verlet', title: 'Euler vs velocity Verlet', level: 'core', ready: true },
-      { id: 'energy-check', title: 'Energy conservation: checking your simulation', level: 'core' },
+      { id: 'energy-check', title: 'Energy conservation: checking your simulation', level: 'core', ready: true },
     ],
   },
   {
