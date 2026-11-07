@@ -27,7 +27,7 @@ export const chapters = [
     n: 3, title: 'Ensembles and temperature', blurb: 'Controlling temperature and pressure.',
     lessons: [
       { id: 'temperature', title: 'What temperature means in MD', level: 'core', ready: true },
-      { id: 'ensembles', title: 'NVE, NVT and NPT', level: 'core' },
+      { id: 'ensembles', title: 'NVE, NVT and NPT', level: 'core', ready: true },
       { id: 'berendsen', title: 'The Berendsen thermostat', level: 'core' },
       { id: 'nose-hoover', title: 'Nosé–Hoover thermostats', level: 'adv' },
       { id: 'langevin', title: 'Langevin dynamics', level: 'adv' },

@@ -13,6 +13,7 @@ import { mountUnits } from './sims/units.js';
 import { mountLattice } from './sims/lattice.js';
 import { mountVelocities } from './sims/velocities.js';
 import { mountPBC } from './sims/pbc.js';
+import { mountEnsembles } from './sims/ensembles.js';
 import { mountTemperature } from './sims/temperature.js';
 import { mountNeighbours } from './sims/neighbours.js';
 import { mountCutoff } from './sims/cutoff.js';
@@ -26,12 +27,13 @@ import unitsLesson from './lessons/units.js';
 import latticeStart from './lessons/lattices.js';
 import maxwellBoltzmann from './lessons/maxwell-boltzmann.js';
 import pbcLesson from './lessons/pbc.js';
+import ensemblesLesson from './lessons/ensembles.js';
 import temperatureLesson from './lessons/temperature.js';
 import neighbourLists from './lessons/neighbour-lists.js';
 import cutoffsLesson from './lessons/cutoffs.js';
 
-const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson, cutoffs: cutoffsLesson, 'neighbour-lists': neighbourLists, temperature: temperatureLesson };   // add new lesson files here
-const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC, cutoff: mountCutoff, neighbours: mountNeighbours, temperature: mountTemperature };
+const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson, cutoffs: cutoffsLesson, 'neighbour-lists': neighbourLists, temperature: temperatureLesson, ensembles: ensemblesLesson };   // add new lesson files here
+const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC, cutoff: mountCutoff, neighbours: mountNeighbours, temperature: mountTemperature, ensembles: mountEnsembles };
 const app = document.getElementById('app');
 let cleanup = [];
 
