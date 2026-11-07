@@ -4,10 +4,12 @@ import '@fontsource/space-grotesk/700.css';
 import './style.css';
 import { chapters, allLessons } from './data/chapters.js';
 import { mountLJ } from './sims/lj.js';
+import { mountPair } from './sims/pair.js';
 import whatIsMd from './lessons/what-is-md.js';
+import lennardJones from './lessons/lennard-jones.js';
 
-const lessons = { 'what-is-md': whatIsMd };   // add new lesson files here
-const sims = { lj: mountLJ };
+const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones };   // add new lesson files here
+const sims = { lj: mountLJ, pair: mountPair };
 const app = document.getElementById('app');
 let cleanup = [];
 

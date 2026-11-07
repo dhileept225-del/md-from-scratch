@@ -5,7 +5,7 @@ export const chapters = [
     n: 1, title: 'Basics', blurb: 'What MD is, and the smallest loop that makes atoms move.',
     lessons: [
       { id: 'what-is-md', title: 'What is molecular dynamics?', level: 'core', ready: true },
-      { id: 'lennard-jones', title: 'Atoms and forces: the Lennard-Jones potential', level: 'core' },
+      { id: 'lennard-jones', title: 'Atoms and forces: the Lennard-Jones potential', level: 'core', ready: true },
       { id: 'newton-in-code', title: "Newton's law in code", level: 'core' },
       { id: 'time-step', title: 'The time step', level: 'core' },
       { id: 'verlet', title: 'Euler vs velocity Verlet', level: 'core' },
