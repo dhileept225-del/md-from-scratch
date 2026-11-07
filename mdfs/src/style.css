@@ -110,6 +110,7 @@ input[type=checkbox] { accent-color: var(--cyan); width: 18px; height: 18px; }
 .lab-view { min-height: 480px; }
 .units-view { min-height: 460px; }
 .vel-view { min-height: 480px; }
+.pbc-view { min-height: 500px; }
 .steps-btns { display: flex; flex-direction: column; gap: 8px; }
 .steps-btns .btn { justify-content: flex-start; }
 .conv { display: flex; flex-direction: column; gap: 8px; }

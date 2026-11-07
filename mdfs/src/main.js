@@ -12,6 +12,7 @@ import { mountEnergyLab } from './sims/energylab.js';
 import { mountUnits } from './sims/units.js';
 import { mountLattice } from './sims/lattice.js';
 import { mountVelocities } from './sims/velocities.js';
+import { mountPBC } from './sims/pbc.js';
 import whatIsMd from './lessons/what-is-md.js';
 import lennardJones from './lessons/lennard-jones.js';
 import newtonInCode from './lessons/newton-in-code.js';
@@ -21,9 +22,10 @@ import energyCheck from './lessons/energy-check.js';
 import unitsLesson from './lessons/units.js';
 import latticeStart from './lessons/lattices.js';
 import maxwellBoltzmann from './lessons/maxwell-boltzmann.js';
+import pbcLesson from './lessons/pbc.js';
 
-const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann };   // add new lesson files here
-const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities };
+const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson };   // add new lesson files here
+const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC };
 const app = document.getElementById('app');
 let cleanup = [];
 

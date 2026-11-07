@@ -18,7 +18,7 @@ export const chapters = [
       { id: 'units', title: 'Units in MD', level: 'core', ready: true },
       { id: 'lattice-start', title: 'Starting positions: lattices', level: 'core', ready: true },
       { id: 'maxwell-boltzmann', title: 'Starting velocities: Maxwell–Boltzmann', level: 'core', ready: true },
-      { id: 'pbc', title: 'Periodic boundary conditions', level: 'core' },
+      { id: 'pbc', title: 'Periodic boundary conditions', level: 'core', ready: true },
       { id: 'cutoffs', title: 'Cutoffs and the minimum image', level: 'core' },
       { id: 'neighbour-lists', title: 'Neighbour lists', level: 'adv' },
     ],
