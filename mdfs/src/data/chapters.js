@@ -35,6 +35,7 @@ export const chapters = [
       { id: 'langevin', title: 'Langevin dynamics', level: 'adv', ready: true },
       { id: 'barostats', title: 'Pressure and barostats', level: 'adv', ready: true },
       { id: 'lab-thermostats', title: 'Lab: thermostats by hand', level: 'lab', ready: true },
+      { id: 'lab-barostats', title: 'Lab: barostats by hand', level: 'lab', ready: true },
     ],
   },
   {
