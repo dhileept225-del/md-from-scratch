@@ -68,6 +68,7 @@ export const chapters = [
       { id: 'van-hove', title: 'Van Hove functions', level: 'adv', ready: true },
       { id: 'conductivity', title: 'Ionic conductivity', level: 'adv', ready: true },
       { id: 'onsager', title: 'Onsager coefficients and transference numbers', level: 'adv', ready: true },
+      { id: 'lab-analysis', title: 'Lab: analysis by hand', level: 'lab', ready: true },
     ],
   },
   {
