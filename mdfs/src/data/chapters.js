@@ -46,6 +46,7 @@ export const chapters = [
       { id: 'force-fields', title: 'What is a force field?', level: 'core', ready: true },
       { id: 'shake', title: 'Constraints and SHAKE', level: 'adv', ready: true },
       { id: 'water-models', title: 'Water models', level: 'core', ready: true },
+      { id: 'lab-molecules', title: 'Lab: a molecule by hand', level: 'lab', ready: true },
     ],
   },
   {
