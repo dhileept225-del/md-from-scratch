@@ -74,6 +74,7 @@ export const chapters = [
       { id: 'lab-viscosity', title: 'Lab: viscosity by hand', level: 'lab', ready: true },
       { id: 'lab-lifetimes', title: 'Lab: lifetimes by hand', level: 'lab', ready: true },
       { id: 'lab-structure-factor', title: 'Lab: structure factor by hand', level: 'lab', ready: true },
+      { id: 'lab-dielectric', title: 'Lab: dielectric constant and rotation by hand', level: 'lab', ready: true },
     ],
   },
   {
