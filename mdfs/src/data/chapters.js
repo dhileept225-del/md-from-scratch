@@ -69,7 +69,7 @@ export const chapters = [
     lessons: [
       { id: 'real-codes', title: 'From toy code to LAMMPS and GROMACS', level: 'core', ready: true },
       { id: 'ml-potentials', title: 'Machine-learning potentials', level: 'adv', ready: true },
-      { id: 'metadynamics', title: 'Enhanced sampling: metadynamics', level: 'adv' },
+      { id: 'metadynamics', title: 'Enhanced sampling: metadynamics', level: 'adv', ready: true },
     ],
   },
 ];
