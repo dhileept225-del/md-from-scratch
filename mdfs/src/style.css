@@ -40,6 +40,14 @@ footer { text-align: center; color: var(--muted); padding: 30px; border-top: 1px
 .badge { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 9px; border-radius: 99px; vertical-align: middle; }
 .badge.core { background: rgba(56, 225, 255, .14); color: var(--cyan); }
 .badge.adv { background: rgba(255, 107, 107, .15); color: var(--coral); }
+.badge.lab { background: rgba(255, 194, 75, .15); color: var(--amber); }
+.lab-step .why { color: var(--ink); }
+.lab-step .see { margin-top: 12px; padding: 12px 14px; border-left: 3px solid var(--amber); background: rgba(255, 194, 75, .06); border-radius: 0 10px 10px 0; }
+.calc { font: 14px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #050A16; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; overflow-x: auto; white-space: pre; margin: 10px 0; color: #DDE6F5; }
+.calc b { color: var(--amber); font-weight: 600; }
+@media (max-width: 600px) { .calc { font-size: 12px; padding: 10px; } }
+.tbl { overflow-x: auto; } .tbl table { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14px; } .tbl th, .tbl td { padding: 6px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; } .tbl th { color: var(--muted); font-weight: 600; } .tbl td:first-child, .tbl th:first-child { text-align: left; }
+.ex { margin: 0 0 14px; } .ex .ans { margin-top: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: rgba(56, 225, 255, .05); }
 .soon { font-size: 12px; font-weight: 700; color: var(--amber); border: 1px solid rgba(255, 194, 75, .5); border-radius: 99px; padding: 1px 8px; vertical-align: middle; }
 .card { background: linear-gradient(180deg, var(--panel2), var(--panel)); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; }
 .card p { color: var(--muted); margin: 0; }

@@ -10,6 +10,7 @@ export const chapters = [
       { id: 'time-step', title: 'The time step', level: 'core', ready: true },
       { id: 'verlet', title: 'Euler vs velocity Verlet', level: 'core', ready: true },
       { id: 'energy-check', title: 'Energy conservation: checking your simulation', level: 'core', ready: true },
+      { id: 'lab-basics', title: 'Lab: two atoms by hand', level: 'lab', ready: true },
     ],
   },
   {

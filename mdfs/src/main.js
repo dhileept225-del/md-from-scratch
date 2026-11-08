@@ -13,6 +13,7 @@ import { mountUnits } from './sims/units.js';
 import { mountLattice } from './sims/lattice.js';
 import { mountVelocities } from './sims/velocities.js';
 import { mountPBC } from './sims/pbc.js';
+import { mountLab1 } from './sims/lab1.js';
 import { mountMetad } from './sims/metad.js';
 import { mountMlpot } from './sims/mlpot.js';
 import { mountRealcodes } from './sims/realcodes.js';
@@ -49,6 +50,7 @@ import unitsLesson from './lessons/units.js';
 import latticeStart from './lessons/lattices.js';
 import maxwellBoltzmann from './lessons/maxwell-boltzmann.js';
 import pbcLesson from './lessons/pbc.js';
+import labBasicsLesson from './lessons/lab-basics.js';
 import metadynamicsLesson from './lessons/metadynamics.js';
 import mlPotentialsLesson from './lessons/ml-potentials.js';
 import realCodesLesson from './lessons/real-codes.js';
@@ -76,13 +78,13 @@ import temperatureLesson from './lessons/temperature.js';
 import neighbourLists from './lessons/neighbour-lists.js';
 import cutoffsLesson from './lessons/cutoffs.js';
 
-const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson, cutoffs: cutoffsLesson, 'neighbour-lists': neighbourLists, temperature: temperatureLesson, ensembles: ensemblesLesson, berendsen: berendsenLesson, 'nose-hoover': noseHooverLesson, langevin: langevinLesson, barostats: barostatsLesson, 'bonds-angles': bondsAnglesLesson, dihedrals: dihedralsLesson, 'force-fields': forceFieldsLesson, shake: shakeLesson, 'water-models': waterModelsLesson, 'coulomb-pbc': coulombPbcLesson, ewald: ewaldLesson, pme: pmeLesson, polarizable: polarizableLesson, rdf: rdfLesson, msd: msdLesson, vacf: vacfLesson, 'van-hove': vanHoveLesson, conductivity: conductivityLesson, onsager: onsagerLesson, 'real-codes': realCodesLesson, 'ml-potentials': mlPotentialsLesson, metadynamics: metadynamicsLesson };   // add new lesson files here
-const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC, cutoff: mountCutoff, neighbours: mountNeighbours, temperature: mountTemperature, ensembles: mountEnsembles, berendsen: mountBerendsen, nosehoover: mountNoseHoover, langevin: mountLangevin, barostats: mountBarostats, bonds: mountBonds, dihedrals: mountDihedrals, forcefield: mountForceField, shake: mountShake, water: mountWater, coulomb: mountCoulomb, ewald: mountEwald, pme: mountPme, polarizable: mountPolarizable, rdf: mountRdf, msd: mountMsd, vacf: mountVacf, vanhove: mountVanhove, conductivity: mountConductivity, onsager: mountOnsager, realcodes: mountRealcodes, mlpot: mountMlpot, metad: mountMetad };
+const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson, cutoffs: cutoffsLesson, 'neighbour-lists': neighbourLists, temperature: temperatureLesson, ensembles: ensemblesLesson, berendsen: berendsenLesson, 'nose-hoover': noseHooverLesson, langevin: langevinLesson, barostats: barostatsLesson, 'bonds-angles': bondsAnglesLesson, dihedrals: dihedralsLesson, 'force-fields': forceFieldsLesson, shake: shakeLesson, 'water-models': waterModelsLesson, 'coulomb-pbc': coulombPbcLesson, ewald: ewaldLesson, pme: pmeLesson, polarizable: polarizableLesson, rdf: rdfLesson, msd: msdLesson, vacf: vacfLesson, 'van-hove': vanHoveLesson, conductivity: conductivityLesson, onsager: onsagerLesson, 'real-codes': realCodesLesson, 'ml-potentials': mlPotentialsLesson, metadynamics: metadynamicsLesson, 'lab-basics': labBasicsLesson };   // add new lesson files here
+const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC, cutoff: mountCutoff, neighbours: mountNeighbours, temperature: mountTemperature, ensembles: mountEnsembles, berendsen: mountBerendsen, nosehoover: mountNoseHoover, langevin: mountLangevin, barostats: mountBarostats, bonds: mountBonds, dihedrals: mountDihedrals, forcefield: mountForceField, shake: mountShake, water: mountWater, coulomb: mountCoulomb, ewald: mountEwald, pme: mountPme, polarizable: mountPolarizable, rdf: mountRdf, msd: mountMsd, vacf: mountVacf, vanhove: mountVanhove, conductivity: mountConductivity, onsager: mountOnsager, realcodes: mountRealcodes, mlpot: mountMlpot, metad: mountMetad, lab1: mountLab1 };
 const app = document.getElementById('app');
 let cleanup = [];
 
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const badge = lv => `<span class="badge ${lv}">${lv === 'adv' ? 'Advanced' : 'Core'}</span>`;
+const badge = lv => `<span class="badge ${lv}">${lv === 'adv' ? 'Advanced' : lv === 'lab' ? 'Lab' : 'Core'}</span>`;
 
 // ---------- pages ----------
 function home() {
@@ -134,6 +136,7 @@ function lessonPage(id) {
   const meta = allLessons.find(l => l.id === id), L = lessons[id];
   if (!meta || !L) return notFound();
   const idx = allLessons.indexOf(meta), prev = allLessons[idx - 1], next = allLessons[idx + 1];
+  if (L.lab) return labPage(meta, L, prev, next);
   const v = L.video;
   const video = v.youtube
     ? `<iframe src="https://www.youtube-nocookie.com/embed/${v.youtube}?rel=0&modestbranding=1&playsinline=1" title="${esc(meta.title)}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
@@ -213,6 +216,56 @@ function lessonPage(id) {
       if (done === L.quiz.length) app.querySelector('.score').textContent = `You got ${right} of ${L.quiz.length}. ${right === L.quiz.length ? 'Ready for the next lesson.' : 'Read the Idea tab again, then try the next lesson.'}`;
     });
   });
+}
+
+// ---------- lab pages: hand calculations on 1-10 particles (no video) ----------
+function labPage(meta, L, prev, next) {
+  const navLink = (l, dir) => !l ? '<span></span>' : l.ready
+    ? `<a class="pn ${dir}" href="#lesson-${l.id}"><small>${dir === 'prev' ? '← Previous' : 'Next →'}</small>${l.num} ${l.title}</a>`
+    : `<div class="pn ${dir} off"><small>${dir === 'prev' ? '← Previous' : 'Next · coming soon'}</small>${l.num} ${l.title}</div>`;
+  app.innerHTML = `
+  <nav class="crumb"><a href="#home">Home</a> / <a href="#lessons">Chapter ${meta.chapter}</a> / ${meta.num}</nav>
+  <section class="block lab-top">
+    <p class="eyebrow">Lab ${meta.num} · ${L.minutes} min ${badge('lab')}</p>
+    <h1>${meta.title}</h1>
+    <p class="lead">${L.summary}</p>
+    <h4>In this lab</h4>
+    <ul class="learn">${L.learn.map(x => `<li>${x}</li>`).join('')}</ul>
+    <p class="muted small">You need only a calculator (or the Python check at the end). Every number on this page is printed by that script.</p>
+  </section>
+  <section class="block lab-setup prose"><h2>The setup</h2>${L.setup}</section>
+  ${L.steps.map((st, i) => `
+  <section class="block lab-step prose" id="step-${i + 1}">
+    <p class="eyebrow">Step ${i + 1}</p>
+    <h2>${st.title}</h2>
+    <p class="why"><b>Why:</b> ${st.why}</p>
+    ${st.work}
+    <div class="see"><b>What the numbers say:</b> ${st.see}</div>
+  </section>`).join('')}
+  <section class="block lab-summary prose"><h2>Summary</h2>${L.summaryTable}</section>
+  <section class="block">
+    <h2>Run it yourself</h2>
+    <p class="muted">${L.simHint}</p>
+    <div id="sim"></div>
+  </section>
+  <section class="block prose">
+    <h2>Check every number in Python</h2>
+    <p>${L.code.note}</p>
+    <div class="code"><button class="btn sm ghost copy">Copy</button><pre>${highlight(L.code.src)}</pre></div>
+  </section>
+  <section class="block prose">
+    <h2>Your turn</h2>
+    ${L.exercises.map((e, i) => `<div class="ex"><p><b>${i + 1}.</b> ${e.q}</p><button class="btn sm ghost" data-ex="${i}">Show answer</button><div class="ans" hidden>${e.a}</div></div>`).join('')}
+  </section>
+  <nav class="prevnext">${navLink(prev, 'prev')}${navLink(next, 'next')}</nav>`;
+  cleanup.push(sims[L.sim](document.getElementById('sim')));
+  app.querySelectorAll('[data-ex]').forEach(b => b.onclick = () => { const a = b.nextElementSibling; a.hidden = !a.hidden; b.textContent = a.hidden ? 'Show answer' : 'Hide answer'; });
+  const copy = app.querySelector('.copy');
+  copy.onclick = async () => {
+    try { await navigator.clipboard.writeText(L.code.src); copy.textContent = 'Copied ✓'; }
+    catch { copy.textContent = 'Select the code to copy'; }
+    setTimeout(() => copy.textContent = 'Copy', 2000);
+  };
 }
 
 function notFound() { app.innerHTML = `<section class="block"><h1>Lesson not found</h1><p><a href="#home">Back to home</a></p></section>`; }
