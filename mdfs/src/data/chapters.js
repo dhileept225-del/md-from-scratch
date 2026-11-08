@@ -67,7 +67,7 @@ export const chapters = [
   {
     n: 7, title: 'Beyond', blurb: 'From your own code to research tools.',
     lessons: [
-      { id: 'real-codes', title: 'From toy code to LAMMPS and GROMACS', level: 'core' },
+      { id: 'real-codes', title: 'From toy code to LAMMPS and GROMACS', level: 'core', ready: true },
       { id: 'ml-potentials', title: 'Machine-learning potentials', level: 'adv' },
       { id: 'metadynamics', title: 'Enhanced sampling: metadynamics', level: 'adv' },
     ],
