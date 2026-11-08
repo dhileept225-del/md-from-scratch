@@ -25,7 +25,7 @@ export function mountLab9(root) {
     <div class="readouts" data-ro></div>
   </div>`;
   const cv = root.querySelector('canvas'), cx = cv.getContext('2d'), view = root.querySelector('.fe-view'), $ = s => root.querySelector(s);
-  let rng = 13; const rand = () => (rng = (rng * 16807) % 2147483647) / 2147483647;
+  let seed = 0x9E3779B9; const rand = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296 + 1e-12; };   // mulberry32
   const gauss = () => Math.sqrt(-2 * Math.log(rand() + 1e-12)) * Math.cos(2 * Math.PI * rand());
   let fw = [], bw = [], us = null;
   function runFep() {
