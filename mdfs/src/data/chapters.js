@@ -37,7 +37,7 @@ export const chapters = [
   {
     n: 4, title: 'Molecules', blurb: 'Bonds, angles and force fields.',
     lessons: [
-      { id: 'bonds-angles', title: 'Bonds and angles', level: 'core' },
+      { id: 'bonds-angles', title: 'Bonds and angles', level: 'core', ready: true },
       { id: 'dihedrals', title: 'Dihedrals', level: 'core' },
       { id: 'force-fields', title: 'What is a force field?', level: 'core' },
       { id: 'shake', title: 'Constraints and SHAKE', level: 'adv' },
