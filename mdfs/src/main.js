@@ -13,6 +13,7 @@ import { mountUnits } from './sims/units.js';
 import { mountLattice } from './sims/lattice.js';
 import { mountVelocities } from './sims/velocities.js';
 import { mountPBC } from './sims/pbc.js';
+import { mountVacf } from './sims/vacf.js';
 import { mountMsd } from './sims/msd.js';
 import { mountRdf } from './sims/rdf.js';
 import { mountPolarizable } from './sims/polarizable.js';
@@ -42,6 +43,7 @@ import unitsLesson from './lessons/units.js';
 import latticeStart from './lessons/lattices.js';
 import maxwellBoltzmann from './lessons/maxwell-boltzmann.js';
 import pbcLesson from './lessons/pbc.js';
+import vacfLesson from './lessons/vacf.js';
 import msdLesson from './lessons/msd.js';
 import rdfLesson from './lessons/rdf.js';
 import polarizableLesson from './lessons/polarizable.js';
@@ -62,8 +64,8 @@ import temperatureLesson from './lessons/temperature.js';
 import neighbourLists from './lessons/neighbour-lists.js';
 import cutoffsLesson from './lessons/cutoffs.js';
 
-const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson, cutoffs: cutoffsLesson, 'neighbour-lists': neighbourLists, temperature: temperatureLesson, ensembles: ensemblesLesson, berendsen: berendsenLesson, 'nose-hoover': noseHooverLesson, langevin: langevinLesson, barostats: barostatsLesson, 'bonds-angles': bondsAnglesLesson, dihedrals: dihedralsLesson, 'force-fields': forceFieldsLesson, shake: shakeLesson, 'water-models': waterModelsLesson, 'coulomb-pbc': coulombPbcLesson, ewald: ewaldLesson, pme: pmeLesson, polarizable: polarizableLesson, rdf: rdfLesson, msd: msdLesson };   // add new lesson files here
-const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC, cutoff: mountCutoff, neighbours: mountNeighbours, temperature: mountTemperature, ensembles: mountEnsembles, berendsen: mountBerendsen, nosehoover: mountNoseHoover, langevin: mountLangevin, barostats: mountBarostats, bonds: mountBonds, dihedrals: mountDihedrals, forcefield: mountForceField, shake: mountShake, water: mountWater, coulomb: mountCoulomb, ewald: mountEwald, pme: mountPme, polarizable: mountPolarizable, rdf: mountRdf, msd: mountMsd };
+const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson, cutoffs: cutoffsLesson, 'neighbour-lists': neighbourLists, temperature: temperatureLesson, ensembles: ensemblesLesson, berendsen: berendsenLesson, 'nose-hoover': noseHooverLesson, langevin: langevinLesson, barostats: barostatsLesson, 'bonds-angles': bondsAnglesLesson, dihedrals: dihedralsLesson, 'force-fields': forceFieldsLesson, shake: shakeLesson, 'water-models': waterModelsLesson, 'coulomb-pbc': coulombPbcLesson, ewald: ewaldLesson, pme: pmeLesson, polarizable: polarizableLesson, rdf: rdfLesson, msd: msdLesson, vacf: vacfLesson };   // add new lesson files here
+const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC, cutoff: mountCutoff, neighbours: mountNeighbours, temperature: mountTemperature, ensembles: mountEnsembles, berendsen: mountBerendsen, nosehoover: mountNoseHoover, langevin: mountLangevin, barostats: mountBarostats, bonds: mountBonds, dihedrals: mountDihedrals, forcefield: mountForceField, shake: mountShake, water: mountWater, coulomb: mountCoulomb, ewald: mountEwald, pme: mountPme, polarizable: mountPolarizable, rdf: mountRdf, msd: mountMsd, vacf: mountVacf };
 const app = document.getElementById('app');
 let cleanup = [];
 
