@@ -48,7 +48,7 @@ export const chapters = [
     n: 5, title: 'Electrostatics', blurb: 'Long-range charges in a periodic world.',
     lessons: [
       { id: 'coulomb-pbc', title: "Coulomb's law in a periodic box", level: 'core', ready: true },
-      { id: 'ewald', title: 'Ewald summation', level: 'adv' },
+      { id: 'ewald', title: 'Ewald summation', level: 'adv', ready: true },
       { id: 'pme', title: 'Particle-mesh Ewald', level: 'adv' },
       { id: 'polarizable', title: 'Polarizable models', level: 'adv' },
     ],
