@@ -40,7 +40,7 @@ export const chapters = [
       { id: 'bonds-angles', title: 'Bonds and angles', level: 'core', ready: true },
       { id: 'dihedrals', title: 'Dihedrals', level: 'core', ready: true },
       { id: 'force-fields', title: 'What is a force field?', level: 'core', ready: true },
-      { id: 'shake', title: 'Constraints and SHAKE', level: 'adv' },
+      { id: 'shake', title: 'Constraints and SHAKE', level: 'adv', ready: true },
       { id: 'water-models', title: 'Water models', level: 'core' },
     ],
   },
