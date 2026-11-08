@@ -57,7 +57,7 @@ export const chapters = [
     n: 6, title: 'Analysis', blurb: 'Turning trajectories into numbers you can compare with experiment.',
     lessons: [
       { id: 'rdf', title: 'Radial distribution function', level: 'core', ready: true },
-      { id: 'msd', title: 'Mean squared displacement and diffusion', level: 'core' },
+      { id: 'msd', title: 'Mean squared displacement and diffusion', level: 'core', ready: true },
       { id: 'vacf', title: 'Velocity autocorrelation', level: 'adv' },
       { id: 'van-hove', title: 'Van Hove functions', level: 'adv' },
       { id: 'conductivity', title: 'Ionic conductivity', level: 'adv' },
