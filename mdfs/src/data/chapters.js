@@ -50,7 +50,7 @@ export const chapters = [
       { id: 'coulomb-pbc', title: "Coulomb's law in a periodic box", level: 'core', ready: true },
       { id: 'ewald', title: 'Ewald summation', level: 'adv', ready: true },
       { id: 'pme', title: 'Particle-mesh Ewald', level: 'adv', ready: true },
-      { id: 'polarizable', title: 'Polarizable models', level: 'adv' },
+      { id: 'polarizable', title: 'Polarizable models', level: 'adv', ready: true },
     ],
   },
   {

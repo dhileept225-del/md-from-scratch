@@ -21,7 +21,7 @@ export function mountForceField(root) {
 
   root.classList.add('sim');
   root.innerHTML = `
-  <div class="sim-view tm-view"><canvas style="touch-action:none"></canvas><div class="sim-tip" style="top:8px;right:10px;bottom:auto;left:auto">Drag the right molecule</div></div>
+  <div class="sim-view tm-view"><canvas style="touch-action:none"></canvas><div class="sim-tip" style="top:8px;right:10px;bottom:auto;left:auto">Drag anywhere to move the right molecule</div></div>
   <div class="sim-ctrl">
     <div class="seg"><button data-m="tip3p" class="on">TIP3P</button><button data-m="spce">SPC/E</button></div>
     <label><span>Rotate molecule B</span><output data-o="rot"></output><input type="range" data-k="rot" min="0" max="360" step="1" value="0"></label>
@@ -59,7 +59,7 @@ export function mountForceField(root) {
   const ro = new ResizeObserver(resize); ro.observe(view);
   let grab = null;
   const toWorld = (px, py) => [(px - ox) / S, -(py - oy) / S];
-  cv.addEventListener('pointerdown', e => { const r = cv.getBoundingClientRect(), p = toWorld(e.clientX - r.left, e.clientY - r.top); if (Math.hypot(p[0] - st.B[0], p[1] - st.B[1]) < 0.12) { grab = [p[0] - st.B[0], p[1] - st.B[1]]; cv.setPointerCapture(e.pointerId); } });
+  cv.addEventListener('pointerdown', e => { const r = cv.getBoundingClientRect(), p = toWorld(e.clientX - r.left, e.clientY - r.top); grab = [p[0] - st.B[0], p[1] - st.B[1]]; cv.setPointerCapture(e.pointerId); e.preventDefault(); });   // drag anywhere (easier on phones)
   cv.addEventListener('pointermove', e => { if (!grab) return; const r = cv.getBoundingClientRect(), p = toWorld(e.clientX - r.left, e.clientY - r.top); let B = [p[0] - grab[0], p[1] - grab[1]]; const d = Math.hypot(B[0], B[1]); if (d < 0.2) B = B.map(v => v / d * 0.2); st.B = B; draw(); });
   const up = () => { grab = null; }; cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
 
