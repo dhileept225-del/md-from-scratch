@@ -22,6 +22,7 @@ export const chapters = [
       { id: 'pbc', title: 'Periodic boundary conditions', level: 'core', ready: true },
       { id: 'cutoffs', title: 'Cutoffs and the minimum image', level: 'core', ready: true },
       { id: 'neighbour-lists', title: 'Neighbour lists', level: 'adv', ready: true },
+      { id: 'lab-building', title: 'Lab: building a system by hand', level: 'lab', ready: true },
     ],
   },
   {
