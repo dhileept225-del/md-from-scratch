@@ -72,6 +72,7 @@ export const chapters = [
       { id: 'lab-errors', title: 'Lab: error bars by hand', level: 'lab', ready: true },
       { id: 'lab-finite-size', title: 'Lab: finite-size effects by hand', level: 'lab', ready: true },
       { id: 'lab-viscosity', title: 'Lab: viscosity by hand', level: 'lab', ready: true },
+      { id: 'lab-lifetimes', title: 'Lab: lifetimes by hand', level: 'lab', ready: true },
     ],
   },
   {
