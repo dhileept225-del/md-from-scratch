@@ -69,6 +69,7 @@ export const chapters = [
       { id: 'conductivity', title: 'Ionic conductivity', level: 'adv', ready: true },
       { id: 'onsager', title: 'Onsager coefficients and transference numbers', level: 'adv', ready: true },
       { id: 'lab-analysis', title: 'Lab: analysis by hand', level: 'lab', ready: true },
+      { id: 'lab-errors', title: 'Lab: error bars by hand', level: 'lab', ready: true },
     ],
   },
   {
