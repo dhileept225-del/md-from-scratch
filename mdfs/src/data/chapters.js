@@ -34,6 +34,7 @@ export const chapters = [
       { id: 'nose-hoover', title: 'Nosé–Hoover thermostats', level: 'adv', ready: true },
       { id: 'langevin', title: 'Langevin dynamics', level: 'adv', ready: true },
       { id: 'barostats', title: 'Pressure and barostats', level: 'adv', ready: true },
+      { id: 'lab-thermostats', title: 'Lab: thermostats by hand', level: 'lab', ready: true },
     ],
   },
   {
