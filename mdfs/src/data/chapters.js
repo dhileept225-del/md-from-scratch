@@ -61,7 +61,7 @@ export const chapters = [
       { id: 'vacf', title: 'Velocity autocorrelation', level: 'adv', ready: true },
       { id: 'van-hove', title: 'Van Hove functions', level: 'adv', ready: true },
       { id: 'conductivity', title: 'Ionic conductivity', level: 'adv', ready: true },
-      { id: 'onsager', title: 'Onsager coefficients and transference numbers', level: 'adv' },
+      { id: 'onsager', title: 'Onsager coefficients and transference numbers', level: 'adv', ready: true },
     ],
   },
   {
