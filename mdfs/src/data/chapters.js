@@ -56,6 +56,7 @@ export const chapters = [
       { id: 'ewald', title: 'Ewald summation', level: 'adv', ready: true },
       { id: 'pme', title: 'Particle-mesh Ewald', level: 'adv', ready: true },
       { id: 'polarizable', title: 'Polarizable models', level: 'adv', ready: true },
+      { id: 'lab-electrostatics', title: 'Lab: electrostatics by hand', level: 'lab', ready: true },
     ],
   },
   {
