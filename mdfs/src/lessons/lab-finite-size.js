@@ -6,7 +6,7 @@ const head = c => `<tr>${c.map(x => `<th>${x}</th>`).join('')}</tr>`;
 export default {
   id: 'lab-finite-size',
   lab: true,
-  summary: 'A simulation box holds a few hundred to a few hundred thousand molecules, not 10²³, and it repeats itself periodically. Some results do not care; others depend on the box size in a predictable way and must be corrected. We compute the 1/N offset in g(r) by hand, what it does to Kirkwood–Buff integrals, the Yeh–Hummer correction for diffusion, and then measure D in four box sizes to check the 1/L law.',
+  summary: 'A simulation box holds a few hundred to a few hundred thousand molecules, not 10²³, and it repeats itself periodically. Some results do not care; others depend on the box size in a predictable way and must be corrected. We compute the 1/N offset in g(r) by hand, what it does to Kirkwood–Buff integrals, the Yeh–Hummer correction for diffusion, and then measure D in four box sizes to check the 1/L law, and find where it breaks down.',
   minutes: 35,
   sim: 'lab10',
   learn: [
@@ -80,20 +80,24 @@ same liquid, L = 10 nm: +12 %,  L = 20 nm: +6 %</div>`,
     },
     {
       title: 'Measuring the 1/L law: four box sizes',
-      why: 'Is the correction real, and is it the right size? Run the same 3D LJ liquid in boxes of 32, 108, 256 and 500 atoms, measure D in each with the MSD (several independent runs for the noisy small boxes), and plot D against 1/L.',
+      why: 'Is the correction real, and is it the right size? Run the same 3D LJ liquid in boxes of 32, 108, 256 and 500 atoms, measure D in each with the MSD (several independent runs, more for the noisy small boxes), and plot D against 1/L.',
       work: `<div class="tbl"><table>${head(['N', 'L', '1/L', 'D (MSD)', 'runs'])}
 ${row(['32', '3.420', '0.2924', '0.0440 ± 0.0014', '12'])}
-${row(['108', '5.130', '0.1949', '0.0565 ± 0.0013', '4'])}
-${row(['256', '6.840', '0.1462', '0.0597 ± 0.0021', '2'])}
-${row(['500', '8.550', '0.1170', '0.0626', '1'])}</table></div>
-<div class="calc">straight line:  D = 0.0755 − 0.1054 / L
-D_∞ = <b>0.0755</b>
-slope = −ξT/(6πη)  ->  η = 2.837 × 1.0 / (6π × 0.1054) = <b>1.43</b>
+${row(['108', '5.130', '0.1949', '0.0567 ± 0.0010', '6'])}
+${row(['256', '6.840', '0.1462', '0.0596 ± 0.0014', '4'])}
+${row(['500', '8.550', '0.1170', '0.0615 ± 0.0006', '3'])}</table></div>
+<div class="calc">straight line through all four boxes:
+D = 0.0743 − 0.1007 / L   ->  η = 2.837/(6π × 0.1007) = <b>1.50</b>
+straight line without the 32-atom box:
+D = 0.0687 − 0.0620 / L   ->  η = 2.837/(6π × 0.0620) = <b>2.43</b>
+direct Green–Kubo viscosity (next lab): <b>2.42 ± 0.12</b>
 
-D_PBC below D_∞:  32 atoms −42 %, 108: −25 %, 256: −21 %, 500: −17 %
-Yeh–Hummer applied to each box:
-0.0749, 0.0771, 0.0751, 0.0750   (all ≈ 0.0755)</div>`,
-      see: 'D grows steadily with box size and falls on a straight line in 1/L, as hydrodynamics predicts. Even the 500-atom box underestimates D by 17 %. Two ways to fix it: run several box sizes and extrapolate to 1/L = 0 (as here), or run one box and add the Yeh–Hummer term with a known viscosity: corrected, all four boxes agree on 0.075–0.077. The slope itself gives the viscosity (1.43 in LJ units for this truncated potential), a useful cross-check of a Green–Kubo viscosity. Limitation: the small-box points need many runs, because D from 32 atoms is noisy.',
+Yeh–Hummer with η = 2.42:  ξT/(6πη) = 0.0622
+N = 32:   0.0440 + 0.0622/3.420 = 0.0622   (still low)
+N = 108:  0.0567 + 0.0622/5.130 = <b>0.0688</b>
+N = 256:  0.0596 + 0.0622/6.840 = <b>0.0687</b>
+N = 500:  0.0615 + 0.0622/8.550 = <b>0.0688</b></div>`,
+      see: 'D grows steadily with box size; even the 500-atom box is 11 % below the infinite-box value 0.0688. The three larger boxes fall on a straight line in 1/L whose slope gives η = 2.43, the same as the viscosity computed directly in the next lab (2.42), and the Yeh–Hummer correction brings all three to 0.0687–0.0688. The 32-atom box (L = 3.4, only about three molecular diameters) does not follow the law: including it in the fit gives a wrong viscosity (1.50) and a wrong extrapolation (0.0743). The hydrodynamic picture needs a box several molecules wide. Practical rule: correct one reasonably sized box with a viscosity computed independently, or extrapolate from several boxes that are all large enough, never from a tiny one.',
     },
     {
       title: 'Consequences for conductivity and the Haven ratio',
@@ -123,12 +127,12 @@ ${row(['10', '5.0 nm', '0.63 /nm', '+12 %', '−20 kJ/mol'])}</table></div>`,
 ${row(['g(r) first peak', '2.92 (25 atoms) vs 2.95 (100)', 'nothing, if L/2 > the structure'])}
 ${row(['g(r) tail', '1 − 1/N (0.990 for 100)', 'Ganguly–van der Vegt for integrals'])}
 ${row(['Kirkwood–Buff integrals', '~9 cm³/mol error for 500 molecules', 'correct, and integrate far enough'])}
-${row(['self-diffusion D', '−17 % even with 500 atoms; ∝ 1/L', 'Yeh–Hummer or extrapolate in 1/L'])}
+${row(['self-diffusion D', '−11 % even with 500 atoms; ∝ 1/L', 'Yeh–Hummer with an independent η; boxes not too small'])}
 ${row(['σ_NE, Haven ratio', '+14 % σ_NE, Haven 1.50 -> 1.71', 'correct D; check σ with two boxes'])}
 ${row(['charged box', '−39 kJ/mol per ion at 5 nm', 'analytic correction (Lab 5.5)'])}</table></div>`,
 
   code: {
-    note: 'This script prints every number on this page: the ideal-gas g(r) tail, the 2D LJ boxes, the Kirkwood–Buff example and its correction, the Yeh–Hummer numbers, the four 3D box sizes (about 40 s) and the transport and checklist tables. Run <code>pip install numpy</code>, then <code>python lab_finite_size.py</code> (about 75 s).',
+    note: 'This script prints every number on this page: the ideal-gas g(r) tail, the 2D LJ boxes, the Kirkwood–Buff example and its correction, the Yeh–Hummer numbers, the four 3D box sizes (about 90 s) and the transport and checklist tables. Run <code>pip install numpy</code>, then <code>python lab_finite_size.py</code> (about 2 minutes).',
     src: `# Lab: finite-size effects by hand. How the box size changes g(r), its integrals, diffusion and transport numbers.
 import numpy as np, time
 rng = np.random.default_rng(0)
@@ -213,14 +217,17 @@ def diffusion(nc, nsteps, seed, tau=1.0):
 t0 = time.time()
 print("\\nStep 4: 3D LJ liquid, rho = 0.8, T = 1.0 (cutoff 1.6), four box sizes; D from the MSD, several independent runs")
 res = []
-for nc, nrun, ns in ((2, 12, 10000), (3, 4, 10000), (4, 2, 10000), (5, 1, 12000)):
+for nc, nrun, ns in ((2, 12, 10000), (3, 6, 10000), (4, 4, 10000), (5, 3, 12000)):
     out = [diffusion(nc, ns, 10 * nc + k) for k in range(nrun)]; L = out[0][0]; Ds = np.array([o[1] for o in out]); Tm = np.mean([o[2] for o in out])
     err = Ds.std(ddof=1) / np.sqrt(nrun) if nrun > 1 else np.nan; res.append((L, Ds.mean(), err))
     print(f"   N = {4 * nc**3:3d}, L = {L:.3f}, 1/L = {1 / L:.4f}: D = {Ds.mean():.4f}" + (f" +- {err:.4f}" if nrun > 1 else "") + f"   ({nrun} runs, T = {Tm:.3f})")
-Ls = np.array([q[0] for q in res]); Dm = np.array([q[1] for q in res]); p = np.polyfit(1 / Ls, Dm, 1)
-eta = xi * T0 / (6 * np.pi * -p[0])
-print(f"   straight line D = {p[1]:.4f} + ({p[0]:.4f}) / L  ->  D_inf = {p[1]:.4f};  slope = -xi T/(6 pi eta)  ->  eta = {eta:.2f} (reduced)")
-for L, D, _ in res: print(f"   N = {round(rho * L**3):3d}: D_PBC is {100 * (1 - D / p[1]):.0f} % below D_inf;  Yeh-Hummer with this eta adds {xi * T0 / (6 * np.pi * eta * L):.4f} -> {D + xi * T0 / (6 * np.pi * eta * L):.4f}")
+Ls = np.array([q[0] for q in res]); Dm = np.array([q[1] for q in res])
+for name, sel in (("all four boxes", slice(0, 4)), ("without the 32-atom box", slice(1, 4))):
+    p = np.polyfit(1 / Ls[sel], Dm[sel], 1); eta = xi * T0 / (6 * np.pi * -p[0])
+    print(f"   fit {name:24s}: D = {p[1]:.4f} + ({p[0]:.4f}) / L  ->  D_inf = {p[1]:.4f},  eta = xi T / (6 pi |slope|) = {eta:.2f}")
+eta_gk = 2.42                                             # Green-Kubo viscosity of this liquid (next lab)
+print(f"   Yeh-Hummer with the Green-Kubo viscosity eta = {eta_gk} (next lab): xi T / (6 pi eta) = {xi * T0 / (6 * np.pi * eta_gk):.4f}")
+for L, D, _ in res: print(f"   N = {round(rho * L**3):3d}: {D:.4f} + {xi * T0 / (6 * np.pi * eta_gk):.4f}/{L:.3f} = {D + xi * T0 / (6 * np.pi * eta_gk * L):.4f}")
 print(f"   ({time.time() - t0:.0f} s)")
 
 # ---------- Step 5: consequences for conductivity and the Haven ratio ----------

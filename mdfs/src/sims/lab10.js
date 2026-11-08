@@ -3,7 +3,7 @@
 //            integral with and without the Ganguly-van der Vegt correction.
 // Diffusion: the four 3D LJ box sizes of the lab vs Yeh-Hummer, plus a calculator for real liquids.
 const COL = { cyan: '#38E1FF', coral: '#FF6B6B', amber: '#FFC24B', ink: '#F2F5FA', muted: '#8FA3C7' };
-const LJ = [[3.420, 0.0440, 0.0014], [5.130, 0.0565, 0.0013], [6.840, 0.0597, 0.0021], [8.550, 0.0626, 0]];
+const LJ = [[3.420, 0.0440, 0.0014], [5.130, 0.0567, 0.0010], [6.840, 0.0596, 0.0014], [8.550, 0.0615, 0.0006]];
 const XI = 2.837297, KB = 1.380649e-23;
 
 export function mountLab10(root) {
@@ -82,11 +82,11 @@ export function mountLab10(root) {
     } else {
       // LJ data vs 1/L
       const x0 = 50, x1 = W - 12, y0 = 22, y1 = half, X = q => x0 + q / 0.32 * (x1 - x0), Y = d => y1 - (d - 0.03) / 0.05 * (y1 - y0);
-      axes(x0, y0, x1, y1); label('3D LJ: D vs 1/L (dots), line D = 0.0755 − 0.1054/L', x0 + 6, y0 - 6, COL.ink, 'left', W < 500 ? '600 10px' : '600 12px');
-      cx.strokeStyle = COL.amber; cx.lineWidth = 2; cx.beginPath(); cx.moveTo(X(0), Y(0.0755)); cx.lineTo(X(0.32), Y(0.0755 - 0.1054 * 0.32)); cx.stroke();
+      axes(x0, y0, x1, y1); label('3D LJ: D vs 1/L (dots); Yeh–Hummer line with η = 2.42', x0 + 6, y0 - 6, COL.ink, 'left', W < 500 ? '600 10px' : '600 12px');
+      cx.strokeStyle = COL.amber; cx.lineWidth = 2; cx.beginPath(); cx.moveTo(X(0), Y(0.0688)); cx.lineTo(X(0.32), Y(0.0688 - 0.0622 * 0.32)); cx.stroke();
       LJ.forEach(([L, D, e]) => { cx.strokeStyle = COL.cyan; cx.beginPath(); cx.moveTo(X(1 / L), Y(D - e)); cx.lineTo(X(1 / L), Y(D + e)); cx.stroke(); cx.fillStyle = COL.cyan; cx.beginPath(); cx.arc(X(1 / L), Y(D), 5, 0, 7); cx.fill();
         label(`${Math.round(0.8 * L ** 3)}`, X(1 / L), Y(D) - 9, COL.muted, 'center', '11px'); });
-      cx.fillStyle = COL.amber; cx.beginPath(); cx.arc(X(0), Y(0.0755), 5, 0, 7); cx.fill(); label('infinite box', X(0) + 8, Y(0.0755) + 4, COL.amber, 'left', '11px');
+      cx.fillStyle = COL.amber; cx.beginPath(); cx.arc(X(0), Y(0.0688), 5, 0, 7); cx.fill(); label('infinite box', X(0) + 8, Y(0.0688) - 8, COL.amber, 'left', '11px');
       cx.fillStyle = COL.muted; cx.font = '11px "Space Grotesk", sans-serif'; cx.textAlign = 'center'; [0, 0.1, 0.2, 0.3].forEach(q => cx.fillText(q, X(q), y1 + 14)); cx.textAlign = 'right'; [0.04, 0.06, 0.08].forEach(d => cx.fillText(d, x0 - 4, Y(d) + 4));
       // calculator: correction (%) vs L for the chosen liquid
       const corr = L => XI * KB * st.T / (6 * Math.PI * st.eta * 1e-3 * L * 1e-9), Dsi = st.D * 1e-11;
