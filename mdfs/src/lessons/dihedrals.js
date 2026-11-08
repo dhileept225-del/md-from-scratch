@@ -77,8 +77,8 @@ def butane(phi):
     """C1-C2-C3-C4 with C-C = 0.153 nm, angle 112 deg, dihedral phi."""
     b, th = 0.153, np.deg2rad(112)
     p1, p2 = np.zeros(3), np.array([b, 0, 0])
-    p0 = p1 + b * np.array([np.cos(np.pi - th), np.sin(np.pi - th), 0])
-    d = np.array([-np.cos(np.pi - th), np.sin(np.pi - th) * np.cos(phi), -np.sin(np.pi - th) * np.sin(phi)])
+    p0 = p1 + b * np.array([np.cos(th), np.sin(th), 0])                       # angle C1-C2-C3 = th
+    d = np.array([-np.cos(th), np.sin(th) * np.cos(phi), -np.sin(th) * np.sin(phi)])   # angle C2-C3-C4 = th
     return np.array([p0, p1, p2, p2 + b * d])
 
 for deg in [180, 60, -60, 0]:
