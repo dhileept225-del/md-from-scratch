@@ -79,6 +79,7 @@ export const chapters = [
       { id: 'ml-potentials', title: 'Machine-learning potentials', level: 'adv', ready: true },
       { id: 'metadynamics', title: 'Enhanced sampling: metadynamics', level: 'adv', ready: true },
       { id: 'lab-beyond', title: 'Lab: beyond, by hand', level: 'lab', ready: true },
+      { id: 'lab-free-energy', title: 'Lab: free energies by hand', level: 'lab', ready: true },
     ],
   },
 ];
