@@ -60,7 +60,7 @@ export const chapters = [
       { id: 'msd', title: 'Mean squared displacement and diffusion', level: 'core', ready: true },
       { id: 'vacf', title: 'Velocity autocorrelation', level: 'adv', ready: true },
       { id: 'van-hove', title: 'Van Hove functions', level: 'adv', ready: true },
-      { id: 'conductivity', title: 'Ionic conductivity', level: 'adv' },
+      { id: 'conductivity', title: 'Ionic conductivity', level: 'adv', ready: true },
       { id: 'onsager', title: 'Onsager coefficients and transference numbers', level: 'adv' },
     ],
   },
