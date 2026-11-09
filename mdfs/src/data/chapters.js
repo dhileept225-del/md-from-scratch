@@ -36,6 +36,7 @@ export const chapters = [
       { id: 'barostats', title: 'Pressure and barostats', level: 'adv', ready: true },
       { id: 'lab-thermostats', title: 'Lab: thermostats by hand', level: 'lab', ready: true },
       { id: 'lab-barostats', title: 'Lab: barostats by hand', level: 'lab', ready: true },
+      { id: 'lab-mc', title: 'Lab: Monte Carlo vs MD by hand', level: 'lab', ready: true },
     ],
   },
   {
