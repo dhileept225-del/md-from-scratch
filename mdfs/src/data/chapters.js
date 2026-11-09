@@ -11,6 +11,7 @@ export const chapters = [
       { id: 'verlet', title: 'Euler vs velocity Verlet', level: 'core', ready: true },
       { id: 'energy-check', title: 'Energy conservation: checking your simulation', level: 'core', ready: true },
       { id: 'lab-basics', title: 'Lab: two atoms by hand', level: 'lab', ready: true },
+      { id: 'lab-integrators', title: 'Lab: integrator extras (shadow energy, precision, RESPA)', level: 'lab', ready: true },
     ],
   },
   {
