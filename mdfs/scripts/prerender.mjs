@@ -84,23 +84,23 @@ for (const meta of ready) {
 // research section
 const RES_DESC = 'Understand how LAMMPS works: run it in your browser, read its engine, change its code and check every change with a hand calculation.';
 const resList = researchParts.map(p => `<div class="chapter"><div class="ch-head"><span class="ch-n">${p.key}</span><div><h3>${p.title}</h3><p>${p.blurb}</p></div></div>
-  <ol class="lesson-list">${p.pages.map(pg => `<li>${pg.ready ? `<a href="/research/${pg.id}"><span class="t">${esc(pg.title)}</span></a>` : `<div class="off"><span class="t">${esc(pg.title)}</span></div>`}</li>`).join('')}</ol></div>`).join('');
-fs.writeFileSync(path.join(dist, 'research.html'), page({ title: `LAMMPS from scratch | ${NAME}`, desc: RES_DESC, urlPath: '/research',
-  body: `<nav class="crumb"><a href="/">Home</a> / Research</nav><section class="block"><h1>LAMMPS from scratch</h1><p class="lead">${RES_DESC}</p></section><section class="chapters">${resList}</section>` }));
-fs.mkdirSync(path.join(dist, 'research'), { recursive: true });
+  <ol class="lesson-list">${p.pages.map(pg => `<li>${pg.ready ? `<a href="/lammps/${pg.id}"><span class="t">${esc(pg.title)}</span></a>` : `<div class="off"><span class="t">${esc(pg.title)}</span></div>`}</li>`).join('')}</ol></div>`).join('');
+fs.writeFileSync(path.join(dist, 'lammps.html'), page({ title: `LAMMPS from scratch | ${NAME}`, desc: RES_DESC, urlPath: '/lammps',
+  body: `<nav class="crumb"><a href="/">Home</a> / LAMMPS</nav><section class="block"><h1>LAMMPS from scratch</h1><p class="lead">${RES_DESC}</p></section><section class="chapters">${resList}</section>` }));
+fs.mkdirSync(path.join(dist, 'lammps'), { recursive: true });
 const readyRes = allResearch.filter(p => p.ready);
 for (const meta of readyRes) {
   const P = researchPages[meta.id];
-  const body = `<nav class="crumb"><a href="/">Home</a> / <a href="/research">Research</a> / ${meta.num}</nav>
+  const body = `<nav class="crumb"><a href="/">Home</a> / <a href="/lammps">LAMMPS</a> / ${meta.num}</nav>
   <section class="block"><p class="eyebrow">LAMMPS from scratch · ${P.minutes} min</p><h1>${esc(meta.title)}</h1><p class="lead">${P.summary}</p><ul class="learn">${P.learn.map(x => `<li>${x}</li>`).join('')}</ul></section>${P.html()}`;
-  const jsonld = { '@context': 'https://schema.org', '@type': 'LearningResource', name: meta.title, description: plain(P.summary), url: `${SITE}/research/${meta.id}`,
+  const jsonld = { '@context': 'https://schema.org', '@type': 'LearningResource', name: meta.title, description: plain(P.summary), url: `${SITE}/lammps/${meta.id}`,
     learningResourceType: 'Tutorial', educationalLevel: 'Graduate', timeRequired: `PT${P.minutes}M`, inLanguage: 'en', isAccessibleForFree: true, teaches: P.learn.map(plain), isPartOf: course };
-  fs.writeFileSync(path.join(dist, 'research', `${meta.id}.html`), page({ title: `${meta.title} | LAMMPS from scratch`, desc: short(P.summary), urlPath: `/research/${meta.id}`, body, type: 'article', jsonld }));
+  fs.writeFileSync(path.join(dist, 'lammps', `${meta.id}.html`), page({ title: `${meta.title} | LAMMPS from scratch`, desc: short(P.summary), urlPath: `/lammps/${meta.id}`, body, type: 'article', jsonld }));
 }
 
 // sitemap and robots
 const today = new Date().toISOString().slice(0, 10);
-const urls = ['/', ...ready.map(l => `/lessons/${l.id}`), '/research', ...readyRes.map(p => `/research/${p.id}`)];
+const urls = ['/', ...ready.map(l => `/lessons/${l.id}`), '/lammps', ...readyRes.map(p => `/lammps/${p.id}`)];
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 console.log(`prerendered ${ready.length} lesson pages + home, /lessons, 404; sitemap with ${urls.length} URLs`);

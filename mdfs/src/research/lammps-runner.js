@@ -13,15 +13,15 @@ function getWorker() {
 }
 
 // Returns { lines, version, thermo: { cols, rows }, error, seconds }
-export function runLammps(script) {
+export function runLammps(script, opts = {}) {
   return new Promise(resolve => {
     const id = nextId++;
     waiting.set(id, res => {
       const lines = res.lines || [];
       const errLine = lines.find(l => /^ERROR/.test(l.trim()));
-      resolve({ lines, error: errLine ? errLine.trim() : res.error, seconds: res.seconds, version: res.banner || lines.find(l => /^LAMMPS \(/.test(l)) || '', thermo: parseThermo(lines) });
+      resolve({ lines, files: res.files || {}, error: errLine ? errLine.trim() : res.error, seconds: res.seconds, version: res.banner || lines.find(l => /^LAMMPS \(/.test(l)) || '', thermo: parseThermo(lines) });
     });
-    getWorker().postMessage({ id, script });
+    getWorker().postMessage({ id, script, files: opts.files || {}, read: opts.read || [] });
   });
 }
 

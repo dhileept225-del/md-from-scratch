@@ -54,7 +54,7 @@ ${row(['time to first run', 'minutes', '15–30 minutes the first time, includin
 ${row(['version', 'whatever was packaged', 'any release, including the newest'])}
 ${row(['packages', 'chosen by the packager', 'exactly the ones you need'])}
 ${row(['change the C++ code', 'not possible', 'yes (Part E)'])}</table></div>
-    <p>No installation at all is also possible: the <a href="/research/lammps-start">Start page</a> runs LAMMPS inside your browser.</p>
+    <p>No installation at all is also possible: the <a href="/lammps/lammps-start">Start page</a> runs LAMMPS inside your browser.</p>
   </section>
 
   <section class="block">
@@ -85,7 +85,7 @@ ${row(['a date with no "stable" tag', 'a feature release: newer features, less t
 
   <section class="block prose">
     <h2>4 · Match: prove your installation works</h2>
-    <p>Run the melt example (it comes with every installer, in <code>examples/melt/</code>, or copy it from the <a href="/research/lammps-start">Start page</a>):</p>
+    <p>Run the melt example (it comes with every installer, in <code>examples/melt/</code>, or copy it from the <a href="/lammps/lammps-start">Start page</a>):</p>
     <div class="calc">lmp -in in.melt</div>
     <p>Its first thermo line is fixed by the crystal and the starting temperature, so every correct installation of every version must print exactly the numbers we computed by hand on the Start page. Paste your line below.</p>
     <div class="lmp paste">

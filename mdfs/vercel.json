@@ -1,4 +1,8 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/research", "destination": "/lammps", "permanent": true },
+    { "source": "/research/:id", "destination": "/lammps/:id", "permanent": true }
+  ]
 }
