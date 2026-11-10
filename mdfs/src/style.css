@@ -290,3 +290,19 @@ select.r-in { width: auto; }
 
 @media (max-width: 760px) { .rd-grid { grid-template-columns: minmax(0,1fr); } .rd-grid .rd-data { height: 300px; } }
 .st-q, .st-d { min-height: 0 !important; height: auto; padding: 8px 10px; resize: none; }
+/* B.2 conductor */
+.lc-grid { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 16px; align-items: start; }
+.lc-lines { display: flex; flex-direction: column; gap: 4px; }
+.lc-line { text-align: left; background: rgba(255,255,255,.03); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; color: inherit; }
+.lc-line code { background: none; padding: 0; font-size: 12.5px; }
+.lc-line.on { border-color: var(--cyan); background: rgba(56,225,255,.08); }
+.lc-mem { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; }
+.lc-m { font: 600 13px/1 ui-monospace, Menlo, monospace; text-align: center; padding: 10px 4px; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); transition: all .2s; }
+.lc-m.on { color: #04121c; background: var(--cyan); border-color: var(--cyan); }
+.lc-what { margin-top: 10px; font-size: 14px; }
+.lc-what p { margin: 4px 0; }
+.lc-in { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.lc-in label { display: flex; flex-direction: column; font-size: 12.5px; color: var(--muted); gap: 4px; }
+.lmp-in.sm { min-height: 0 !important; width: 110px; padding: 7px 9px; resize: none; }
+.lc-u { background: #050A16; color: inherit; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+@media (max-width: 760px) { .lc-grid { grid-template-columns: minmax(0,1fr); } .lc-in label { flex: 1 1 40%; } .lmp-in.sm { width: 100%; } }
