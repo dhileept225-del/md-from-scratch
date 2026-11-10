@@ -1,4 +1,4 @@
 import { defineConfig } from 'vite';
 
-// base './' keeps every link relative, so the built site works on Vercel and in previews.
-export default defineConfig({ base: './' });
+// base '/' because pages live at nested paths (/lessons/<id>); every Vercel deploy serves from its domain root.
+export default defineConfig({ base: '/' });

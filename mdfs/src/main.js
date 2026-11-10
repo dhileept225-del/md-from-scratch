@@ -129,7 +129,7 @@ function home() {
       <p class="eyebrow">A free, hands-on course</p>
       <h1>Molecular dynamics,<br><span class="c">from scratch.</span></h1>
       <p class="lead">Learn how MD really works by building it yourself, one small idea at a time. Each lesson has a 60-second video, a live simulation and code you can run.</p>
-      <div class="row"><a class="btn primary" href="#lesson-what-is-md">Start lesson 1 →</a><a class="btn ghost" href="#lessons">See all lessons</a></div>
+      <div class="row"><a class="btn primary" href="/lessons/what-is-md">Start lesson 1 →</a><a class="btn ghost" href="/lessons">See all lessons</a></div>
       <p class="meta">${chapters.length} chapters · ${total} lessons · ${ready} live so far</p>
     </div>
     <div class="hero-sim" id="hero-sim"></div>
@@ -153,7 +153,7 @@ function home() {
         <ol class="lesson-list">
           ${c.lessons.map((l, i) => {
             const inner = `<span class="num">${c.n}.${i + 1}</span><span class="t">${l.title}</span>${badge(l.level)}${l.ready ? '<span class="go">→</span>' : '<span class="soon">Soon</span>'}`;
-            return `<li>${l.ready ? `<a href="#lesson-${l.id}">${inner}</a>` : `<div class="off">${inner}</div>`}</li>`;
+            return `<li>${l.ready ? `<a href="/lessons/${l.id}">${inner}</a>` : `<div class="off">${inner}</div>`}</li>`;
           }).join('')}
         </ol>
       </div>`).join('')}
@@ -171,16 +171,16 @@ function lessonPage(id) {
   if (!meta || !L) return notFound();
   const idx = allLessons.indexOf(meta), prev = allLessons[idx - 1], next = allLessons[idx + 1];
   if (L.lab) return labPage(meta, L, prev, next);
-  const v = L.video;
+  const v = L.video, abs = p => p && !/^(\/|https?:)/.test(p) ? '/' + p : p;
   const video = v.youtube
     ? `<iframe src="https://www.youtube-nocookie.com/embed/${v.youtube}?rel=0&modestbranding=1&playsinline=1" title="${esc(meta.title)}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-    : `<video src="${v.mp4}" poster="${v.poster || ''}" controls playsinline preload="metadata"></video>`;
+    : `<video src="${abs(v.mp4)}" poster="${abs(v.poster) || ''}" controls playsinline preload="metadata"></video>`;
   const navLink = (l, dir) => !l ? '<span></span>' : l.ready
-    ? `<a class="pn ${dir}" href="#lesson-${l.id}"><small>${dir === 'prev' ? '← Previous' : 'Next →'}</small>${l.num} ${l.title}</a>`
+    ? `<a class="pn ${dir}" href="/lessons/${l.id}"><small>${dir === 'prev' ? '← Previous' : 'Next →'}</small>${l.num} ${l.title}</a>`
     : `<div class="pn ${dir} off"><small>${dir === 'prev' ? '← Previous' : 'Next · coming soon'}</small>${l.num} ${l.title}</div>`;
 
   app.innerHTML = `
-  <nav class="crumb"><a href="#home">Home</a> / <a href="#lessons">Chapter ${meta.chapter}</a> / ${meta.num}</nav>
+  <nav class="crumb"><a href="/">Home</a> / <a href="/lessons">Chapter ${meta.chapter}</a> / ${meta.num}</nav>
   <section class="lesson-top">
     <div class="video">${video}</div>
     <div class="intro">
@@ -255,10 +255,10 @@ function lessonPage(id) {
 // ---------- lab pages: hand calculations on 1-10 particles (no video) ----------
 function labPage(meta, L, prev, next) {
   const navLink = (l, dir) => !l ? '<span></span>' : l.ready
-    ? `<a class="pn ${dir}" href="#lesson-${l.id}"><small>${dir === 'prev' ? '← Previous' : 'Next →'}</small>${l.num} ${l.title}</a>`
+    ? `<a class="pn ${dir}" href="/lessons/${l.id}"><small>${dir === 'prev' ? '← Previous' : 'Next →'}</small>${l.num} ${l.title}</a>`
     : `<div class="pn ${dir} off"><small>${dir === 'prev' ? '← Previous' : 'Next · coming soon'}</small>${l.num} ${l.title}</div>`;
   app.innerHTML = `
-  <nav class="crumb"><a href="#home">Home</a> / <a href="#lessons">Chapter ${meta.chapter}</a> / ${meta.num}</nav>
+  <nav class="crumb"><a href="/">Home</a> / <a href="/lessons">Chapter ${meta.chapter}</a> / ${meta.num}</nav>
   <section class="block lab-top">
     <p class="eyebrow">Lab ${meta.num} · ${L.minutes} min ${badge('lab')}</p>
     <h1>${meta.title}</h1>
@@ -302,7 +302,7 @@ function labPage(meta, L, prev, next) {
   };
 }
 
-function notFound() { app.innerHTML = `<section class="block"><h1>Lesson not found</h1><p><a href="#home">Back to home</a></p></section>`; }
+function notFound() { app.innerHTML = `<section class="block"><h1>Page not found</h1><p><a href="/">Back to home</a></p></section>`; }
 
 function highlight(src) {
   const kw = /\b(import|as|def|return|for|in|if|range|round|print)\b/g;
@@ -314,12 +314,47 @@ function highlight(src) {
   }).join('\n');
 }
 
-// ---------- router (#home, #lessons, #lesson-<id>) ----------
+// ---------- page titles and descriptions (search engines and link previews) ----------
+const SITE = 'https://mdfromscratch.org', NAME = 'MD from Scratch';
+const HOME_DESC = 'A free, hands-on course: learn molecular dynamics from scratch with school maths, live simulations, hand-checked labs and Python code.';
+const plain = s => String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const short = s => { const p = plain(s); return p.length > 155 ? p.slice(0, 152).replace(/\s\S*$/, '') + '…' : p; };
+function setMeta(title, desc, path) {
+  document.title = title;
+  const set = (sel, attr, val) => { const e = document.head.querySelector(sel); if (e) e.setAttribute(attr, val); };
+  set('meta[name="description"]', 'content', desc); set('link[rel="canonical"]', 'href', SITE + path);
+  set('meta[property="og:title"]', 'content', title); set('meta[property="og:description"]', 'content', desc); set('meta[property="og:url"]', 'content', SITE + path);
+}
+
+// ---------- router: /, /lessons, /lessons/<id>  (old #lesson-<id> links still work) ----------
+function legacyHash() {
+  const h = location.hash.slice(1);
+  if (h.startsWith('lesson-')) history.replaceState(null, '', '/lessons/' + h.slice(7));
+  else if (h === 'lessons') history.replaceState(null, '', '/lessons');
+  else if (h === 'home') history.replaceState(null, '', '/');
+}
 function route() {
   cleanup.forEach(f => f()); cleanup = [];
-  const h = location.hash.slice(1) || 'home';
-  if (h.startsWith('lesson-')) { lessonPage(h.slice(7)); window.scrollTo(0, 0); }
-  else { home(); if (h === 'lessons') document.getElementById('lessons-list').scrollIntoView(); else window.scrollTo(0, 0); }
+  const p = location.pathname.replace(/\/+$/, '') || '/';
+  const m = p.match(/^\/lessons\/([\w-]+)$/);
+  if (m) {
+    const meta = allLessons.find(l => l.id === m[1]), L = lessons[m[1]];
+    lessonPage(m[1]); window.scrollTo(0, 0);
+    if (meta && L) setMeta(`${meta.title} | ${NAME}`, short(L.summary), p); else setMeta(`Page not found | ${NAME}`, HOME_DESC, p);
+  } else {
+    home();
+    if (p === '/lessons') { document.getElementById('lessons-list').scrollIntoView(); setMeta(`All lessons | ${NAME}`, HOME_DESC, '/lessons'); }
+    else { window.scrollTo(0, 0); setMeta(`${NAME}: learn molecular dynamics by building it`, HOME_DESC, '/'); }
+  }
 }
-addEventListener('hashchange', route);
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="/"]');
+  if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target === '_blank' || /\.[a-z0-9]+$/i.test(a.getAttribute('href'))) return;
+  e.preventDefault();
+  if (a.getAttribute('href') !== location.pathname) history.pushState(null, '', a.getAttribute('href'));
+  route();
+});
+addEventListener('popstate', route);
+addEventListener('hashchange', () => { if (/^#(lesson-|lessons$|home$)/.test(location.hash)) { legacyHash(); route(); } });
+legacyHash();
 route();
