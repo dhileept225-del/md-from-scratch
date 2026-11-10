@@ -22,9 +22,9 @@ export const researchParts = [
     pages: [
       { id: 'input-script', title: 'What an input script is', ready: true },
       { id: 'reading-a-line', title: 'How LAMMPS reads one line', ready: true },
-      { id: 'four-blocks', title: 'The four blocks of every script' },
-      { id: 'units', title: 'Units' },
-      { id: 'building-the-system', title: 'Building the system' },
+      { id: 'four-blocks', title: 'The four blocks of every script', ready: true },
+      { id: 'units', title: 'Units', ready: true },
+      { id: 'building-the-system', title: 'Building the system', ready: true },
       { id: 'velocities', title: 'Velocities' },
       { id: 'forces-in-script', title: 'Forces and neighbours in the script' },
       { id: 'read-data', title: 'read_data files' },

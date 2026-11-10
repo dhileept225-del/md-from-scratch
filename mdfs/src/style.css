@@ -266,3 +266,11 @@ svg.flow { width: 100%; max-width: 760px; height: auto; display: block; margin: 
 .word { font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; background: rgba(56, 225, 255, .06); }
 .word.cmd { border-color: var(--amber); color: var(--amber); }
 #reader .presets { display: flex; flex-wrap: wrap; gap: 6px; }
+/* A.3 sorter, A.5 builder */
+.sorter { border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; max-width: 900px; }
+.srow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 12px; border-bottom: 1px solid var(--line); }
+.srow code { font-size: 13px; white-space: pre; overflow-x: auto; }
+.srow.ok { background: rgba(110, 231, 168, .08); } .srow.bad { background: rgba(255, 107, 107, .1); }
+.seg.mini { flex: 0 0 auto; padding: 2px; } .seg.mini button { padding: 4px 11px; font-size: 13px; flex: 0 0 auto; }
+.sorter + .row, #builder .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 10px 0; }
+select.r-in { width: auto; }
