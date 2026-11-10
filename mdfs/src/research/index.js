@@ -13,8 +13,8 @@ export const researchParts = [
       { id: 'terminal-basics', title: 'The terminal in 10 commands', ready: true },
       { id: 'get-lammps', title: 'Getting LAMMPS without compiling', ready: true },
       { id: 'build-lammps', title: 'Building LAMMPS from source', ready: true },
-      { id: 'read-cpp', title: 'Reading C++ with school maths' },
-      { id: 'git-diff', title: 'Git: seeing exactly what changed' },
+      { id: 'read-cpp', title: 'Reading C++ with school maths', ready: true },
+      { id: 'git-diff', title: 'Git: seeing exactly what changed', ready: true },
     ],
   },
   {

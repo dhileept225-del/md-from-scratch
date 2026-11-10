@@ -237,3 +237,19 @@ svg.flow { width: 100%; max-width: 760px; height: auto; display: block; margin: 
 .tasks .row { display: flex; flex-wrap: wrap; gap: 6px; } .tcmd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; padding: 6px 12px; }
 @media (max-width: 860px) { .term-wrap { grid-template-columns: minmax(0, 1fr); } .term { position: static; } .term-out { height: 320px; } }
 .os-tabs { max-width: 520px; margin-bottom: 14px; } .paste-in { width: 100%; box-sizing: border-box; background: #050A16; color: #DDE6F5; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font-size: 13px; }
+/* diffs and the code stepper */
+.diff { font: 13px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #050A16; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; overflow-x: auto; white-space: pre; margin: 10px 0; color: #C9D5EA; }
+.diff .dh { color: var(--muted); font-weight: 700; } .diff .dat { color: var(--cyan); }
+.diff .del, .tbl .del { color: #FF8F8F; background: rgba(255, 107, 107, .12); } .diff .add, .tbl .add { color: #7DF0B0; background: rgba(110, 231, 168, .12); }
+.diff .del, .diff .add { display: inline-block; min-width: 100%; }
+.stepper { border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); padding: 14px; }
+.stepper .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 10px; }
+.step-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 14px; }
+.code-lines { margin: 0; font: 12.5px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #050A16; border: 1px solid var(--line); border-radius: 12px; padding: 10px; overflow: auto; max-height: 440px; color: #9FB0CF; }
+.code-lines span { display: block; white-space: pre; } .code-lines i { font-style: normal; color: #55657F; display: inline-block; width: 34px; }
+.code-lines .cur { background: rgba(56, 225, 255, .14); color: #fff; border-radius: 4px; }
+.says { min-height: 48px; margin-bottom: 8px; font-size: 15px; }
+.vars table { font-size: 13px; } .vars td { padding: 3px 8px; } .vars .fx td { color: var(--amber); }
+#mydiff .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; } #mydiff .r-in { width: 80px; }
+@media (max-width: 860px) { .step-grid { grid-template-columns: minmax(0, 1fr); } .code-lines { max-height: 260px; font-size: 11.5px; } }
+.code-lines { position: relative; }
