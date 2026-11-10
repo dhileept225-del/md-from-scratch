@@ -20,8 +20,8 @@ export const researchParts = [
   {
     key: 'A', title: 'Input handling', blurb: 'How LAMMPS turns a text file into actions, checked line by line.',
     pages: [
-      { id: 'input-script', title: 'What an input script is' },
-      { id: 'reading-a-line', title: 'How LAMMPS reads one line' },
+      { id: 'input-script', title: 'What an input script is', ready: true },
+      { id: 'reading-a-line', title: 'How LAMMPS reads one line', ready: true },
       { id: 'four-blocks', title: 'The four blocks of every script' },
       { id: 'units', title: 'Units' },
       { id: 'building-the-system', title: 'Building the system' },
