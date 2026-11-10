@@ -51,6 +51,11 @@ footer { text-align: center; color: var(--muted); padding: 30px; border-top: 1px
 .rd-grid .rd-script { margin: 0 0 10px; max-height: 360px; overflow: auto; }
 .exp .er-out pre { white-space: pre-wrap; word-break: break-word; }
 .lg-tail { overflow-x: auto; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+.chip { font: 600 12px/1.2 "Space Grotesk", sans-serif; color: var(--text, #E6EEFB); background: linear-gradient(90deg, rgba(56,225,255,.22) var(--w,0%), rgba(255,255,255,.04) var(--w,0%)); border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; cursor: pointer; }
+.chip small { color: var(--muted); font-weight: 500; margin-left: 3px; }
+.chip.on { border-color: var(--cyan); box-shadow: 0 0 0 1px var(--cyan) inset; }
+.st-pkinfo p { font-size: 14px; word-break: break-word; }
 .rd-sp-lab { display: block; line-height: 1.6; cursor: pointer; }
 .rd-sp-lab input { margin-right: 8px; vertical-align: middle; }
 @media (max-width: 600px) { .calc { font-size: 12px; padding: 10px; } }
@@ -284,3 +289,4 @@ svg.flow { width: 100%; max-width: 760px; height: auto; display: block; margin: 
 select.r-in { width: auto; }
 
 @media (max-width: 760px) { .rd-grid { grid-template-columns: minmax(0,1fr); } .rd-grid .rd-data { height: 300px; } }
+.st-q, .st-d { min-height: 0 !important; height: auto; padding: 8px 10px; resize: none; }

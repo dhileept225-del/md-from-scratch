@@ -34,7 +34,7 @@ export const researchParts = [
   {
     key: 'B', title: 'How LAMMPS is organized', blurb: 'One small core plus hundreds of interchangeable styles.',
     pages: [
-      { id: 'source-tree', title: 'A tour of the source tree' },
+      { id: 'source-tree', title: 'A tour of the source tree', ready: true },
       { id: 'lammps-class', title: 'The conductor: the LAMMPS class' },
       { id: 'styles', title: 'Styles: the plug-in design' },
       { id: 'style-families', title: 'The families of styles' },
