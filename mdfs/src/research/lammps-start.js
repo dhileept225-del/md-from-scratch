@@ -248,7 +248,7 @@ ${row(['D. T = 1.0', 'TotEng and Press move; E_pair does not', 'at step 0 the po
   <section class="block prose">
     <h2>Coming next: changing the C++ code itself</h2>
     <p>Here you changed the <b>input</b>. Later pages change the <b>source code</b> of LAMMPS with the same four steps: read the C++ lines that compute the force, change them (for example the 12 in r⁻¹² to a 9), predict the new energy by hand, and compare.</p>
-    <p>A browser cannot compile LAMMPS itself (that takes about 10 minutes on a desktop computer). So each code-change page will come with the modified LAMMPS already compiled: you will see the exact lines changed, run the original and the modified program side by side here, and match the difference by hand. You can also rebuild it on your own computer with the steps in Part 0.</p>
+    <p>A browser cannot compile LAMMPS itself (compiling it took 4½ minutes on our 2-processor computer, with a compiler far too large to download into a web page). So each code-change page will come with the modified LAMMPS already compiled: you will see the exact lines changed, run the original and the modified program side by side here, and match the difference by hand. You can also rebuild it on your own computer with the steps in Part 0.</p>
   </section>
 
   <section class="block prose">

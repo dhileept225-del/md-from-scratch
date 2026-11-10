@@ -9,7 +9,7 @@ export const researchParts = [
   {
     key: '0', title: 'A zero-programming primer', blurb: 'Just enough terminal, building and reading C++ to follow the rest.',
     pages: [
-      { id: 'source-compile-run', title: 'Source code, compiling, running' },
+      { id: 'source-compile-run', title: 'Source code, compiling, running', ready: true },
       { id: 'terminal', title: 'The terminal in 10 commands' },
       { id: 'get-lammps', title: 'Getting LAMMPS without compiling' },
       { id: 'build-lammps', title: 'Building LAMMPS from source' },

@@ -37,11 +37,18 @@ export function parseThermo(lines) {
   return { cols, rows };
 }
 
-// LAMMPS prints thermo numbers with 8 significant digits (%.8g)
+// LAMMPS prints thermo numbers with 8 significant digits, like C's %.8g
 export const g8 = x => {
   if (!isFinite(x)) return String(x);
-  const s = Number(x.toPrecision(8)).toString();
-  return s.includes('e') ? x.toPrecision(8) : s;
+  if (x === 0) return '0';
+  const ex = Math.floor(Math.log10(Math.abs(Number(x.toPrecision(8)))));
+  if (ex < -4 || ex >= 8) {
+    let [m, e] = x.toExponential(7).split('e');
+    m = m.replace(/\.?0+$/, '');
+    const n = Math.abs(+e);
+    return `${m}e${+e < 0 ? '-' : '+'}${n < 10 ? '0' + n : n}`;
+  }
+  return Number(x.toPrecision(8)).toString();
 };
 
 // Mark how many leading characters of two printed numbers agree
