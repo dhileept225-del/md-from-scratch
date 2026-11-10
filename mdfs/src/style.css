@@ -197,3 +197,21 @@ pre .k { color: var(--cyan); } pre .s { color: var(--amber); } pre .n { color: #
   .logo img { width: 24px; height: 24px; }
   .top nav em { display: none; }
 }
+
+/* research: LAMMPS in the browser */
+.tbl.wide td { white-space: normal; text-align: left; vertical-align: top; } .tbl.wide td code { white-space: nowrap; }
+.lmp { border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); padding: 14px; max-width: 900px; }
+.lmp-in { width: 100%; box-sizing: border-box; min-height: 330px; font: 13px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #DDE6F5; background: #050A16; border: 1px solid var(--line); border-radius: 12px; padding: 12px; resize: vertical; }
+.lmp .row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 10px 0; }
+.lmp-status { font-size: 14px; }
+.lmp-thermo table { margin-top: 6px; }
+.lmp-log { margin-top: 10px; } .lmp-log summary { cursor: pointer; color: var(--muted); }
+.lmp-log pre { max-height: 320px; overflow: auto; font-size: 12px; background: #050A16; border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+.lmp-compare { margin-top: 10px; }
+.lmp-err { color: var(--coral); }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.m-ok { color: #6EE7A8; } .m-bad { color: var(--coral); }
+.exp { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 18px; }
+.exp h3 { margin: 0 0 8px; }
+.research-part .ch-n { font-size: 24px; }
+.lmp-in { white-space: pre; overflow-x: auto; }

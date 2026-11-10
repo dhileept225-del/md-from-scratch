@@ -5,6 +5,8 @@ import './style.css';
 import { inject } from '@vercel/analytics';
 inject(); // Vercel Web Analytics: counts page views, including /lessons/<id> navigation
 import { chapters, allLessons } from './data/chapters.js';
+import { researchParts, allResearch } from './research/index.js';
+import lammpsStart from './research/lammps-start.js';
 import { mountLJ } from './sims/lj.js';
 import { mountPair } from './sims/pair.js';
 import { mountNewton } from './sims/newton.js';
@@ -116,6 +118,7 @@ import cutoffsLesson from './lessons/cutoffs.js';
 
 const lessons = { 'what-is-md': whatIsMd, 'lennard-jones': lennardJones, 'newton-in-code': newtonInCode, 'time-step': timeStep, verlet, 'energy-check': energyCheck, units: unitsLesson, 'lattice-start': latticeStart, 'maxwell-boltzmann': maxwellBoltzmann, pbc: pbcLesson, cutoffs: cutoffsLesson, 'neighbour-lists': neighbourLists, temperature: temperatureLesson, ensembles: ensemblesLesson, berendsen: berendsenLesson, 'nose-hoover': noseHooverLesson, langevin: langevinLesson, barostats: barostatsLesson, 'bonds-angles': bondsAnglesLesson, dihedrals: dihedralsLesson, 'force-fields': forceFieldsLesson, shake: shakeLesson, 'water-models': waterModelsLesson, 'coulomb-pbc': coulombPbcLesson, ewald: ewaldLesson, pme: pmeLesson, polarizable: polarizableLesson, rdf: rdfLesson, msd: msdLesson, vacf: vacfLesson, 'van-hove': vanHoveLesson, conductivity: conductivityLesson, onsager: onsagerLesson, 'real-codes': realCodesLesson, 'ml-potentials': mlPotentialsLesson, metadynamics: metadynamicsLesson, 'lab-basics': labBasicsLesson, 'lab-building': labBuildingLesson, 'lab-thermostats': labThermostatsLesson, 'lab-barostats': labBarostatsLesson, 'lab-molecules': labMoleculesLesson, 'lab-electrostatics': labElectrostaticsLesson, 'lab-analysis': labAnalysisLesson, 'lab-beyond': labBeyondLesson, 'lab-errors': labErrorsLesson, 'lab-free-energy': labFreeEnergyLesson, 'lab-finite-size': labFiniteSizeLesson, 'lab-viscosity': labViscosityLesson, 'lab-lifetimes': labLifetimesLesson, 'lab-structure-factor': labStructureFactorLesson, 'lab-dielectric': labDielectricLesson, 'lab-mc': labMcLesson, 'lab-packing': labPackingLesson, 'lab-integrators': labIntegratorsLesson };   // add new lesson files here
 const sims = { lj: mountLJ, pair: mountPair, newton: mountNewton, timestep: mountTimestep, integrators: mountIntegrators, energylab: mountEnergyLab, units: mountUnits, lattice: mountLattice, velocities: mountVelocities, pbc: mountPBC, cutoff: mountCutoff, neighbours: mountNeighbours, temperature: mountTemperature, ensembles: mountEnsembles, berendsen: mountBerendsen, nosehoover: mountNoseHoover, langevin: mountLangevin, barostats: mountBarostats, bonds: mountBonds, dihedrals: mountDihedrals, forcefield: mountForceField, shake: mountShake, water: mountWater, coulomb: mountCoulomb, ewald: mountEwald, pme: mountPme, polarizable: mountPolarizable, rdf: mountRdf, msd: mountMsd, vacf: mountVacf, vanhove: mountVanhove, conductivity: mountConductivity, onsager: mountOnsager, realcodes: mountRealcodes, mlpot: mountMlpot, metad: mountMetad, lab1: mountLab1, lab2: mountLab2, lab3: mountLab3, lab3b: mountLab3b, lab4: mountLab4, lab5: mountLab5, lab6: mountLab6, lab7: mountLab7, lab8: mountLab8, lab9: mountLab9, lab10: mountLab10, lab11: mountLab11, lab12: mountLab12, lab13: mountLab13, lab14: mountLab14, lab15: mountLab15, lab16: mountLab16, lab17: mountLab17 };
+const researchPages = { 'lammps-start': lammpsStart };
 const app = document.getElementById('app');
 let cleanup = [];
 
@@ -162,8 +165,9 @@ function home() {
   </section>
 
   <section class="research card">
-    <h3>Research notes <span class="soon">Coming soon</span></h3>
-    <p>Links to papers and deeper research write-ups will appear here.</p>
+    <h3>Research: LAMMPS from scratch <span class="badge lab">New</span></h3>
+    <p>Run the real LAMMPS in your browser, read its engine, change its code, and check every change with a hand calculation.</p>
+    <a class="btn sm primary" href="/research">Open the research section →</a>
   </section>`;
   cleanup.push(mountLJ(document.getElementById('hero-sim'), { mini: true }));
 }
@@ -304,6 +308,49 @@ function labPage(meta, L, prev, next) {
   };
 }
 
+// ---------- research: LAMMPS from scratch ----------
+function researchHome() {
+  const ready = allResearch.filter(p => p.ready).length;
+  app.innerHTML = `
+  <nav class="crumb"><a href="/">Home</a> / Research</nav>
+  <section class="block lab-top prose">
+    <p class="eyebrow">Research · ${ready} of ${allResearch.length} pages live</p>
+    <h1>LAMMPS from scratch</h1>
+    <p class="lead">Understand how LAMMPS, the most widely used molecular dynamics program, really works. Run it in your browser, read its engine, change its code, and check every change with a hand calculation. You need school maths and no programming.</p>
+  </section>
+  <section class="chapters">
+    ${researchParts.map(p => `
+      <div class="chapter research-part">
+        <div class="ch-head"><span class="ch-n">${p.key}</span><div><h3>${p.title}</h3><p>${p.blurb}</p></div></div>
+        <ol class="lesson-list">
+          ${p.pages.map((pg, i) => {
+            const inner = `<span class="num">${p.key === 'S' ? '▶' : `${p.key}.${i + 1}`}</span><span class="t">${pg.title}</span>${pg.ready ? '<span class="go">→</span>' : '<span class="soon">Soon</span>'}`;
+            return `<li>${pg.ready ? `<a href="/research/${pg.id}">${inner}</a>` : `<div class="off">${inner}</div>`}</li>`;
+          }).join('')}
+        </ol>
+      </div>`).join('')}
+  </section>`;
+}
+
+function researchPage(id) {
+  const meta = allResearch.find(p => p.id === id), P = researchPages[id];
+  if (!meta || !P) return notFound();
+  const ready = allResearch.filter(p => p.ready), i = ready.indexOf(meta), prev = ready[i - 1], next = ready[i + 1];
+  const link = (p, dir) => p ? `<a class="pn ${dir}" href="/research/${p.id}"><small>${dir === 'prev' ? '← Previous' : 'Next →'}</small>${p.title}</a>` : `<a class="pn ${dir}" href="/research"><small>${dir === 'prev' ? '← Back' : 'More pages coming'}</small>All research pages</a>`;
+  app.innerHTML = `
+  <nav class="crumb"><a href="/">Home</a> / <a href="/research">Research</a> / ${meta.num}</nav>
+  <section class="block lab-top">
+    <p class="eyebrow">LAMMPS from scratch · ${meta.num === 'Start' ? 'Start here' : meta.num} · ${P.minutes} min</p>
+    <h1>${meta.title}</h1>
+    <p class="lead">${P.summary}</p>
+    <h4>On this page</h4>
+    <ul class="learn">${P.learn.map(x => `<li>${x}</li>`).join('')}</ul>
+  </section>
+  ${P.html()}
+  <nav class="prevnext">${link(prev, 'prev')}${link(next, 'next')}</nav>`;
+  cleanup.push(P.mount(app));
+}
+
 function notFound() { app.innerHTML = `<section class="block"><h1>Page not found</h1><p><a href="/">Back to home</a></p></section>`; }
 
 function highlight(src) {
@@ -338,8 +385,12 @@ function legacyHash() {
 function route() {
   cleanup.forEach(f => f()); cleanup = [];
   const p = location.pathname.replace(/\/+$/, '') || '/';
-  const m = p.match(/^\/lessons\/([\w-]+)$/);
-  if (m) {
+  const m = p.match(/^\/lessons\/([\w-]+)$/), r = p.match(/^\/research(?:\/([\w-]+))?$/);
+  if (r) {
+    window.scrollTo(0, 0);
+    if (!r[1]) { researchHome(); setMeta(`LAMMPS from scratch | ${NAME}`, 'Understand how LAMMPS works: run it in your browser, read its engine, change its code and check every change with a hand calculation.', '/research'); }
+    else { const meta = allResearch.find(x => x.id === r[1]), P = researchPages[r[1]]; researchPage(r[1]); setMeta(meta && P ? `${meta.title} | LAMMPS from scratch` : `Page not found | ${NAME}`, P ? short(P.summary) : HOME_DESC, p); }
+  } else if (m) {
     const meta = allLessons.find(l => l.id === m[1]), L = lessons[m[1]];
     lessonPage(m[1]); window.scrollTo(0, 0);
     if (meta && L) setMeta(`${meta.title} | ${NAME}`, short(L.summary), p); else setMeta(`Page not found | ${NAME}`, HOME_DESC, p);
