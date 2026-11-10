@@ -1,7 +1,11 @@
+import { inject } from '@vercel/analytics';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
 import './style.css';
+
+// Initialize Vercel Web Analytics
+inject();
 import { chapters, allLessons } from './data/chapters.js';
 import { mountLJ } from './sims/lj.js';
 import { mountPair } from './sims/pair.js';
