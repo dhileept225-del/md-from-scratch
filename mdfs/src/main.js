@@ -1,4 +1,6 @@
 import '@fontsource/space-grotesk/400.css';
+import { SITE, NAME, HOME_TITLE, HOME_DESC } from './site.js';
+import { lessonBox, lammpsBox } from './crosslinks.js';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
 import './style.css';
@@ -247,7 +249,7 @@ function lessonPage(id) {
       <p class="score muted"></p>
     </div>
   </section>
-
+  ${lessonBox(id, x => allResearch.find(p => p.id === x))}
   <nav class="prevnext">${navLink(prev, 'prev')}${navLink(next, 'next')}</nav>`;
 
   cleanup.push(sims[L.sim](document.getElementById('sim')));
@@ -316,6 +318,7 @@ function labPage(meta, L, prev, next) {
     <h2>Your turn</h2>
     ${L.exercises.map((e, i) => `<div class="ex"><p><b>${i + 1}.</b> ${e.q}</p><button class="btn sm ghost" data-ex="${i}">Show answer</button><div class="ans" hidden>${e.a}</div></div>`).join('')}
   </section>
+  ${lessonBox(meta.id, x => allResearch.find(p => p.id === x))}
   <nav class="prevnext">${navLink(prev, 'prev')}${navLink(next, 'next')}</nav>`;
   cleanup.push(sims[L.sim](document.getElementById('sim')));
   app.querySelectorAll('[data-ex]').forEach(b => b.onclick = () => { const a = b.nextElementSibling; a.hidden = !a.hidden; b.textContent = a.hidden ? 'Show answer' : 'Hide answer'; });
@@ -366,6 +369,7 @@ function researchPage(id) {
     <ul class="learn">${P.learn.map(x => `<li>${x}</li>`).join('')}</ul>
   </section>
   ${P.html()}
+  ${lammpsBox(id, x => allLessons.find(l => l.id === x))}
   <nav class="prevnext">${link(prev, 'prev')}${link(next, 'next')}</nav>`;
   cleanup.push(P.mount(app));
 }
@@ -383,8 +387,6 @@ function highlight(src) {
 }
 
 // ---------- page titles and descriptions (search engines and link previews) ----------
-const SITE = 'https://mdfromscratch.org', NAME = 'MD from Scratch';
-const HOME_DESC = 'A free, hands-on course: learn molecular dynamics from scratch with school maths, live simulations, hand-checked labs and Python code.';
 const plain = s => String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const short = s => { const p = plain(s); return p.length > 155 ? p.slice(0, 152).replace(/\s\S*$/, '') + '…' : p; };
 function setMeta(title, desc, path) {
@@ -417,7 +419,7 @@ function route() {
   } else {
     home();
     if (p === '/lessons') { document.getElementById('lessons-list').scrollIntoView(); setMeta(`All lessons | ${NAME}`, HOME_DESC, '/lessons'); }
-    else { window.scrollTo(0, 0); setMeta(`${NAME}: learn molecular dynamics by building it`, HOME_DESC, '/'); }
+    else { window.scrollTo(0, 0); setMeta(HOME_TITLE, HOME_DESC, '/'); }
   }
 }
 document.addEventListener('click', e => {

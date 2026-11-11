@@ -306,3 +306,7 @@ select.r-in { width: auto; }
 .lmp-in.sm { min-height: 0 !important; width: 110px; padding: 7px 9px; resize: none; }
 .lc-u { background: #050A16; color: inherit; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
 @media (max-width: 760px) { .lc-grid { grid-template-columns: minmax(0,1fr); } .lc-in label { flex: 1 1 40%; } .lmp-in.sm { width: 100%; } }
+/* lesson <-> LAMMPS cross-links */
+.xlink { border-left: 3px solid var(--cyan); }
+.xlink ul { margin: 8px 0 0; padding-left: 18px; }
+.xlink li { margin: 4px 0; }
