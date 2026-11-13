@@ -61,7 +61,7 @@ export default {
   id: 'forces-in-script',
   title: 'Forces and neighbours in the script',
   minutes: 25,
-  summary: 'Five commands control how forces are computed: pair_style, pair_coeff, pair_modify, neighbor and neigh_modify. You predict by hand what shifting the energy, adding a tail correction and mixing two atom types do, run each live, and then examine how the melt example's neighbour-list settings behave in this particular run.',
+  summary: 'Five commands control how forces are computed: pair_style, pair_coeff, pair_modify, neighbor and neigh_modify. You predict by hand what shifting the energy, adding a tail correction and mixing two atom types do, run each live, and then examine how the melt example\'s neighbour-list settings behave in this particular run.',
   learn: [
     'What pair_style, pair_coeff and pair_modify (shift, tail, mix) change, predicted and checked',
     'How many neighbours each atom has in the list, counted by hand',
