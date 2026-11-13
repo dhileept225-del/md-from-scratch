@@ -10,10 +10,10 @@ const SIG = 3.405, EPS = 0.2381, KB = 0.0019872067, NKTV2P = 68568.415, N = 4000
 
 const LJ = IN_MELT.replace('loop geom', 'loop all');
 const REAL = `# melt in real units: argon, sigma = 3.405 A, epsilon = 0.2381 kcal/mol, m = 39.948 g/mol
+units           real
+
 variable        sig equal 3.405
 variable        eps equal 0.2381
-
-units           real
 atom_style      atomic
 
 lattice         fcc $((4/0.8442)^(1/3)*v_sig)
@@ -50,7 +50,7 @@ export default {
   html: () => `
   <section class="block prose">
     <h2>1 · Understand: the same number means different things</h2>
-    <p><code>units</code> must be the first command, because it fixes the meaning of every later number. <code>timestep 1.0</code> is one femtosecond in real units and one picosecond in metal units.</p>
+    <p>Set <code>units</code> before creating the simulation box or defining force-field settings, so LAMMPS interprets later values correctly. This example places it near the top. <code>timestep 1.0</code> is one femtosecond in real units and one picosecond in metal units.</p>
     <div class="tbl wide"><table>${head(['', 'lj', 'real', 'metal', 'si'])}
 ${row(['mass', 'm (set to 1)', 'g/mol', 'g/mol', 'kg'])}
 ${row(['distance', 'σ', 'Å', 'Å', 'm'])}
