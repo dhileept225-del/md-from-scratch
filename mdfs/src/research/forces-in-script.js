@@ -61,7 +61,7 @@ export default {
   id: 'forces-in-script',
   title: 'Forces and neighbours in the script',
   minutes: 25,
-  summary: 'Five commands control how forces are computed: pair_style, pair_coeff, pair_modify, neighbor and neigh_modify. You predict by hand what shifting the energy, adding a tail correction and mixing two atom types do, run each live, and then discover that the neighbour settings of the official melt example are not safe.',
+  summary: 'Five commands control how forces are computed: pair_style, pair_coeff, pair_modify, neighbor and neigh_modify. You predict by hand what shifting the energy, adding a tail correction and mixing two atom types do, run each live, and then examine how the melt example's neighbour-list settings behave in this particular run.',
   learn: [
     'What pair_style, pair_coeff and pair_modify (shift, tail, mix) change, predicted and checked',
     'How many neighbours each atom has in the list, counted by hand',
@@ -115,10 +115,10 @@ total in the list    = 4000 × 39 = <b>156000</b></div>
 
   <section class="block prose">
     <h2>4 · Observe: are melt's neighbour settings safe?</h2>
-    <p>The list is valid only until some atom has moved more than half the skin (0.15). Then a pair that was outside 2.8 may already be inside 2.5 and is missed. A rebuild that happens later than that is a <b>dangerous build</b>. Estimate: after melting T ≈ 1.7, typical speed √(3T) ≈ 2.3, the fastest atoms about three times that. In 20 steps (0.1 τ) a fast atom moves about 0.7, far more than 0.15.</p>
+    <p>The list can miss an interaction if, between rebuilds, an atom moves far enough that a pair previously outside the list cutoff (2.8) enters the force cutoff (2.5). LAMMPS flags a <b>dangerous build</b> when its displacement check detects this condition at a rebuild. With <code>check no</code>, that check is disabled, so LAMMPS cannot report whether scheduled rebuilds were dangerous. Whether this schedule misses interactions depends on the timestep, skin, and actual particle motion; the estimate below indicates why this setup deserves caution.</p>
     <div class="tbl wide"><table class="nb-table">${head(['neigh_modify', 'idea', 'list builds', 'dangerous', 'TotEng at 250', ''])}
 ${NEIGH.map(([s, idea], i) => `<tr data-n="${i}"><td><code>${s}</code></td><td>${idea}</td><td class="mono b"></td><td class="mono d"></td><td class="mono te"></td><td><button class="btn sm ghost" data-nrun="${i}">Run</button></td></tr>`).join('')}</table></div>
-    <p>Our runs gave: melt as shipped rebuilt 12 times and every one of them was dangerous (it simply did not check). Looking every step, LAMMPS rebuilt 42 times (about every 6 steps) with no dangerous builds. The total energy at step 250 also moves: −2.2812174 as shipped, −2.2797308 when safe, against −2.2744931 at step 0. The safe run conserves energy better. The melt example is a speed demonstration, not a model for real work.</p>
+    <p>In the recorded run, the melt settings rebuilt the list 12 times, but with <code>check no</code> LAMMPS did not check or report dangerous builds. With <code>every 1 delay 0 check yes</code>, it rebuilt 42 times (about every 6 steps) and reported no dangerous builds. The total energy at step 250 was −2.2812174 for the original settings and −2.2797308 for the checked settings, versus −2.2744931 at step 0. These results are specific to this input and LAMMPS build; use a checked neighbor schedule when validating a simulation.</p>
   </section>
 
   <section class="block prose">
