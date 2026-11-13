@@ -39,7 +39,7 @@ export const researchParts = [
       { id: 'styles', title: 'Styles: the plug-in design', ready: true },
       { id: 'style-families', title: 'The families of styles', ready: true },
       { id: 'packages', title: 'Packages', ready: true },
-      { id: 'atom-storage', title: 'How atoms are stored' },
+      { id: 'atom-storage', title: 'How atoms are stored', ready: true },
       { id: 'parallel', title: 'Running in parallel' },
       { id: 'finding-your-way', title: 'Finding your way in the code' },
     ],

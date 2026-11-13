@@ -15,6 +15,8 @@ const MAP = {
   'force-fields': ['style-families', 'styles'],
   'water-models': ['read-data'],
   'real-codes': ['lammps-start', 'source-tree'],
+  msd: ['atom-storage'],
+  pbc: ['atom-storage'],
   'lab-molecules': ['read-data', 'style-families'],
   'lab-building': ['building-the-system'],
   'lab-basics': ['styles'],
