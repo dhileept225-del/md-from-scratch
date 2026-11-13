@@ -26,13 +26,13 @@ function readDump(text) {
   return snaps;
 }
 
-function histo(canvas, snaps, T) {
+function histo(canvas, snaps, T, T2) {
   const d = Math.min(devicePixelRatio || 1, 2), W = canvas.clientWidth, H = canvas.clientHeight; canvas.width = W * d; canvas.height = H * d;
   const c = canvas.getContext('2d'); c.setTransform(d, 0, 0, d, 0, 0); c.clearRect(0, 0, W, H);
   const vmax = 6, nb = 48, x0 = 40, x1 = W - 10, y0 = 14, y1 = H - 28, X = v => x0 + (v + vmax) / (2 * vmax) * (x1 - x0);
   const sets = snaps.map(s => { const h = new Array(nb).fill(0); s.v.forEach(v => { const b = Math.floor((v + vmax) / (2 * vmax) * nb); if (b >= 0 && b < nb) h[b]++; }); return h.map(x => x / (s.v.length * 2 * vmax / nb)); });
-  const g = v => Math.exp(-v * v / (2 * T)) / Math.sqrt(2 * Math.PI * T);
-  const ymax = Math.max(...sets.flat(), g(0)) * 1.1, Y = p => y1 - p / ymax * (y1 - y0);
+  const gT = t => v => Math.exp(-v * v / (2 * t)) / Math.sqrt(2 * Math.PI * t), g = gT(T);
+  const ymax = Math.max(...sets.flat(), g(0), T2 ? gT(T2)(0) : 0) * 1.4, Y = p => y1 - p / ymax * (y1 - y0);
   c.strokeStyle = 'rgba(143,163,199,.6)'; c.beginPath(); c.moveTo(x0, y0); c.lineTo(x0, y1); c.lineTo(x1, y1); c.stroke();
   c.fillStyle = '#8FA3C7'; c.font = '11px "Space Grotesk", sans-serif'; c.textAlign = 'center';
   for (let v = -6; v <= 6; v += 2) c.fillText(String(v), X(v), y1 + 14);
@@ -40,9 +40,11 @@ function histo(canvas, snaps, T) {
   const cols = ['#FFC24B', '#38E1FF'];
   sets.forEach((h, k) => { c.strokeStyle = cols[k]; c.lineWidth = 2; c.beginPath(); h.forEach((p, b) => { const xa = X(-vmax + b * 2 * vmax / nb), xb = X(-vmax + (b + 1) * 2 * vmax / nb); b ? c.lineTo(xa, Y(p)) : c.moveTo(xa, Y(p)); c.lineTo(xb, Y(p)); }); c.stroke(); });
   c.strokeStyle = 'rgba(242,245,250,.85)'; c.setLineDash([4, 4]); c.lineWidth = 1.5; c.beginPath();
-  for (let k = 0; k <= 200; k++) { const v = -vmax + k * 2 * vmax / 200; k ? c.lineTo(X(v), Y(g(v))) : c.moveTo(X(v), Y(g(v))); } c.stroke(); c.setLineDash([]);
+  for (let k = 0; k <= 200; k++) { const v = -vmax + k * 2 * vmax / 200; k ? c.lineTo(X(v), Y(g(v))) : c.moveTo(X(v), Y(g(v))); } c.stroke();
+  if (T2) { const g2 = gT(T2); c.strokeStyle = 'rgba(56,225,255,.9)'; c.beginPath(); for (let k = 0; k <= 200; k++) { const v = -vmax + k * 2 * vmax / 200; k ? c.lineTo(X(v), Y(g2(v))) : c.moveTo(X(v), Y(g2(v))); } c.stroke(); }
+  c.setLineDash([]);
   c.textAlign = 'left'; c.fillStyle = cols[0]; c.fillText(`step ${snaps[0].step}`, x0 + 8, y0 + 4); if (snaps[1]) { c.fillStyle = cols[1]; c.fillText(`step ${snaps[1].step}`, x0 + 70, y0 + 4); }
-  c.fillStyle = '#F2F5FA'; c.fillText(`dashed: Maxwell at T = ${T}`, x0 + 140, y0 + 4);
+  c.fillStyle = '#F2F5FA'; const lab = `dashed: Maxwell, T = ${T}`; c.fillText(lab, x0 + 8, y0 + 18); if (T2) { c.fillStyle = cols[1]; c.fillText(`and T = ${T2.toFixed(2)}`, x0 + 14 + c.measureText(lab).width, y0 + 18); }
 }
 
 export default {
@@ -83,7 +85,7 @@ the velocity of the centre of mass after step 2: <b>0</b> (to rounding, about 10
 
   <section class="block">
     <h2>3 · Modify and observe</h2>
-    <p class="muted">Choose the options, run 100 steps of melt, and compare the vx distribution at step 0 and step 100 with the Maxwell bell curve.</p>
+    <p class="muted">Choose the options, run 100 steps of melt, and compare the vx distribution at step 0 with the Maxwell bell curve at T = 3, and at step 100 with the Maxwell curve at the temperature LAMMPS prints for step 100.</p>
     <div class="lmp" id="vel">
       <div class="row">
         <label class="rlab">dist <select class="r-in o-dist"><option>uniform</option><option>gaussian</option></select></label>
@@ -101,7 +103,7 @@ the velocity of the centre of mass after step 2: <b>0</b> (to rounding, about 10
     <h2>What the runs show</h2>
     <ul>
       <li><b>Every option gives KE = 17995.5 at step 0:</b> step 4 always rescales to the exact target.</li>
-      <li><b>uniform</b> starts flat, clearly not the Maxwell curve. After 100 steps (0.5 τ) collisions have already turned it into the bell curve. The starting distribution is forgotten quickly; the temperature it sets is not.</li>
+      <li><b>uniform</b> starts flat, clearly not the Maxwell curve. After 100 steps (0.5 τ) collisions have already turned it into a bell curve. It is narrower than the T = 3 curve, because melting has turned kinetic energy into potential energy: the temperature has dropped to about 1.67, and the step-100 histogram follows the Maxwell curve for that temperature. The starting distribution is forgotten quickly; the temperature it sets is not.</li>
       <li><b>mom no</b>: the centre of mass moves at a small constant velocity, identical at steps 0 and 100 to every digit. The whole system drifts; with a thermostat this drift can grow into the "flying ice cube" of Lab 3.7. Keep the default.</li>
       <li><b>A different seed</b>: the same KE at step 0, different numbers at step 100. Runs with several seeds are the honest way to estimate error bars (Lab 6.8).</li>
     </ul>
@@ -117,7 +119,7 @@ the velocity of the centre of mass after step 2: <b>0</b> (to rounding, about 10
   mount(root) {
     const V = root.querySelector('#vel'), cv = V.querySelector('.vhist'), st = V.querySelector('.v-st');
     let last = null;
-    const ro = new ResizeObserver(() => { if (last) histo(cv, last.snaps, 3); }); ro.observe(cv);
+    const ro = new ResizeObserver(() => { if (last) histo(cv, last.snaps, 3, last.T2); }); ro.observe(cv);
     V.querySelector('[data-k=run]').onclick = async e => {
       const o = { T: 3.0, seed: parseInt(V.querySelector('.o-seed').value) || 87287, dist: V.querySelector('.o-dist').value, mom: V.querySelector('.o-mom').value, rot: V.querySelector('.o-rot').value };
       const b = e.currentTarget; b.disabled = true; st.textContent = 'Running the real LAMMPS… (the first run downloads about 3 MB)';
@@ -125,8 +127,9 @@ the velocity of the centre of mass after step 2: <b>0</b> (to rounding, about 10
       if (res.error) { st.innerHTML = `<span class="lmp-err">${esc(res.error)}</span>`; return; }
       st.textContent = `dist ${o.dist} · mom ${o.mom} · rot ${o.rot} · seed ${o.seed}`;
       const snaps = res.files['v.dump'] ? readDump(res.files['v.dump']) : [];
-      last = { snaps }; if (snaps.length) histo(cv, snaps, 3);
+      last = { snaps }; 
       const { cols, rows } = res.thermo, r0 = rows.find(w => w[0] === '0'), r1 = rows.find(w => w[0] === '100'), C = k => cols.indexOf(k);
+      last.T2 = r1 ? +r1[C('Temp')] : 0; if (snaps.length) histo(cv, snaps, 3, last.T2);
       const m = matchMarkup(g8(17995.5), r0[C('KinEng')]);
       const drift = o.mom === 'no';
       const mv = drift ? matchMarkup(r0[C('v_vx')], r1[C('v_vx')]) : null;

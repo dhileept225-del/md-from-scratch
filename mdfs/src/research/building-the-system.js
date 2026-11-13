@@ -121,7 +121,7 @@ fcc, ρ = 0.8442, 3 cells:  a = (4/0.8442)^(1/3) = 1.6795962,  L = 5.0387886,  N
       B.querySelector('.b-pred').innerHTML = esc(`n = ${L.n} atom${L.n > 1 ? 's' : ''} per cell${style === 'hex' ? ' (cell a × √3a)' : ''}
 a = ${dim === 3 ? `(${L.n}/${rho})^(1/3)` : style === 'hex' ? `(2/(${rho}·√3))^(1/2)` : `(1/${rho})^(1/2)`} = ${g8(p.a)}
 spacing x,y${dim === 3 ? ',z' : ''}: ${p.sp.slice(0, dim).map(g8).join(' ')}
-box = (0 0) to (${p.box.slice(0, dim).map(g8).join(' ')})
+box = (${dim === 3 ? '0 0 0' : '0 0'}) to (${p.box.slice(0, dim).map(g8).join(' ')})
 atoms = ${whole ? `${L.n} × ${c}^${dim} = ` : 'lattice points inside the box: '}${p.N}
 nearest neighbour = ${L.nnTxt} = ${g8(p.nn)}`);
       B.querySelector('.b-script').textContent = script(style, rho, cells, dim);

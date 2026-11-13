@@ -39,8 +39,8 @@ const TRACE = [
 556    return cut[i][j];                         // the neighbour list uses this` },
   { when: 'run (every step)', fn: 'compute(eflag, vflag): all forces, energy, virial', file: ['src/pair_lj_cut.cpp', 69],
     code: `the double loop over atoms and neighbours that pages A.7 and B.1 showed.
-Verlet calls it without knowing which style it is (src/verlet.cpp:140):
-140    if (pair_compute_flag) force->pair->compute(eflag,vflag);` },
+Verlet calls it without knowing which style it is (src/verlet.cpp:316):
+316    force->pair->compute(eflag,vflag);` },
   { when: 'pair_write …', fn: 'single(): energy and force of ONE pair at one distance', file: ['src/pair_lj_cut.cpp', 660],
     code: `665    r2inv = 1.0 / rsq;
 666    r6inv = r2inv * r2inv * r2inv;
@@ -87,7 +87,7 @@ export default {
   id: 'styles',
   title: 'Styles: the plug-in design',
   minutes: 20,
-  summary: 'How LAMMPS can have 1400 styles without the main loop knowing any of them: every style is a C++ class that fills the same set of sockets (settings, coeff, init_one, compute, single). You follow one pair style through its sockets in the order LAMMPS calls them, then use pair_write to ask a style for its energy and force at chosen distances and match every number by hand, for three different styles.',
+  summary: 'How LAMMPS can have 1800 styles without the main loop knowing any of them: every style is a C++ class that fills the same set of sockets (settings, coeff, init_one, compute, single). You follow one pair style through its sockets in the order LAMMPS calls them, then use pair_write to ask a style for its energy and force at chosen distances and match every number by hand, for three different styles.',
   learn: [
     'A base class declares the sockets; a style fills them (inheritance and virtual functions, in plain words)',
     'How a style registers its name, and how pair_style finds it',
@@ -113,12 +113,12 @@ export default {
 35    double init_one(int, int) override;
 42    double single(int, int, int, int, double, double, double, double &) override;</pre>
     <div class="tbl wide"><table>${head(['Base class (socket)', 'File', 'Styles (plugs) in 22 Jul 2025'])}
-${row(['<code>Pair</code>', 'pair.h', 'pair_style: lj/cut, morse, eam, tersoff … (548)'])}
-${row(['<code>Bond</code>, <code>Angle</code>, <code>Dihedral</code>, <code>Improper</code>', 'bond.h …', 'harmonic, fene, opls … (158)'])}
-${row(['<code>KSpace</code>', 'kspace.h', 'ewald, pppm … (34)'])}
-${row(['<code>Fix</code>', 'fix.h', 'nve, nvt, npt, langevin, rigid … (336)'])}
-${row(['<code>Compute</code>', 'compute.h', 'temp, pe, rdf, msd … (176)'])}
-${row(['<code>AtomVec</code>, <code>Region</code>, <code>Dump</code>, <code>Integrate</code>, <code>Min</code>, <code>Command</code>', '…', 'the rest of the 1412 (page B.1)'])}</table></div>
+${row(['<code>Pair</code>', 'pair.h', 'pair_style: lj/cut, morse, eam, tersoff … (734)'])}
+${row(['<code>Bond</code>, <code>Angle</code>, <code>Dihedral</code>, <code>Improper</code>', 'bond.h …', 'harmonic, fene, opls … (209)'])}
+${row(['<code>KSpace</code>', 'kspace.h', 'ewald, pppm … (37)'])}
+${row(['<code>Fix</code>', 'fix.h', 'nve, nvt, npt, langevin, rigid … (440)'])}
+${row(['<code>Compute</code>', 'compute.h', 'temp, pe, rdf, msd … (210)'])}
+${row(['<code>AtomVec</code>, <code>Region</code>, <code>Dump</code>, <code>Integrate</code>, <code>Min</code>, <code>Command</code>', '…', 'the rest of the 1807 (page B.1)'])}</table></div>
   </section>
 
   <section class="block prose">

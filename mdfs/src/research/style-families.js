@@ -205,7 +205,7 @@ ${row(['compute', 'Compute', 'measures, never changes anything', '<code>c_ID</co
   <section class="block prose">
     <h2>Your turn</h2>
     <div class="ex"><p><b>1.</b> Which φ gives E_dihed = 0? Predict from the OPLS formula, then set it.</p><button class="btn sm ghost" data-ex>Show answer</button><div class="ans" hidden>φ = <b>180°</b> (trans): cos φ = −1, cos 2φ = 1, cos 3φ = −1, so every bracket is 0. LAMMPS, like IUPAC, calls trans 180°.</div></div>
-    <div class="ex"><p><b>2.</b> Set φ = 0 (cis) with 1–4 weight 1. Why does E_vdwl explode?</p><button class="btn sm ghost" data-ex>Show answer</button><div class="ans" hidden>Atoms 1 and 4 come to about 2.6 Å, well inside σ = 3.75 Å, where (σ/r)¹² is huge. This is one reason force fields exclude or scale the 1–4 pair and put the cis barrier in the dihedral term instead.</div></div>
+    <div class="ex"><p><b>2.</b> Set φ = 0 (cis) with 1–4 weight 1. Why does E_vdwl explode?</p><button class="btn sm ghost" data-ex>Show answer</button><div class="ans" hidden>Atoms 1 and 4 come to about 2.7 Å, well inside σ = 3.75 Å, where (σ/r)¹² is huge. This is one reason force fields exclude or scale the 1–4 pair and put the cis barrier in the dihedral term instead.</div></div>
     <div class="ex"><p><b>3.</b> Which family would you use to keep atom 1 from moving, and why not a compute?</p><button class="btn sm ghost" data-ex>Show answer</button><div class="ans" hidden>A fix: <code>fix 2 one setforce 0 0 0</code> (with v = 0) or <code>fix spring/self</code>. A compute can only measure; it is never called in a way that changes x, v or f.</div></div>
   </section>`,
 

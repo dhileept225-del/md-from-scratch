@@ -84,12 +84,12 @@ export default {
     <div class="tbl wide"><table>${head(['What', 'Number'])}
 ${row(['source files in all of LAMMPS (.cpp)', '1,860'])}
 ${row(['lines of C++ in all of LAMMPS (.cpp and .h)', '1.19 million'])}
-${row(['optional packages', '97'])}
+${row(['optional packages', '94'])}
 ${row(['core only (no packages): files and lines', '363 .cpp + 382 .h, 235,476 lines'])}
 ${row(['our build: core + MOLECULE, KSPACE, RIGID', '451 files compiled'])}
 ${row(['size of the program lmp', '11.6 MB'])}
 ${row(['time to compile everything', '266 s (about 4½ minutes) on 2 processors'])}
-${row(['time to recompile after changing one file', '3.8 s: one file compiled, then the pieces joined again'])}</table></div>
+${row(['time to recompile after changing one file', '3.8 s: one file compiled, then the pieces joined again (13–16 s in a git download, where a second file that records the git state is rebuilt too: page 0.6)'])}</table></div>
     <p>The last two rows matter most. Compiling everything takes minutes, but after changing one file the compiler only redoes that file and joins the pieces again, which takes seconds. That is why changing LAMMPS is practical.</p>
   </section>
 

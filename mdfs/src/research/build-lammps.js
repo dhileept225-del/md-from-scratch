@@ -83,7 +83,7 @@ ${row(['size of lmp', '11.6 MB', '12.8 MB'])}
 ${row(['files compiled', '451 (from nothing)', '489 (almost everything again)'])}
 ${row(['time on 2 processors', '266 s', '274 s'])}
 ${row(['melt step 0', '−6.7733681', '−6.7733681 (unchanged)'])}</table></div>
-    <p>Why compile almost everything again, when only 38 new files were added? Many core files read small generated lists of "which styles exist" and "which packages are installed". Adding a package changes those lists, so every file that reads them must be compiled again. Changing one existing file (page 0.1: 3.8 s) is cheap; changing the package list is not. Choose your packages before starting long work.</p>
+    <p>Why compile almost everything again, when only 39 new files were added? Many core files read small generated lists of "which styles exist" and "which packages are installed". Adding a package changes those lists, so every file that reads them must be compiled again. Changing one existing file (page 0.1: 3.8 s) is cheap; changing the package list is not. Choose your packages before starting long work.</p>
   </section>
 
   <section class="block prose">
