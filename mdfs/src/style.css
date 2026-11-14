@@ -311,3 +311,4 @@ select.r-in { width: auto; }
 .xlink ul { margin: 8px 0 0; padding-left: 18px; }
 .xlink li { margin: 4px 0; }
 .sim-ctrl select { width: 100%; background: #050A16; color: inherit; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; margin-top: 4px; font: inherit; font-size: 13px; }
+footer a { color: var(--cyan); }
