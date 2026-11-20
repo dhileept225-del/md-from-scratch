@@ -40,7 +40,7 @@ export const researchParts = [
       { id: 'style-families', title: 'The families of styles', ready: true },
       { id: 'packages', title: 'Packages', ready: true },
       { id: 'atom-storage', title: 'How atoms are stored', ready: true },
-      { id: 'parallel', title: 'Running in parallel' },
+      { id: 'parallel', title: 'Running in parallel', ready: true },
       { id: 'finding-your-way', title: 'Finding your way in the code' },
     ],
   },
