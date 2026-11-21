@@ -60,7 +60,7 @@ const course = { '@type': 'Course', name: NAME, description: HOME_DESC, url: SIT
 // home (rewrite dist/index.html itself with static content) and /lessons
 const homeBody = `<section class="hero"><div class="hero-text"><p class="eyebrow">A free, hands-on course</p><h1>Molecular dynamics, from scratch.</h1>
   <p class="lead">${HOME_DESC}</p></div></section><section id="lessons-list" class="chapters"><h2>Lessons</h2>${listHtml()}</section>`;
-fs.writeFileSync(path.join(dist, 'index.html'), page({ title: HOME_TITLE, desc: HOME_DESC, urlPath: '/', body: homeBody, jsonld: { '@context': 'https://schema.org', ...course }, image: ogImg('home', 'A free, hands-on course', 'Molecular dynamics, from scratch') }));
+fs.writeFileSync(path.join(dist, 'index.html'), page({ title: HOME_TITLE, desc: HOME_DESC, urlPath: '/', body: homeBody, jsonld: [{ '@context': 'https://schema.org', ...course }, { '@context': 'https://schema.org', '@type': 'WebSite', name: NAME, alternateName: ['mdfromscratch', 'MD from scratch: molecular dynamics course'], url: SITE + '/' }], image: ogImg('home', 'A free, hands-on course', 'Molecular dynamics, from scratch') }));
 fs.writeFileSync(path.join(dist, 'lessons.html'), page({ title: `All lessons | ${NAME}`, desc: HOME_DESC, urlPath: '/lessons', body: homeBody, jsonld: { '@context': 'https://schema.org', ...course, url: SITE + '/lessons' },
   image: ogImg('lessons', `${allLessons.filter(l => l.ready).length} lessons and labs`, 'Molecular dynamics, from scratch'), crumb: [['Home', '/'], ['Lessons', '/lessons']] }));
 fs.writeFileSync(path.join(dist, '404.html'), page({ title: `Page not found | ${NAME}`, desc: HOME_DESC, urlPath: '/404', body: '', noindex: true }));
