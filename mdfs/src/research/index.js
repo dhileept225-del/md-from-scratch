@@ -41,7 +41,7 @@ export const researchParts = [
       { id: 'packages', title: 'Packages', ready: true },
       { id: 'atom-storage', title: 'How atoms are stored', ready: true },
       { id: 'parallel', title: 'Running in parallel', ready: true },
-      { id: 'finding-your-way', title: 'Finding your way in the code' },
+      { id: 'finding-your-way', title: 'Finding your way in the code', ready: true },
     ],
   },
   {
