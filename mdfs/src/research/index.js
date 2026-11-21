@@ -47,7 +47,7 @@ export const researchParts = [
   {
     key: 'C', title: 'The main engine: one timestep', blurb: 'The loop every LAMMPS run goes through, traced for two atoms by hand.',
     pages: [
-      { id: 'run-to-loop', title: 'From run 250 to the loop' },
+      { id: 'run-to-loop', title: 'From run 250 to the loop', ready: true },
       { id: 'verlet-loop', title: 'The loop, line by line' },
       { id: 'hooks', title: 'Hooks and fix masks' },
       { id: 'two-atom-step', title: 'One timestep for two atoms, by hand' },
