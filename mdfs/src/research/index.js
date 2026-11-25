@@ -52,7 +52,7 @@ export const researchParts = [
       { id: 'hooks', title: 'Hooks and fix masks', ready: true },
       { id: 'two-atom-step', title: 'One timestep for two atoms, by hand', ready: true },
       { id: 'energy-bookkeeping', title: 'Energy and virial bookkeeping', ready: true },
-      { id: 'multiple-runs', title: 'Setup, multiple runs and rerun' },
+      { id: 'multiple-runs', title: 'Setup, multiple runs and rerun', ready: true },
       { id: 'other-loops', title: 'The other loops: RESPA and minimize' },
       { id: 'timing-table', title: 'The timing table' },
     ],
