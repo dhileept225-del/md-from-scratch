@@ -67,7 +67,7 @@ export const researchParts = [
       { id: 'pair-lj-cut', title: 'Pair style lj/cut', ready: true },
       { id: 'mixing-special', title: 'Mixing rules and special bonds', ready: true },
       { id: 'coulomb-ewald', title: 'Coulomb and Ewald', ready: true },
-      { id: 'bonded', title: 'Bonds, angles and dihedrals' },
+      { id: 'bonded', title: 'Bonds, angles and dihedrals', ready: true },
       { id: 'fix-nve', title: 'The integrator: fix nve' },
       { id: 'thermostats', title: 'Thermostats' },
       { id: 'barostats', title: 'Barostats' },
