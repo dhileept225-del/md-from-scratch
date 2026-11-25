@@ -61,7 +61,7 @@ export const researchParts = [
     key: 'D', title: 'Modules and their algorithms', blurb: 'Each module read in the code, then reproduced by hand.',
     pages: [
       { id: 'units-constants', title: 'Units and constants', ready: true },
-      { id: 'domain-pbc', title: 'Domain and periodic boundaries' },
+      { id: 'domain-pbc', title: 'Domain and periodic boundaries', ready: true },
       { id: 'neighbor-lists', title: 'Neighbour lists' },
       { id: 'communication', title: 'Communication between processors' },
       { id: 'pair-lj-cut', title: 'Pair style lj/cut' },
