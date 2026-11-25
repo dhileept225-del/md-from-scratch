@@ -100,7 +100,7 @@ export const researchParts = [
   {
     key: 'F', title: 'Useful extras', blurb: 'Not needed to run simulations, but worth knowing.',
     pages: [
-      { id: 'python-interface', title: 'Python and the library interface' },
+      { id: 'python-interface', title: 'Python and the library interface', ready: true },
       { id: 'plugins', title: 'Plugins' },
       { id: 'testing', title: 'Unit tests and regression' },
       { id: 'debugging', title: 'Debugging' },
