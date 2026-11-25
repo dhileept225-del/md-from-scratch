@@ -84,7 +84,7 @@ export const researchParts = [
     key: 'E', title: 'Change the code, check by hand', blurb: 'Predict, change, rebuild, run, compare to the digit.',
     pages: [
       { id: 'hello-engine', title: 'Hello from inside the engine', ready: true },
-      { id: 'clone-pair-style', title: 'Clone a pair style' },
+      { id: 'clone-pair-style', title: 'Clone a pair style', ready: true },
       { id: 'change-formula', title: 'Change the formula (Mie potential)' },
       { id: 'add-parameter', title: 'Add a parameter (soft core)' },
       { id: 'euler-fix', title: 'A broken integrator on purpose' },
