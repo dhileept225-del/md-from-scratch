@@ -92,7 +92,7 @@ export const researchParts = [
       { id: 'write-compute', title: 'Write a compute', ready: true },
       { id: 'watch-neighbor', title: 'Watch the neighbour list decide', ready: true },
       { id: 'new-bond-style', title: 'A new bond style', ready: true },
-      { id: 'plugin', title: 'Same style, no rebuild: a plugin' },
+      { id: 'plugin', title: 'Same style, no rebuild: a plugin', ready: true },
       { id: 'unit-test', title: 'Test it like the developers' },
       { id: 'python-check', title: 'Check from Python' },
     ],
