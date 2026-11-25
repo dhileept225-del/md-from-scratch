@@ -28,6 +28,8 @@ const MAP = {
   'real-codes': ['lammps-start', 'source-tree'],
   msd: ['analysis-computes', 'atom-storage', 'domain-pbc'],
   rdf: ['analysis-computes'],
+  'lab-viscosity': ['time-averaging'],
+  vacf: ['time-averaging'],
   pbc: ['atom-storage', 'domain-pbc'],
   'lab-molecules': ['read-data', 'style-families'],
   'lab-building': ['building-the-system'],
