@@ -94,7 +94,7 @@ export const researchParts = [
       { id: 'new-bond-style', title: 'A new bond style', ready: true },
       { id: 'plugin', title: 'Same style, no rebuild: a plugin', ready: true },
       { id: 'unit-test', title: 'Test it like the developers', ready: true },
-      { id: 'python-check', title: 'Check from Python' },
+      { id: 'python-check', title: 'Check from Python', ready: true },
     ],
   },
   {
