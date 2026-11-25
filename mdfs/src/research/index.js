@@ -49,7 +49,7 @@ export const researchParts = [
     pages: [
       { id: 'run-to-loop', title: 'From run 250 to the loop', ready: true },
       { id: 'verlet-loop', title: 'The loop, line by line', ready: true },
-      { id: 'hooks', title: 'Hooks and fix masks' },
+      { id: 'hooks', title: 'Hooks and fix masks', ready: true },
       { id: 'two-atom-step', title: 'One timestep for two atoms, by hand' },
       { id: 'energy-bookkeeping', title: 'Energy and virial bookkeeping' },
       { id: 'multiple-runs', title: 'Setup, multiple runs and rerun' },
