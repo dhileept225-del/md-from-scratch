@@ -76,7 +76,7 @@ export const researchParts = [
       { id: 'minimization', title: 'Minimization', ready: true },
       { id: 'analysis-computes', title: 'Computes for analysis', ready: true },
       { id: 'time-averaging', title: 'Time averaging and correlations', ready: true },
-      { id: 'groups-variables', title: 'Groups, regions and variables' },
+      { id: 'groups-variables', title: 'Groups, regions and variables', ready: true },
       { id: 'output', title: 'Dumps, restarts and output' },
     ],
   },
