@@ -12,7 +12,7 @@ export default {
     'Ballistic (t²) and diffusive (t) regimes, and fitting D from the linear part',
     'Error bars, the wrapped-coordinates mistake and the finite-size (Yeh–Hummer) correction',
   ],
-  simHint: 'Let the liquid run until the MSD is straight and D settles near 0.03. Switch to log–log: the curve starts on the dotted ballistic line (slope 2) and bends over to slope 1. Turn on "+ wrapped" to see how wrong wrapped coordinates are. Then compare Solid (D ≈ 0, the MSD flattens) and Gas: atoms fly so far between collisions that even at 5 τ the slope is not yet 1, and the widget warns you not to trust D. Finally, try heating the liquid.',
+  simHint: 'Let the liquid run until the MSD is straight and D settles near 0.03. Switch to log–log: the curve starts on the dotted ballistic line (slope 2) and bends over to slope 1. Turn on "+ wrapped" to see how wrong wrapped coordinates are. Then compare Solid (D ≈ 0, the MSD flattens) and Gas: atoms fly so far between collisions that the slope is not yet 1. The widget reports D only after enough lag data and flags slopes that are clearly above or below 1. Finally, try heating the liquid.',
 
   idea: `
 <p>Follow each atom from time 0 to time t and measure how far it has moved, r(t) − r(0). The average of the square of this displacement over all atoms is the <b>mean squared displacement</b>:</p>
