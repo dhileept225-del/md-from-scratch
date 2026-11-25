@@ -8,6 +8,7 @@ const MAP = {
   'lattice-start': ['building-the-system'],
   'maxwell-boltzmann': ['velocities'],
   temperature: ['velocities', 'finding-your-way'],
+  verlet: ['verlet-loop'],
   cutoffs: ['forces-in-script'],
   'neighbour-lists': ['forces-in-script'],
   'bonds-angles': ['read-data', 'style-families'],
