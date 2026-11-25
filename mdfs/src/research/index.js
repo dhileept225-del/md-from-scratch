@@ -90,7 +90,7 @@ export const researchParts = [
       { id: 'euler-fix', title: 'A broken integrator on purpose', ready: true },
       { id: 'write-thermostat', title: 'Write a thermostat', ready: true },
       { id: 'write-compute', title: 'Write a compute', ready: true },
-      { id: 'watch-neighbor', title: 'Watch the neighbour list decide' },
+      { id: 'watch-neighbor', title: 'Watch the neighbour list decide', ready: true },
       { id: 'new-bond-style', title: 'A new bond style' },
       { id: 'plugin', title: 'Same style, no rebuild: a plugin' },
       { id: 'unit-test', title: 'Test it like the developers' },

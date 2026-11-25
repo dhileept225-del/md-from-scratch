@@ -20,7 +20,7 @@ const MAP = {
   'nose-hoover': ['thermostats', 'energy-bookkeeping'],
   berendsen: ['thermostats', 'hooks', 'energy-bookkeeping', 'write-thermostat'],
   langevin: ['thermostats', 'hooks', 'energy-bookkeeping'],
-  'neighbour-lists': ['neighbor-lists', 'forces-in-script', 'multiple-runs', 'timing-table'],
+  'neighbour-lists': ['neighbor-lists', 'forces-in-script', 'multiple-runs', 'timing-table', 'watch-neighbor'],
   'bonds-angles': ['bonded', 'read-data', 'style-families'],
   dihedrals: ['bonded', 'style-families', 'mixing-special'],
   'force-fields': ['mixing-special', 'style-families', 'styles'],
