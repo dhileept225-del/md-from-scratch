@@ -72,7 +72,7 @@ export const researchParts = [
       { id: 'thermostats', title: 'Thermostats', ready: true },
       { id: 'barostats', title: 'Barostats', ready: true },
       { id: 'thermo-output', title: 'Thermo output: temperature and pressure', ready: true },
-      { id: 'constraints', title: 'Constraints: SHAKE and RATTLE' },
+      { id: 'constraints', title: 'Constraints: SHAKE and RATTLE', ready: true },
       { id: 'minimization', title: 'Minimization' },
       { id: 'analysis-computes', title: 'Computes for analysis' },
       { id: 'time-averaging', title: 'Time averaging and correlations' },
