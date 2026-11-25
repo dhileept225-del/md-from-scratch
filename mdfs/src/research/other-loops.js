@@ -232,7 +232,7 @@ while (true) {
     <h2>5 · Observe</h2>
     <ul>
       <li><b>RESPA buys accuracy cheaply.</b> At dt = 0.005 plain Verlet takes 14 steps per bond vibration and loses about 0.25 in TotEng; RESPA with 4 inner loops does almost as well as Verlet at dt = 0.00125 but computes the pair force 4 times less often. With thousands of atoms the pair force is the expensive part.</li>
-      <li><b>"Energy tolerance" with etol = 0.</b> Near the minimum, |F|² is about 10⁻⁶, so the hoped-for drop 0.4·alpha·|F|² falls below EMACH = 10⁻⁸ and the line search gives up and reports ETOL. The force is then about 10⁻³, far above ftol. Real force tolerances need <code>min_style cg</code> with the default quadratic line search, or <code>fire</code>. Try x₂ = 6.1 with dmax 0.02: there the last trial raised the energy (de &gt; 0), so the same exit reports "linesearch alpha is zero".</li>
+      <li><b>"Energy tolerance" with etol = 0.</b> Near the minimum, |F|² is about 10⁻⁶, so the hoped-for drop 0.4·alpha·|F|² falls below EMACH = 10⁻⁸ and the line search gives up and reports ETOL. The force is then about 10⁻³, far above ftol. Real force tolerances need <code>min_style cg</code> with the default quadratic line search, or <code>fire</code> (and page D.14 shows where the quadratic search freezes). Try x₂ = 6.1 with dmax 0.02: there the last trial raised the energy (de &gt; 0), so the same exit reports "linesearch alpha is zero".</li>
       <li><b>Force evaluations count line-search trials.</b> LAMMPS's "Iterations, force evaluations" adds every alpha tried, plus the step back on failure.</li>
     </ul>
   </section>

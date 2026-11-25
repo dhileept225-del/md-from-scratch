@@ -12,6 +12,7 @@ const MAP = {
   shake: ['constraints'],
   units: ['units', 'units-constants'],
   'lattice-start': ['building-the-system'],
+  'lab-packing': ['minimization'],
   'maxwell-boltzmann': ['velocities'],
   temperature: ['thermo-output', 'velocities', 'finding-your-way'],
   verlet: ['verlet-loop', 'two-atom-step', 'fix-nve'],
