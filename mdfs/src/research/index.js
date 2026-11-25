@@ -87,7 +87,7 @@ export const researchParts = [
       { id: 'clone-pair-style', title: 'Clone a pair style', ready: true },
       { id: 'change-formula', title: 'Change the formula (Mie potential)', ready: true },
       { id: 'add-parameter', title: 'Add a parameter (soft core)', ready: true },
-      { id: 'euler-fix', title: 'A broken integrator on purpose' },
+      { id: 'euler-fix', title: 'A broken integrator on purpose', ready: true },
       { id: 'write-thermostat', title: 'Write a thermostat' },
       { id: 'write-compute', title: 'Write a compute' },
       { id: 'watch-neighbor', title: 'Watch the neighbour list decide' },
