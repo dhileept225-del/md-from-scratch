@@ -54,7 +54,7 @@ export const researchParts = [
       { id: 'energy-bookkeeping', title: 'Energy and virial bookkeeping', ready: true },
       { id: 'multiple-runs', title: 'Setup, multiple runs and rerun', ready: true },
       { id: 'other-loops', title: 'The other loops: RESPA and minimize', ready: true },
-      { id: 'timing-table', title: 'The timing table' },
+      { id: 'timing-table', title: 'The timing table', ready: true },
     ],
   },
   {
