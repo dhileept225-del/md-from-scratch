@@ -2,7 +2,7 @@
 // Used by the app and by the prerender script, so search engines see the links too.
 const MAP = {
   'lennard-jones': ['styles', 'forces-in-script'],
-  'time-step': ['log-and-errors'],
+  'time-step': ['log-and-errors', 'other-loops'],
   'energy-check': ['log-and-errors', 'energy-bookkeeping'],
   units: ['units'],
   'lattice-start': ['building-the-system'],
