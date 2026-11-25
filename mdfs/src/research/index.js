@@ -77,7 +77,7 @@ export const researchParts = [
       { id: 'analysis-computes', title: 'Computes for analysis', ready: true },
       { id: 'time-averaging', title: 'Time averaging and correlations', ready: true },
       { id: 'groups-variables', title: 'Groups, regions and variables', ready: true },
-      { id: 'output', title: 'Dumps, restarts and output' },
+      { id: 'output', title: 'Dumps, restarts and output', ready: true },
     ],
   },
   {
