@@ -21,7 +21,7 @@ const MAP = {
   berendsen: ['thermostats', 'hooks', 'energy-bookkeeping', 'write-thermostat'],
   langevin: ['thermostats', 'hooks', 'energy-bookkeeping'],
   'neighbour-lists': ['neighbor-lists', 'forces-in-script', 'multiple-runs', 'timing-table', 'watch-neighbor'],
-  'bonds-angles': ['bonded', 'read-data', 'style-families'],
+  'bonds-angles': ['bonded', 'read-data', 'style-families', 'new-bond-style'],
   dihedrals: ['bonded', 'style-families', 'mixing-special'],
   'force-fields': ['mixing-special', 'style-families', 'styles'],
   'water-models': ['read-data'],
