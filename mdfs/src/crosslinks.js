@@ -27,7 +27,7 @@ const MAP = {
   'water-models': ['read-data'],
   'real-codes': ['lammps-start', 'source-tree'],
   msd: ['analysis-computes', 'atom-storage', 'domain-pbc'],
-  rdf: ['analysis-computes'],
+  rdf: ['analysis-computes', 'write-compute'],
   'lab-viscosity': ['time-averaging'],
   vacf: ['time-averaging'],
   pbc: ['atom-storage', 'domain-pbc'],
