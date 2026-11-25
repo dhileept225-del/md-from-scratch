@@ -1,7 +1,7 @@
 // Links between the theory lessons and the LAMMPS pages that show the same idea inside LAMMPS.
 // Used by the app and by the prerender script, so search engines see the links too.
 const MAP = {
-  'lennard-jones': ['styles', 'forces-in-script'],
+  'lennard-jones': ['pair-lj-cut', 'styles', 'forces-in-script'],
   'time-step': ['log-and-errors', 'other-loops'],
   'energy-check': ['log-and-errors', 'energy-bookkeeping'],
   units: ['units', 'units-constants'],
@@ -9,7 +9,7 @@ const MAP = {
   'maxwell-boltzmann': ['velocities'],
   temperature: ['velocities', 'finding-your-way'],
   verlet: ['verlet-loop', 'two-atom-step'],
-  cutoffs: ['forces-in-script', 'energy-bookkeeping'],
+  cutoffs: ['pair-lj-cut', 'forces-in-script', 'energy-bookkeeping'],
   'nose-hoover': ['energy-bookkeeping'],
   berendsen: ['hooks', 'energy-bookkeeping'],
   langevin: ['hooks', 'energy-bookkeeping'],

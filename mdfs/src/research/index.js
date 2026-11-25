@@ -64,7 +64,7 @@ export const researchParts = [
       { id: 'domain-pbc', title: 'Domain and periodic boundaries', ready: true },
       { id: 'neighbor-lists', title: 'Neighbour lists', ready: true },
       { id: 'communication', title: 'Communication between processors', ready: true },
-      { id: 'pair-lj-cut', title: 'Pair style lj/cut' },
+      { id: 'pair-lj-cut', title: 'Pair style lj/cut', ready: true },
       { id: 'mixing-special', title: 'Mixing rules and special bonds' },
       { id: 'coulomb-ewald', title: 'Coulomb and Ewald' },
       { id: 'bonded', title: 'Bonds, angles and dihedrals' },
