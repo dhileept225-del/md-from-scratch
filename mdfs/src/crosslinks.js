@@ -7,6 +7,8 @@ const MAP = {
   ewald: ['coulomb-ewald'],
   pme: ['coulomb-ewald'],
   'coulomb-pbc': ['coulomb-ewald'],
+  barostats: ['barostats'],
+  'lab-barostats': ['barostats'],
   units: ['units', 'units-constants'],
   'lattice-start': ['building-the-system'],
   'maxwell-boltzmann': ['velocities'],

@@ -70,7 +70,7 @@ export const researchParts = [
       { id: 'bonded', title: 'Bonds, angles and dihedrals', ready: true },
       { id: 'fix-nve', title: 'The integrator: fix nve', ready: true },
       { id: 'thermostats', title: 'Thermostats', ready: true },
-      { id: 'barostats', title: 'Barostats' },
+      { id: 'barostats', title: 'Barostats', ready: true },
       { id: 'thermo-output', title: 'Thermo output: temperature and pressure' },
       { id: 'constraints', title: 'Constraints: SHAKE and RATTLE' },
       { id: 'minimization', title: 'Minimization' },
