@@ -12,13 +12,13 @@ export function mountMsd(root) {
   <div class="sim-view tm-view"><canvas></canvas></div>
   <div class="sim-ctrl">
     <div class="seg"><button data-s="gas">Gas</button><button data-s="liquid" class="on">Liquid</button><button data-s="solid">Solid</button></div>
-    <label><span>Temperature <i class="nc">T</i>*</span><output data-o="T0"></output><input type="range" data-k="T" min="0.2" max="2.5" step="0.05" value="0.722"></label>
+    <label><span>Temperature <i class="nc">T</i>*</span><output data-o="T0"></output><input type="range" data-k="T" min="0.2" max="2.5" step="0.001" value="0.722"></label>
     <div class="seg"><button data-ax="lin" class="on">Linear axes</button><button data-ax="log">Log–log</button></div>
     <div class="seg"><button data-w="0" class="on">Unwrapped</button><button data-w="1">+ wrapped (wrong)</button></div>
     <div class="row"><button class="btn sm primary" data-k="run">❚❚ Pause</button><button class="btn sm ghost" data-k="reset">Reset average</button></div>
     <div class="readouts">
       <div><span>Diffusion coefficient <i class="nc">D</i>*</span><b data-o="D"></b></div>
-      <div><span>Log–log slope (end)</span><b data-o="sl"></b></div>
+      <div><span>Log–log slope (2–4 τ)</span><b data-o="sl"></b></div>
       <div><span>Simulated time / origins</span><b data-o="nf"></b></div>
       <div><span>Measured <i class="nc">T</i>*</span><b data-o="T"></b></div>
     </div>
@@ -123,8 +123,16 @@ export function mountMsd(root) {
     } else { cx.fillStyle = COL.muted; cx.textAlign = 'center'; cx.font = '13px "Space Grotesk", sans-serif'; cx.fillText('equilibrating…', (x0 + x1) / 2, (yt + yb) / 2); }
     // readouts
     o.T0.textContent = st.T.toFixed(2); o.T.textContent = Tnow.toFixed(2);
-    const k2 = cnt[K] ? K : 0, sl = k2 && mU[K] > 0 && mU[K / 2] > 0 ? Math.log(mU[K] / mU[K / 2]) / Math.log(2) : null;
-    o.D.textContent = D == null ? 'collecting…' : D < 2e-4 ? '≈ 0 (atoms only vibrate)' : sl != null && sl > 1.25 ? `${D.toFixed(3)}? not diffusive yet (slope > 1)` : D.toFixed(4);
+    const slopeStart = 40, slopeEnd = 80; let sl = null;
+    if (cnt[slopeEnd] >= 20) {                                        // at least 20 time origins at 4 tau
+      let n = 0, sx = 0, sy = 0, sxx = 0, sxy = 0;
+      for (let k = slopeStart; k <= slopeEnd; k++) {
+        if (cnt[k] < 20 || mU[k] <= 0) continue;
+        const tx = Math.log(k * EVERY * DT), my = Math.log(mU[k]); n++; sx += tx; sy += my; sxx += tx * tx; sxy += tx * my;
+      }
+      if (n > 10) sl = (n * sxy - sx * sy) / (n * sxx - sx * sx);     // log–log slope over 2–4 tau
+    }
+    o.D.textContent = D == null || sl == null ? 'collecting enough lag data…' : D < 2e-4 ? '≈ 0 (no long-time diffusion observed)' : Math.abs(sl - 1) > 0.25 ? `${D.toFixed(3)}? not diffusive (slope ${sl.toFixed(2)}, expected ≈1)` : D.toFixed(4);
     o.sl.textContent = sl == null ? '…' : `${sl.toFixed(2)} (1 = diffusive)`;
     o.nf.textContent = `${(nfr * EVERY * DT).toFixed(1)} τ / ${cnt[1] | 0}`;
   }
