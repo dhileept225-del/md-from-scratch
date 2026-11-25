@@ -18,7 +18,7 @@ const MAP = {
   verlet: ['verlet-loop', 'two-atom-step', 'fix-nve', 'euler-fix'],
   cutoffs: ['pair-lj-cut', 'forces-in-script', 'energy-bookkeeping'],
   'nose-hoover': ['thermostats', 'energy-bookkeeping'],
-  berendsen: ['thermostats', 'hooks', 'energy-bookkeeping'],
+  berendsen: ['thermostats', 'hooks', 'energy-bookkeeping', 'write-thermostat'],
   langevin: ['thermostats', 'hooks', 'energy-bookkeeping'],
   'neighbour-lists': ['neighbor-lists', 'forces-in-script', 'multiple-runs', 'timing-table'],
   'bonds-angles': ['bonded', 'read-data', 'style-families'],

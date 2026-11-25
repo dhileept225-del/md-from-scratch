@@ -9,7 +9,7 @@ const decompose = x => {   // x = M · 2^E, M an integer below 2^53
 };
 const bitlen = n => n.toString(2).length;
 // round the positive rational num/den to the nearest double (ties to even)
-function ratioToDouble(num, den) {
+export function ratioToDouble(num, den) {
   let sh = 0;
   const target = 60;                               // keep 60 significant bits, the rest as a sticky bit
   const lb = bitlen(num) - bitlen(den);
@@ -39,4 +39,22 @@ function crpowParts(M, E, p, q, inv) {
   // y ≈ (r + sticky·ε) / 2^S ; one extra low bit makes the sticky information survive rounding
   const R = (r << 1n) | (sticky ? 1n : 0n), den = 1n << BigInt(S + 1);
   return inv ? ratioToDouble(den, R) : ratioToDouble(R, den);
+}
+
+// Correctly rounded natural logarithm (x > 0): ln(M/2^52) by the atanh series in 200-bit fixed point, plus e·ln 2.
+const P = 200n, ONE = 1n << P;
+function lnFixed(num, den) {                       // ln(num/den) · 2^200, for num/den near 1..2
+  const z = ((num - den) << P) / (num + den), z2 = (z * z) >> P;
+  let term = z, sum = 0n, k = 1n;
+  while (term !== 0n) { sum += term / k; term = (term * z2) >> P; k += 2n; }
+  return 2n * sum;
+}
+const LN2 = lnFixed(2n, 1n);
+export function crlog(x) {
+  if (x === 1) return 0;
+  let [M, E] = decompose(x);
+  while (M < (1n << 52n)) { M <<= 1n; E -= 1; }     // subnormals
+  const L = lnFixed(M, 1n << 52n) + BigInt(E + 52) * LN2;
+  if (L === 0n) return 0;
+  return L < 0n ? -ratioToDouble(-L, ONE) : ratioToDouble(L, ONE);
 }
