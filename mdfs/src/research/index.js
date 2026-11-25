@@ -68,7 +68,7 @@ export const researchParts = [
       { id: 'mixing-special', title: 'Mixing rules and special bonds', ready: true },
       { id: 'coulomb-ewald', title: 'Coulomb and Ewald', ready: true },
       { id: 'bonded', title: 'Bonds, angles and dihedrals', ready: true },
-      { id: 'fix-nve', title: 'The integrator: fix nve' },
+      { id: 'fix-nve', title: 'The integrator: fix nve', ready: true },
       { id: 'thermostats', title: 'Thermostats' },
       { id: 'barostats', title: 'Barostats' },
       { id: 'thermo-output', title: 'Thermo output: temperature and pressure' },

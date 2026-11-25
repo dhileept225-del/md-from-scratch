@@ -2,7 +2,7 @@
 // Used by the app and by the prerender script, so search engines see the links too.
 const MAP = {
   'lennard-jones': ['pair-lj-cut', 'styles', 'forces-in-script'],
-  'time-step': ['log-and-errors', 'other-loops'],
+  'time-step': ['fix-nve', 'log-and-errors', 'other-loops'],
   'energy-check': ['log-and-errors', 'energy-bookkeeping'],
   ewald: ['coulomb-ewald'],
   pme: ['coulomb-ewald'],
@@ -11,7 +11,7 @@ const MAP = {
   'lattice-start': ['building-the-system'],
   'maxwell-boltzmann': ['velocities'],
   temperature: ['velocities', 'finding-your-way'],
-  verlet: ['verlet-loop', 'two-atom-step'],
+  verlet: ['verlet-loop', 'two-atom-step', 'fix-nve'],
   cutoffs: ['pair-lj-cut', 'forces-in-script', 'energy-bookkeeping'],
   'nose-hoover': ['energy-bookkeeping'],
   berendsen: ['hooks', 'energy-bookkeeping'],
