@@ -4,7 +4,7 @@ const MAP = {
   'lennard-jones': ['styles', 'forces-in-script'],
   'time-step': ['log-and-errors', 'other-loops'],
   'energy-check': ['log-and-errors', 'energy-bookkeeping'],
-  units: ['units'],
+  units: ['units', 'units-constants'],
   'lattice-start': ['building-the-system'],
   'maxwell-boltzmann': ['velocities'],
   temperature: ['velocities', 'finding-your-way'],
