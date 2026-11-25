@@ -13,7 +13,7 @@ const MAP = {
   'nose-hoover': ['energy-bookkeeping'],
   berendsen: ['hooks', 'energy-bookkeeping'],
   langevin: ['hooks', 'energy-bookkeeping'],
-  'neighbour-lists': ['forces-in-script', 'multiple-runs', 'timing-table'],
+  'neighbour-lists': ['neighbor-lists', 'forces-in-script', 'multiple-runs', 'timing-table'],
   'bonds-angles': ['read-data', 'style-families'],
   dihedrals: ['style-families'],
   'force-fields': ['style-families', 'styles'],

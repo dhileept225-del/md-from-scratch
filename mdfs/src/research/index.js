@@ -62,7 +62,7 @@ export const researchParts = [
     pages: [
       { id: 'units-constants', title: 'Units and constants', ready: true },
       { id: 'domain-pbc', title: 'Domain and periodic boundaries', ready: true },
-      { id: 'neighbor-lists', title: 'Neighbour lists' },
+      { id: 'neighbor-lists', title: 'Neighbour lists', ready: true },
       { id: 'communication', title: 'Communication between processors' },
       { id: 'pair-lj-cut', title: 'Pair style lj/cut' },
       { id: 'mixing-special', title: 'Mixing rules and special bonds' },
