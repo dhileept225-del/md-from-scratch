@@ -12,7 +12,7 @@ const MAP = {
   units: ['units', 'units-constants'],
   'lattice-start': ['building-the-system'],
   'maxwell-boltzmann': ['velocities'],
-  temperature: ['velocities', 'finding-your-way'],
+  temperature: ['thermo-output', 'velocities', 'finding-your-way'],
   verlet: ['verlet-loop', 'two-atom-step', 'fix-nve'],
   cutoffs: ['pair-lj-cut', 'forces-in-script', 'energy-bookkeeping'],
   'nose-hoover': ['thermostats', 'energy-bookkeeping'],

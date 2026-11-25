@@ -71,7 +71,7 @@ export const researchParts = [
       { id: 'fix-nve', title: 'The integrator: fix nve', ready: true },
       { id: 'thermostats', title: 'Thermostats', ready: true },
       { id: 'barostats', title: 'Barostats', ready: true },
-      { id: 'thermo-output', title: 'Thermo output: temperature and pressure' },
+      { id: 'thermo-output', title: 'Thermo output: temperature and pressure', ready: true },
       { id: 'constraints', title: 'Constraints: SHAKE and RATTLE' },
       { id: 'minimization', title: 'Minimization' },
       { id: 'analysis-computes', title: 'Computes for analysis' },
