@@ -108,7 +108,7 @@ export const researchParts = [
       { id: 'restarts', title: 'Restarts and system surgery', ready: true },
       { id: 'rerun', title: 'Rerun and post-processing', ready: true },
       { id: 'multi-replica', title: 'Multi-replica methods', ready: true },
-      { id: 'ml-potentials', title: 'Machine-learning potentials' },
+      { id: 'ml-potentials', title: 'Machine-learning potentials', ready: true },
       { id: 'reproducibility', title: 'Reproducibility' },
       { id: 'tools-contributing', title: 'Tools and contributing' },
     ],
