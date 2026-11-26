@@ -104,7 +104,7 @@ export const researchParts = [
       { id: 'plugins', title: 'Plugins', ready: true },
       { id: 'testing', title: 'Unit tests and regression', ready: true },
       { id: 'debugging', title: 'Debugging', ready: true },
-      { id: 'performance', title: 'Performance' },
+      { id: 'performance', title: 'Performance', ready: true },
       { id: 'restarts', title: 'Restarts and system surgery' },
       { id: 'rerun', title: 'Rerun and post-processing' },
       { id: 'multi-replica', title: 'Multi-replica methods' },
