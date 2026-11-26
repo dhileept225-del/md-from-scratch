@@ -109,7 +109,7 @@ export const researchParts = [
       { id: 'rerun', title: 'Rerun and post-processing', ready: true },
       { id: 'multi-replica', title: 'Multi-replica methods', ready: true },
       { id: 'ml-potentials', title: 'Machine-learning potentials', ready: true },
-      { id: 'reproducibility', title: 'Reproducibility' },
+      { id: 'reproducibility', title: 'Reproducibility', ready: true },
       { id: 'tools-contributing', title: 'Tools and contributing' },
     ],
   },
