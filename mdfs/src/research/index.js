@@ -106,7 +106,7 @@ export const researchParts = [
       { id: 'debugging', title: 'Debugging', ready: true },
       { id: 'performance', title: 'Performance', ready: true },
       { id: 'restarts', title: 'Restarts and system surgery', ready: true },
-      { id: 'rerun', title: 'Rerun and post-processing' },
+      { id: 'rerun', title: 'Rerun and post-processing', ready: true },
       { id: 'multi-replica', title: 'Multi-replica methods' },
       { id: 'ml-potentials', title: 'Machine-learning potentials' },
       { id: 'reproducibility', title: 'Reproducibility' },
