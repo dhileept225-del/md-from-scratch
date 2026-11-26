@@ -103,7 +103,7 @@ export const researchParts = [
       { id: 'python-interface', title: 'Python and the library interface', ready: true },
       { id: 'plugins', title: 'Plugins', ready: true },
       { id: 'testing', title: 'Unit tests and regression', ready: true },
-      { id: 'debugging', title: 'Debugging' },
+      { id: 'debugging', title: 'Debugging', ready: true },
       { id: 'performance', title: 'Performance' },
       { id: 'restarts', title: 'Restarts and system surgery' },
       { id: 'rerun', title: 'Rerun and post-processing' },
