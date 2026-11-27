@@ -128,7 +128,7 @@ for (const meta of readyMl) {
   const P = mlPages[meta.id];
   const body = `<nav class="crumb"><a href="/">Home</a> / <a href="/ml">ML potentials</a> / ${meta.num}</nav>
   <section class="block"><p class="eyebrow">ML potentials from scratch · ${meta.num} · ${P.minutes} min</p><h1>${esc(meta.title)}</h1><p class="lead">${P.summary}</p><ul class="learn">${P.learn.map(x => `<li>${x}</li>`).join('')}</ul></section>
-  ${[['Idea', P.idea], ['Hand calculation', P.hand], ['Algorithm', P.algorithm], ['Maths', P.maths && P.maths()]].filter(t => t[1]).map(([h, b]) => `<section class="block prose"><h2>${h}</h2>${b}</section>`).join('')}`;
+  ${[['Idea', P.idea], ['Hand calculation', P.hand], ['Algorithm', P.algorithm], ['Maths', P.maths && P.maths()]].filter(t => t[1]).map(([h, b]) => `<section class="block prose"><h2>${h}</h2>${b}</section>`).join('')}${P.footnote ? `<aside class="ml-foot muted">${P.footnote}</aside>` : ''}`;
   const jsonld = { '@context': 'https://schema.org', '@type': 'LearningResource', name: meta.title, description: plain(P.summary), url: `${SITE}/ml/${meta.id}`,
     learningResourceType: 'Tutorial', educationalLevel: 'Graduate', timeRequired: `PT${P.minutes}M`, inLanguage: 'en', isAccessibleForFree: true, teaches: P.learn.map(plain), isPartOf: mlCourse };
   fs.writeFileSync(path.join(dist, 'ml', `${meta.id}.html`), page({ title: `${meta.title} | ML potentials from scratch`, desc: short(P.summary), urlPath: `/ml/${meta.id}`, body, type: 'article', jsonld,

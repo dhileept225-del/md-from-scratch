@@ -323,3 +323,5 @@ footer a { color: var(--cyan); }
 
 .more-video .mv { display: grid; grid-template-columns: minmax(0, 480px) 1fr; gap: 28px; align-items: start; }
 @media (max-width: 820px) { .more-video .mv { grid-template-columns: 1fr; } }
+.ml-foot { font-size: 13px; line-height: 1.55; margin: 8px 0 28px; padding-top: 14px; border-top: 1px solid var(--line); }
+.ml-foot p { margin: 0 0 6px; }

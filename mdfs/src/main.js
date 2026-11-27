@@ -492,7 +492,7 @@ function mlPage(id) {
     <div id="sim"></div>
   </section>
   <section class="block">
-    <div class="tabs" role="tablist">${tabs.map(([t], k) => `<button role="tab" class="${k ? '' : 'on'}" data-tab="${t}">${t}</button>`).join('')}</div>
+    ${tabs.length > 1 ? `<div class="tabs" role="tablist">${tabs.map(([t], k) => `<button role="tab" class="${k ? '' : 'on'}" data-tab="${t}">${t}</button>`).join('')}</div>` : `<h2>${tabs[0][0]}</h2>`}
     ${tabs.map(([t, h], k) => `<div class="tab-body prose" data-panel="${t}"${k ? ' hidden' : ''}>${h}</div>`).join('')}
   </section>
   <section class="block">
@@ -506,6 +506,7 @@ function mlPage(id) {
       <p class="score muted"></p>
     </div>
   </section>
+  ${P.footnote ? `<aside class="ml-foot muted">${P.footnote}</aside>` : ''}
   <nav class="prevnext">${link(prev, 'prev')}${link(next, 'next')}</nav>`;
   app.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => {
     app.querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('on', x === b));

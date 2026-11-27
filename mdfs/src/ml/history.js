@@ -43,7 +43,6 @@ const E = [
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const fmtD = s => { const [y, m, d] = s.split('-'); return `${d ? +d + ' ' : ''}${MON[+m - 1]} ${y}`; };
 const yr = (e, mode) => mode === 'pub' && e.pub ? e.pub : +e.first.slice(0, 4);
-const days = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
 
 export default {
   id: 'history',
@@ -52,7 +51,7 @@ export default {
   learn: [
     'The four steps: small fits (1995), atomic energies (2007), message passing (2017), foundation models (2023)',
     'Which family each method belongs to: networks, kernels, linear bases, message passing',
-    'Why a paper has two dates, and which one to cite as "first"',
+    'What each step added that the one before lacked',
     'Where the methods taught later in this course come from',
   ],
   simHint: 'Tap a family to filter. Switch between the date a paper first appeared (usually arXiv) and its journal year: watch which entries move. Tap an entry for what it added and its links.',
@@ -62,43 +61,16 @@ export default {
   <p><b>2007: atomic energies.</b> Behler and Parrinello wrote the total energy as a sum of atomic energies, each from a network that sees only the atom's neighbours within a cutoff, described by <i>symmetry functions</i> that do not change when the system is rotated or atoms are swapped. One network per element, any number of atoms. Almost every model since keeps this sum.</p>
   <p><b>2009–2019: better descriptors, other fits.</b> GAP replaced the network by a Gaussian process (a kernel fit, with error bars); SOAP gave a smooth way to compare environments; SNAP, MTP and ACE showed that a <i>linear</i> fit on a rich enough basis is as accurate and very fast. ANI-1 and DeePMD scaled the network route to large datasets.</p>
   <p><b>2017–2022: message passing.</b> SchNet let atoms exchange learned messages instead of using a fixed descriptor. NequIP made the messages equivariant (they rotate with the molecule), which cut the data needed by orders of magnitude; MACE made them many-body, so two layers suffice; Allegro kept equivariance but dropped messages to stay strictly local and parallel.</p>
-  <p><b>2022–2025: one model for everything.</b> Trained on large public DFT datasets (Materials Project, then OMat24 and OMol25), M3GNet, CHGNet, MACE-MP-0 and their successors run on almost any composition without new training. They are the starting point you fine-tune in part M5, and part M6 compares them.</p>
-  <div class="callout">The plan for this course listed journal years. Here the first year is the first public appearance; for most papers that is the arXiv v1, months to a year before the journal. NequIP is "2021" by that rule and "2022" by its journal.</div>`,
+  <p><b>2022–2025: one model for everything.</b> Trained on large public DFT datasets (Materials Project, then OMat24 and OMol25), M3GNet, CHGNet, MACE-MP-0 and their successors run on almost any composition without new training. They are the starting point you fine-tune in part M5, and part M6 compares them.</p>`,
 
-  hand: `
-  <p>Two dates per paper: when it first appeared, and when the journal published it. How long is the gap? Count the days, month by month.</p>
-  <p><b>NequIP:</b> arXiv v1 8 Jan 2021, published 4 May 2022.</p>
-  <div class="calc">8 Jan 2021 → 8 Jan 2022 = 365 days (2021 is not a leap year)
-8 Jan 2022 → 8 Apr 2022 = 23 + 28 + 31 + 8 = 90 days   (rest of Jan, Feb, Mar, to 8 Apr)
-8 Apr 2022 → 4 May 2022 = 22 + 4 = 26 days
-total = 365 + 90 + 26 = 481 days ≈ 481 / 30.44 = 15.8 months</div>
-  <p><b>DeePMD:</b> arXiv v1 30 Jul 2017, published 4 Apr 2018.</p>
-  <div class="calc">30 Jul → 31 Jul 2017 = 1;  Aug–Dec = 31 + 30 + 31 + 30 + 31 = 153
-Jan–Mar 2018 = 31 + 28 + 31 = 90;  1 Apr → 4 Apr = 4
-total = 1 + 153 + 90 + 4 = 248 days ≈ 8.1 months</div>
-  <p><b>ANI-1:</b> arXiv v1 27 Oct 2016, first published online 8 Feb 2017.</p>
-  <div class="calc">27 Oct → 31 Oct = 4;  Nov + Dec = 30 + 31 = 61;  Jan = 31;  1 Feb → 8 Feb = 8
-total = 4 + 61 + 31 + 8 = 104 days ≈ 3.4 months</div>
-  <p>So the same idea can carry a different year depending on which date you quote: it matters when you write "first introduced in". Press the button to let the page count the same three gaps.</p>
-  <p><button class="btn sm" data-k="hand">Count the days</button></p>
-  <div class="ml-hand-out"></div>`,
-
-  algorithm: `
-  <p>How each date on this page was checked:</p>
-  <ol>
-    <li>Find the arXiv number in the paper. Its first four digits are the year and month of submission (2101 → January 2021).</li>
-    <li>Open the arXiv abstract page and read <i>Submission history</i>: the v1 date is the first public appearance.</li>
-    <li>Follow the DOI to the journal page and read the publication (or first-online) date. Some journals also give "Received", the date the authors submitted it.</li>
-    <li>If there was no preprint (Blank 1995, Behler–Parrinello 2007, ACE 2019), the journal date is the first appearance.</li>
-    <li>Conference papers (SchNet, MACE, eSEN) are dated by the conference year; they have no DOI of a journal.</li>
-    <li>Preprints with no journal version yet (MACE-MP-0, OMat24, UMA, …) show "preprint" and the arXiv link.</li>
-  </ol>`,
+  footnote: `<p><b>About the dates.</b> The year shown first is the paper's first public appearance: the arXiv v1 date, or the journal date when there was no preprint (Blank 1995, Behler–Parrinello 2007, ACE 2019). Conference papers (SchNet, MACE, eSEN) carry the conference year. Papers marked "preprint" had no journal version when this page was written.</p>
+  <p>Journal years are often later: ANI-1 by 104 days, DeePMD by 248, NequIP by 481 (8 Jan 2021 → 4 May 2022). The plan for this course listed journal years; the toggle above shows both. Every date was checked against its arXiv record and DOI in November 2026.</p>`,
 
   quiz: [
     { q: 'What did Behler and Parrinello (2007) add that let a neural network handle any number of atoms?', options: ['A larger network', 'The energy as a sum of atomic energies, each from the atom\'s local neighbourhood', 'Training on forces', 'Periodic boundary conditions'], answer: 1, why: 'Each atom\'s energy depends on neighbours within a cutoff, through symmetry functions; summing them works for 10 atoms or 10 million.' },
     { q: 'Which appeared first as a preprint?', options: ['MACE', 'NequIP', 'Allegro', 'They appeared the same month'], answer: 1, why: 'NequIP: 8 Jan 2021. Allegro: 11 Apr 2022. MACE: 15 Jun 2022.' },
     { q: 'SNAP and GAP both use bispectrum-type descriptors. What is the main difference?', options: ['SNAP is a linear least-squares fit; GAP is a Gaussian process (kernel) fit', 'SNAP is a neural network', 'GAP only works for molecules', 'SNAP has error bars, GAP does not'], answer: 0, why: 'SNAP assumes the atomic energy is linear in the descriptors, which makes it fast and simple to fit; GAP compares environments through a kernel and gives an uncertainty.' },
-    { q: 'NequIP\'s arXiv v1 is 8 Jan 2021 and the journal published it on 4 May 2022. About how long was the gap?', options: ['4 months', '8 months', '16 months', '28 months'], answer: 2, why: '481 days ≈ 15.8 months. Quote "2021" for the first appearance and "2022" for the journal, and say which.' },
+    { q: 'What did NequIP (2021) change in message passing?', options: ['It removed the cutoff', 'Its messages are equivariant: they rotate with the structure', 'It used a Gaussian process instead of a network', 'It trained on energies only'], answer: 1, why: 'Equivariant messages carry directions, not just distances, which made it accurate from a few hundred training structures.' },
   ],
 
   mount(root) {
@@ -153,11 +125,6 @@ total = 4 + 61 + 31 + 8 = 104 days ≈ 3.4 months</div>
     el.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { const k = b.dataset.f; st.on.has(k) ? st.on.delete(k) : st.on.add(k); if (!st.on.size) Object.keys(FAM).forEach(f => st.on.add(f)); el.querySelectorAll('[data-f]').forEach(x => x.classList.toggle('on', st.on.has(x.dataset.f))); list(); draw(); });
     list(); resize();
 
-    const hb = root.querySelector('[data-k=hand]'), out = root.querySelector('.ml-hand-out');
-    if (hb) hb.onclick = () => {
-      const rows = [['NequIP', '2021-01-08', '2022-05-04'], ['DeePMD', '2017-07-30', '2018-04-04'], ['ANI-1', '2016-10-27', '2017-02-08']].map(([n, a, b]) => { const d = days(a, b); return `<tr><td>${n}</td><td>${fmtD(a)}</td><td>${fmtD(b)}</td><td>${d}</td><td>${(d / 30.44).toFixed(1)}</td></tr>`; }).join('');
-      out.innerHTML = `<div class="tbl"><table><tr><th>paper</th><th>arXiv v1</th><th>journal</th><th>days</th><th>months</th></tr>${rows}</table></div><p>Same as by hand: 481, 248 and 104 days.</p>`;
-    };
     return () => ro.disconnect();
   },
 };
