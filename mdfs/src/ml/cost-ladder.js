@@ -46,8 +46,8 @@ export default {
 <li><b>Tight binding</b> (xTB): a cheap, approximate quantum method in between.</li>
 <li><b>ML potential</b>: a flexible function, trained on DFT energies and forces, that maps atomic positions to the same numbers. Once trained it costs far less than DFT, and it has no electrons.</li>
 </ul>
-<p>Measured here, for 32 water molecules (96 atoms) on the same two cores: force field <b>${fmtT(T.ff)}</b> per step, MACE-MP-0 small <b>${fmtT(T.mace)}</b>, GFN2-xTB <b>${fmtT(T.xtb)}</b>, DFT about <b>${fmtT(tDFT96)}</b>. Each rung is roughly a thousand times the one below, and ML lands near the bottom of the quantum part of the ladder. Its accuracy is whatever its training data had, and that is what the rest of this section is about.</p>
-<p>Two honest caveats. A GPU makes the ML potential 10–100× faster, and production DFT-MD codes (CP2K, VASP) on a few hundred cores are far faster than PySCF on two. The ratios between the rungs survive both.</p>`,
+<p>Measured here, for 32 water molecules (96 atoms) on the same two cores: force field <b>${fmtT(T.ff)}</b> per step, MACE-MP-0 small <b>${fmtT(T.mace)}</b>, GFN2-xTB <b>${fmtT(T.xtb)}</b>, DFT about <b>${fmtT(tDFT96)}</b>. Each level of the ladder costs roughly a thousand times more than the one below, and ML lands near the bottom of the quantum part of the ladder. Its accuracy is whatever its training data had, and that is what the rest of this section is about.</p>
+<p>Two honest caveats. A GPU makes the ML potential 10–100× faster, and production DFT-MD codes (CP2K, VASP) on a few hundred cores are far faster than PySCF on two. The ratios between the levels survive both.</p>`,
 
   hand: `
 <p>One nanosecond at a 1 fs time step is</p>
