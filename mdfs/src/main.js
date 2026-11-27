@@ -8,6 +8,8 @@ import { inject } from '@vercel/analytics';
 inject(); // Vercel Web Analytics: counts page views, including /lessons/<id> navigation
 import { chapters, allLessons } from './data/chapters.js';
 import { researchParts, allResearch } from './research/index.js';
+import { mlParts, allMl } from './ml/index.js';
+import { mlPages } from './ml/pages.js';
 import lammpsStart from './research/lammps-start.js';
 import sourceCompileRun from './research/source-compile-run.js';
 import terminalBasics from './research/terminal-basics.js';
@@ -239,6 +241,12 @@ function home() {
   </section>
 
   <section class="research card">
+    <h3>ML potentials from scratch <span class="badge lab">New</span></h3>
+    <p>How machine-learned interatomic potentials work, from a least-squares fit to MACE and the foundation models. Every number checked by hand, every model run live in the browser.</p>
+    <a class="btn sm primary" href="/ml">Open the ML section →</a>
+  </section>
+
+  <section class="research card">
     <h3>LAMMPS from scratch <span class="badge lab">New</span></h3>
     <p>Run the real LAMMPS in your browser, read its engine, change its code, and check every change with a hand calculation.</p>
     <a class="btn sm primary" href="/lammps">Open the LAMMPS section →</a>
@@ -427,6 +435,96 @@ function researchPage(id) {
   cleanup.push(P.mount(app));
 }
 
+
+// ---------- ML potentials from scratch ----------
+function mlHome() {
+  const ready = allMl.filter(p => p.ready).length;
+  app.innerHTML = `
+  <nav class="crumb"><a href="/">Home</a> / ML potentials</nav>
+  <section class="block lab-top prose">
+    <p class="eyebrow">ML potentials · ${ready} of ${allMl.length} pages live</p>
+    <h1>ML potentials from scratch</h1>
+    <p class="lead">How machine-learned interatomic potentials work, from a least-squares fit of the argon dimer to equivariant message passing, MACE and the foundation models. Every page has a live simulation in your browser, a hand calculation you can redo with a calculator, and a short script that prints every number. It assumes chapters 1–4 of the lessons and no machine-learning background.</p>
+  </section>
+  <section class="chapters">
+    ${mlParts.map(p => `
+      <div class="chapter research-part">
+        <div class="ch-head"><span class="ch-n">${p.key}</span><div><h3>${p.title}</h3><p>${p.blurb}</p></div></div>
+        <ol class="lesson-list">
+          ${p.pages.map(pg => {
+            const m = allMl.find(x => x.id === pg.id);
+            const inner = `<span class="num">${m.num}</span><span class="t">${pg.title}</span>${pg.lab ? badge('lab') : ''}${pg.ready ? '<span class="go">→</span>' : '<span class="soon">Soon</span>'}`;
+            return `<li>${pg.ready ? `<a href="/ml/${pg.id}">${inner}</a>` : `<div class="off">${inner}</div>`}</li>`;
+          }).join('')}
+        </ol>
+      </div>`).join('')}
+  </section>`;
+}
+
+function mlPage(id) {
+  const meta = allMl.find(p => p.id === id), P = mlPages[id];
+  if (!meta || !P) return notFound();
+  const i = allMl.indexOf(meta), prev = allMl[i - 1], next = allMl[i + 1];
+  const link = (p, dir) => !p ? `<a class="pn ${dir}" href="/ml"><small>${dir === 'prev' ? '← Back' : 'Up'}</small>All ML pages</a>` : p.ready
+    ? `<a class="pn ${dir}" href="/ml/${p.id}"><small>${dir === 'prev' ? '← Previous' : 'Next →'}</small>${p.num} ${p.title}</a>`
+    : `<div class="pn ${dir} off"><small>${dir === 'prev' ? '← Previous' : 'Next · coming soon'}</small>${p.num} ${p.title}</div>`;
+  const tabs = [['Idea', P.idea], ['Hand calculation', P.hand], ['Algorithm', P.algorithm], ['Maths', P.maths()], ['Code', `<p>${P.code.note}</p><div class="code"><button class="btn sm ghost copy">Copy</button><pre>${highlight(P.code.src)}</pre></div>`]];
+  app.innerHTML = `
+  <nav class="crumb"><a href="/">Home</a> / <a href="/ml">ML potentials</a> / ${meta.num}</nav>
+  <section class="block lab-top">
+    <p class="eyebrow">ML potentials from scratch · ${meta.num} · ${P.minutes} min</p>
+    <h1>${meta.title}</h1>
+    <p class="lead">${P.summary}</p>
+    <h4>In this lesson</h4>
+    <ul class="learn">${P.learn.map(x => `<li>${x}</li>`).join('')}</ul>
+  </section>
+  <section class="block">
+    <h2>Try it</h2>
+    <p class="muted">${P.simHint}</p>
+    <div id="sim"></div>
+  </section>
+  <section class="block">
+    <div class="tabs" role="tablist">${tabs.map(([t], k) => `<button role="tab" class="${k ? '' : 'on'}" data-tab="${t}">${t}</button>`).join('')}</div>
+    ${tabs.map(([t, h], k) => `<div class="tab-body prose" data-panel="${t}"${k ? ' hidden' : ''}>${h}</div>`).join('')}
+  </section>
+  <section class="block">
+    <h2>Check yourself</h2>
+    <div class="quiz">${P.quiz.map((q, qi) => `
+      <div class="q" data-q="${qi}">
+        <p class="qt"><b>${qi + 1}.</b> ${q.q}</p>
+        <div class="opts">${q.options.map((o, oi) => `<button data-o="${oi}">${o}</button>`).join('')}</div>
+        <p class="why" hidden></p>
+      </div>`).join('')}
+      <p class="score muted"></p>
+    </div>
+  </section>
+  <nav class="prevnext">${link(prev, 'prev')}${link(next, 'next')}</nav>`;
+  app.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => {
+    app.querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('on', x === b));
+    app.querySelectorAll('[data-panel]').forEach(p => p.hidden = p.dataset.panel !== b.dataset.tab);
+  });
+  const copy = app.querySelector('.copy');
+  copy.onclick = async () => {
+    try { await navigator.clipboard.writeText(P.code.src); copy.textContent = 'Copied ✓'; }
+    catch { copy.textContent = 'Select the code to copy'; }
+    setTimeout(() => copy.textContent = 'Copy', 2000);
+  };
+  let right = 0, done = 0;
+  app.querySelectorAll('.q').forEach(qe => {
+    const q = P.quiz[+qe.dataset.q];
+    qe.querySelectorAll('[data-o]').forEach(b => b.onclick = () => {
+      if (qe.classList.contains('done')) return;
+      qe.classList.add('done'); done++;
+      const ok = +b.dataset.o === q.answer; if (ok) right++;
+      b.classList.add(ok ? 'right' : 'wrong');
+      qe.querySelector(`[data-o="${q.answer}"]`).classList.add('right');
+      const w = qe.querySelector('.why'); w.hidden = false; w.innerHTML = `<b>${ok ? 'Correct.' : 'Not quite.'}</b> ${q.why}`;
+      if (done === P.quiz.length) app.querySelector('.score').textContent = `You got ${right} of ${P.quiz.length}.`;
+    });
+  });
+  cleanup.push(P.mount(app));
+}
+
 function notFound() { app.innerHTML = `<section class="block"><h1>Page not found</h1><p><a href="/">Back to home</a></p></section>`; }
 
 function highlight(src) {
@@ -460,8 +558,12 @@ function route() {
   cleanup.forEach(f => f()); cleanup = [];
   if (/^\/research(\/|$)/.test(location.pathname)) history.replaceState(null, '', location.pathname.replace(/^\/research/, '/lammps') + location.hash);
   const p = location.pathname.replace(/\/+$/, '') || '/';
-  const m = p.match(/^\/lessons\/([\w-]+)$/), r = p.match(/^\/lammps(?:\/([\w-]+))?$/);
-  if (r) {
+  const m = p.match(/^\/lessons\/([\w-]+)$/), r = p.match(/^\/lammps(?:\/([\w-]+))?$/), ml = p.match(/^\/ml(?:\/([\w-]+))?$/);
+  if (ml) {
+    window.scrollTo(0, 0);
+    if (!ml[1]) { mlHome(); setMeta(`ML potentials from scratch | ${NAME}`, 'How machine-learned interatomic potentials work, from least squares to MACE and foundation models, with live simulations and hand calculations.', '/ml'); }
+    else { const meta = allMl.find(x => x.id === ml[1]), P = mlPages[ml[1]]; mlPage(ml[1]); setMeta(meta && P ? `${meta.title} | ML potentials from scratch` : `Page not found | ${NAME}`, P ? short(P.summary) : HOME_DESC, p); }
+  } else if (r) {
     window.scrollTo(0, 0);
     if (!r[1]) { researchHome(); setMeta(`LAMMPS from scratch | ${NAME}`, 'Understand how LAMMPS works: run it in your browser, read its engine, change its code and check every change with a hand calculation.', '/lammps'); }
     else { const meta = allResearch.find(x => x.id === r[1]), P = researchPages[r[1]]; researchPage(r[1]); setMeta(meta && P ? `${meta.title} | LAMMPS from scratch` : `Page not found | ${NAME}`, P ? short(P.summary) : HOME_DESC, p); }

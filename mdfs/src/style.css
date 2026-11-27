@@ -205,7 +205,7 @@ pre .k { color: var(--cyan); } pre .s { color: var(--amber); } pre .n { color: #
   .sim-view.tm-view { aspect-ratio: auto; min-height: 600px; }
   .sim-view.en-view { aspect-ratio: auto; min-height: 660px; }
   .top { padding: 12px 16px; }
-  .top nav { gap: 14px; font-size: 15px; }
+  .top nav { gap: 12px; font-size: 14px; }
   .logo { font-size: 16px; gap: 8px; }
   .logo img { width: 24px; height: 24px; }
   .top nav em { display: none; }
@@ -312,3 +312,4 @@ select.r-in { width: auto; }
 .xlink li { margin: 4px 0; }
 .sim-ctrl select { width: 100%; background: #050A16; color: inherit; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; margin-top: 4px; font: inherit; font-size: 13px; }
 footer a { color: var(--cyan); }
+@media (max-width: 420px) { .top nav { gap: 10px; font-size: 13.5px; } .top .brand span, .top .logo span { font-size: 16px; } }

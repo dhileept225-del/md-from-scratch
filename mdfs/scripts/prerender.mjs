@@ -18,6 +18,8 @@ for (const f of fs.readdirSync(path.join(root, 'src/lessons')).filter(f => f.end
   if (L && L.id) lessons[L.id] = L;
 }
 const { researchParts, allResearch } = await vite.ssrLoadModule('/src/research/index.js');
+const { mlParts, allMl } = await vite.ssrLoadModule('/src/ml/index.js');
+const { mlPages } = await vite.ssrLoadModule('/src/ml/pages.js');
 const researchPages = {};
 for (const p of allResearch.filter(p => p.ready)) researchPages[p.id] = (await vite.ssrLoadModule(`/src/research/${p.id}.js`)).default;
 await vite.close();
@@ -111,9 +113,31 @@ for (const meta of readyRes) {
     image: ogImg('lammps-' + meta.id, `LAMMPS from scratch · ${meta.num}`, meta.title), crumb: [['Home', '/'], ['LAMMPS', '/lammps'], [meta.title, `/lammps/${meta.id}`]] }));
 }
 
+
+// ML potentials section
+const ML_DESC = 'How machine-learned interatomic potentials work, from least squares to MACE and foundation models, with live simulations and hand calculations.';
+const mlList = mlParts.map(p => `<div class="chapter"><div class="ch-head"><span class="ch-n">${p.key}</span><div><h3>${p.title}</h3><p>${p.blurb}</p></div></div>
+  <ol class="lesson-list">${p.pages.map(pg => `<li>${pg.ready ? `<a href="/ml/${pg.id}"><span class="t">${esc(pg.title)}</span></a>` : `<div class="off"><span class="t">${esc(pg.title)}</span></div>`}</li>`).join('')}</ol></div>`).join('');
+const mlCourse = { '@context': 'https://schema.org', '@type': 'Course', name: 'ML potentials from scratch', description: ML_DESC, url: SITE + '/ml', inLanguage: 'en', isAccessibleForFree: true, provider: course.provider };
+fs.writeFileSync(path.join(dist, 'ml.html'), page({ title: `ML potentials from scratch | ${NAME}`, desc: ML_DESC, urlPath: '/ml', jsonld: mlCourse,
+  image: ogImg('ml', 'Learn a potential, check it by hand', 'ML potentials from scratch'), crumb: [['Home', '/'], ['ML potentials', '/ml']],
+  body: `<nav class="crumb"><a href="/">Home</a> / ML potentials</nav><section class="block"><h1>ML potentials from scratch</h1><p class="lead">${ML_DESC}</p></section><section class="chapters">${mlList}</section>` }));
+fs.mkdirSync(path.join(dist, 'ml'), { recursive: true });
+const readyMl = allMl.filter(p => p.ready && mlPages[p.id]);
+for (const meta of readyMl) {
+  const P = mlPages[meta.id];
+  const body = `<nav class="crumb"><a href="/">Home</a> / <a href="/ml">ML potentials</a> / ${meta.num}</nav>
+  <section class="block"><p class="eyebrow">ML potentials from scratch · ${meta.num} · ${P.minutes} min</p><h1>${esc(meta.title)}</h1><p class="lead">${P.summary}</p><ul class="learn">${P.learn.map(x => `<li>${x}</li>`).join('')}</ul></section>
+  <section class="block prose"><h2>Idea</h2>${P.idea}</section><section class="block prose"><h2>Hand calculation</h2>${P.hand}</section><section class="block prose"><h2>Algorithm</h2>${P.algorithm}</section><section class="block prose"><h2>Maths</h2>${P.maths()}</section>`;
+  const jsonld = { '@context': 'https://schema.org', '@type': 'LearningResource', name: meta.title, description: plain(P.summary), url: `${SITE}/ml/${meta.id}`,
+    learningResourceType: 'Tutorial', educationalLevel: 'Graduate', timeRequired: `PT${P.minutes}M`, inLanguage: 'en', isAccessibleForFree: true, teaches: P.learn.map(plain), isPartOf: mlCourse };
+  fs.writeFileSync(path.join(dist, 'ml', `${meta.id}.html`), page({ title: `${meta.title} | ML potentials from scratch`, desc: short(P.summary), urlPath: `/ml/${meta.id}`, body, type: 'article', jsonld,
+    image: ogImg('ml-' + meta.id, `ML potentials · ${meta.num}`, meta.title), crumb: [['Home', '/'], ['ML potentials', '/ml'], [meta.title, `/ml/${meta.id}`]] }));
+}
+
 // sitemap and robots
 const today = new Date().toISOString().slice(0, 10);
-const urls = ['/', '/lessons', ...ready.map(l => `/lessons/${l.id}`), '/lammps', ...readyRes.map(p => `/lammps/${p.id}`)];
+const urls = ['/', '/lessons', ...ready.map(l => `/lessons/${l.id}`), '/ml', ...readyMl.map(p => `/ml/${p.id}`), '/lammps', ...readyRes.map(p => `/lammps/${p.id}`)];
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 fs.writeFileSync(path.join(dist, 'og-list.json'), JSON.stringify(og, null, 1));
