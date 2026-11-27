@@ -320,3 +320,6 @@ footer a { color: var(--cyan); }
 .hist-tbl th { text-align: left !important; } .hist-tbl td:first-child { white-space: nowrap; }
 @media (max-width: 420px) { .logo { font-size: 16px; } .top nav a { white-space: nowrap; } .top nav .nl { display: none; } }
 @media (max-width: 340px) { .logo { font-size: 14px; gap: 6px; } .top nav { gap: 8px; font-size: 13px; } }
+
+.more-video .mv { display: grid; grid-template-columns: minmax(0, 480px) 1fr; gap: 28px; align-items: start; }
+@media (max-width: 820px) { .more-video .mv { grid-template-columns: 1fr; } }

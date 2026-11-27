@@ -310,6 +310,14 @@ function lessonPage(id) {
       <p class="score muted"></p>
     </div>
   </section>
+  ${(L.moreVideos || []).map(m => `
+  <section class="block more-video">
+    <h2>${m.title}</h2>
+    <div class="mv">
+      <div class="video">${m.youtube ? `<iframe src="https://www.youtube-nocookie.com/embed/${m.youtube}?rel=0&modestbranding=1&playsinline=1" title="${esc(m.title)}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` : `<video src="${abs(m.mp4)}" poster="${abs(m.poster) || ''}" controls playsinline preload="none"></video>`}</div>
+      <div class="prose">${m.text}</div>
+    </div>
+  </section>`).join('')}
   ${lessonBox(id, x => allResearch.find(p => p.id === x))}
   <nav class="prevnext">${navLink(prev, 'prev')}${navLink(next, 'next')}</nav>`;
 

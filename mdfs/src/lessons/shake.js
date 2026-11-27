@@ -6,6 +6,22 @@ export default {
   minutes: 15,
   // VIDEO: paste your YouTube video ID here (the part after "watch?v="). Empty = local MP4.
   video: { youtube: '', mp4: 'videos/shake.mp4', poster: 'videos/shake.jpg' },
+  // Extra video at the bottom of the page (suggested by a LinkedIn reader). Numbers from a methanol test:
+  // 64 molecules, GAFF-like bonds and angles, NVE velocity Verlet + RATTLE, 300 K, 20 ps per run.
+  moreVideos: [{
+    title: 'Video: SHAKE for 2 fs, HMR for 4 fs',
+    youtube: '', mp4: 'videos/shake-hmr.mp4', poster: 'videos/shake-hmr.jpg',
+    text: `<p>A reader asked how SHAKE gives 2 fs and how hydrogen mass repartitioning (HMR) gives 4 fs. The video measures it on methanol (64 molecules, NVE, 300 K, 20 ps per run).</p>
+<div class="tbl"><table><tr><th>time step</th><th>flexible</th><th>SHAKE</th><th>SHAKE + HMR</th></tr>
+<tr><td>1 fs</td><td>0.11</td><td>0.026</td><td>0.016</td></tr>
+<tr><td>2 fs</td><td>0.59</td><td>0.11</td><td>0.067</td></tr>
+<tr><td>3 fs</td><td>3.0</td><td>0.28</td><td>0.15</td></tr>
+<tr><td>4 fs</td><td>blows up</td><td>0.59</td><td>0.30</td></tr>
+<tr><td>5 fs</td><td>blows up</td><td>blows up</td><td>0.63</td></tr></table></div>
+<p class="muted small">RMS energy error per molecule, kJ/mol.</p>
+<p><b>Why.</b> The fastest motions set the step: C–H and O–H stretches, period 11 fs. SHAKE freezes them; the fastest left are H–C–H bends at 22 fs, so 2 fs costs the same error as 1 fs flexible. HMR moves mass from each heavy atom to its hydrogens (H 1.008 → 3.024, C 12.011 → 5.963, O 15.999 → 13.983; total 32.042 unchanged). The hydrogen bends slow to about 35 fs and the error at 4 fs halves.</p>
+<p><b>Watch for.</b> Equilibrium averages do not depend on mass; dynamics (diffusion, rates) change a little. The light methyl carbon (6 amu) now sets the limit, so check energy conservation. Repartition the solute only; rigid water already uses SETTLE. GROMACS (2024 and later): <code>mass-repartition-factor = 3</code>; AMBER: <code>HMassRepartition</code> in ParmEd; LAMMPS: edit the masses in the data file.</p>`,
+  }],
   sim: 'shake',
   learn: [
     'Why constraining X–H bonds allows larger time steps',
