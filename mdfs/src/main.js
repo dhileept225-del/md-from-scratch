@@ -468,7 +468,7 @@ function mlPage(id) {
   const link = (p, dir) => !p ? `<a class="pn ${dir}" href="/ml"><small>${dir === 'prev' ? '← Back' : 'Up'}</small>All ML pages</a>` : p.ready
     ? `<a class="pn ${dir}" href="/ml/${p.id}"><small>${dir === 'prev' ? '← Previous' : 'Next →'}</small>${p.num} ${p.title}</a>`
     : `<div class="pn ${dir} off"><small>${dir === 'prev' ? '← Previous' : 'Next · coming soon'}</small>${p.num} ${p.title}</div>`;
-  const tabs = [['Idea', P.idea], ['Hand calculation', P.hand], ['Algorithm', P.algorithm], ['Maths', P.maths()], ['Code', `<p>${P.code.note}</p><div class="code"><button class="btn sm ghost copy">Copy</button><pre>${highlight(P.code.src)}</pre></div>`]];
+  const tabs = [['Idea', P.idea], ['Hand calculation', P.hand], ['Algorithm', P.algorithm], ['Maths', P.maths && P.maths()], ['Code', P.code && `<p>${P.code.note}</p><div class="code"><button class="btn sm ghost copy">Copy</button><pre>${highlight(P.code.src)}</pre></div>`]].filter(t => t[1]);
   app.innerHTML = `
   <nav class="crumb"><a href="/">Home</a> / <a href="/ml">ML potentials</a> / ${meta.num}</nav>
   <section class="block lab-top">
@@ -504,7 +504,7 @@ function mlPage(id) {
     app.querySelectorAll('[data-panel]').forEach(p => p.hidden = p.dataset.panel !== b.dataset.tab);
   });
   const copy = app.querySelector('.copy');
-  copy.onclick = async () => {
+  if (copy) copy.onclick = async () => {
     try { await navigator.clipboard.writeText(P.code.src); copy.textContent = 'Copied ✓'; }
     catch { copy.textContent = 'Select the code to copy'; }
     setTimeout(() => copy.textContent = 'Copy', 2000);

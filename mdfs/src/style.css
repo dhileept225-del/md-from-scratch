@@ -313,3 +313,10 @@ select.r-in { width: auto; }
 .sim-ctrl select { width: 100%; background: #050A16; color: inherit; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; margin-top: 4px; font: inherit; font-size: 13px; }
 footer a { color: var(--cyan); }
 @media (max-width: 420px) { .top nav { gap: 10px; font-size: 13.5px; } .top .brand span, .top .logo span { font-size: 16px; } }
+
+.hist-view { height: 210px; border: 1px solid var(--line); border-radius: var(--r); background: radial-gradient(120% 140% at 20% 0%, rgba(56,225,255,.08), transparent 60%), var(--panel); }
+.hist-view canvas { width: 100%; height: 100%; display: block; }
+.hist-ctrl { margin: 12px 0 4px; } .hist-ctrl .seg { display: inline-flex; }
+.hist-tbl th { text-align: left !important; } .hist-tbl td:first-child { white-space: nowrap; }
+@media (max-width: 420px) { .logo { font-size: 16px; } .top nav a { white-space: nowrap; } .top nav .nl { display: none; } }
+@media (max-width: 340px) { .logo { font-size: 14px; gap: 6px; } .top nav { gap: 8px; font-size: 13px; } }
