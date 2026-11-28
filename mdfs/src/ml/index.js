@@ -6,7 +6,7 @@ export const mlParts = [
     pages: [
       { id: 'cost-ladder', title: 'The cost ladder: force field, DFT, ML', ready: true },
       { id: 'history', title: 'Who started it: 1995 to today', ready: true },
-      { id: 'invariances', title: 'What a potential must obey' },
+      { id: 'invariances', title: 'What a potential must obey', ready: true },
     ],
   },
   {
